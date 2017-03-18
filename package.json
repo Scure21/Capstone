@@ -1,5 +1,5 @@
 {
-  "name": "__BONES_NEEDS_A_NAME__",
+  "name": "ecmas-capstone",
   "version": "0.0.1",
   "description": "A happy little skeleton.",
   "main": "index.js",
@@ -66,7 +66,8 @@
     "redux-thunk": "^2.1.0",
     "sequelize": "^3.24.6",
     "sinon": "^1.17.6",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "socketio": "^1.0.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
