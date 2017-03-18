@@ -6,6 +6,9 @@ const {resolve} = require('path')
 const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
+const chalk = require('chalk')
+const socketio = require('socket.io')
+
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
 // Bones has a symlink from node_modules/APP to the root of the app.
@@ -23,7 +26,7 @@ if (!pkg.isProduction && !pkg.isTesting) {
 }
 
 // Pretty error prints errors all pretty.
-const prettyError = new PrettyError();
+const prettyError = new PrettyError()
 
 // Skip events.js and http.js and similar core node files.
 prettyError.skipNodeFiles()
@@ -34,9 +37,9 @@ prettyError.skipPackage('express')
 module.exports = app
   // Session middleware - compared to express-session (which is what's used in the Auther workshop), cookie-session stores sessions in a cookie, rather than some other type of session store.
   // Cookie-session docs: https://www.npmjs.com/package/cookie-session
-  .use(require('cookie-session') ({
+  .use(require('cookie-session')({
     name: 'session',
-    keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
+    keys: [process.env.SESSION_SECRET || 'an insecure secret key']
   }))
 
   // Body parsing middleware
@@ -78,6 +81,59 @@ if (module === require.main) {
       console.log(`Listening on http://${urlSafeHost}:${port}`)
     }
   )
+  // adding socketio
+  const io = socketio(server)
+    // use socket server as an event emitter in order to listen for new connctions
+  io.on('connection', function (socket) {
+    socket.on('chat message', function (msg) {
+      console.log(chalk.cyan('message: ' + msg))
+    })
+    // receives the newly connected socket
+    // called for each browser that connects to our server
+    console.log(chalk.magenta('A new client has connected'))
+    console.log(chalk.yellow('socket id: ', socket.id))
+
+    // event that runs anytime a socket disconnects
+    socket.on('disconnect', function () {
+      console.log('socket id ' + socket.id + ' has disconnected. :(')
+    })
+
+    // emit events
+    io.emit()
+  })
+
+  /*
+  ROOMS: this may work for the rooms of the game, so the players wait for all the people to join the room
+  */
+
+  // var drawHistory = {};
+
+  // io.on('connection', function (socket) {
+
+  //     // scope issues
+  //     var room = null;
+
+  //     // listens to 37 emit
+  //     socket.on('wantToJoinRoomPlox', function (roomName) {
+  //         room = roomName;
+  //         socket.join(roomName);
+
+  //         if (!drawHistory[roomName]) {
+  //             drawHistory[roomName] = [];
+  //         }
+
+  //         // console.log('drawhistory: ', drawHistory)
+  //         socket.emit('drawHistory', drawHistory[roomName]);
+  //     });
+
+  //     socket.on('newDraw', function (start, end, color) {
+  //         // data
+  //         console.log('new draw', start, end, color)
+  //         drawHistory[room].push({ start: start, end: end, color: color });
+  //         socket.broadcast.to(room).emit('someoneElseDrew', start, end, color);
+  //     });
+
+  // });
 }
 
 // This check on line 64 is only starting the server if this file is being run directly by Node, and not required by another file.
