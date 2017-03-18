@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Snake Game</title>
+    <link href="style.css" type="text/css" rel="/public/style" />
+  </head>
+  <body>
+    <!--Added the world wide whiteboard code just as an example that we are stablishing a connection through sockets-->
+        <div id="color-selector">
+            <div class="marker selected" id="black"></div>
+            <div class="marker" id="purple"></div>
+            <div class="marker" id="red"></div>
+            <div class="marker" id="blue"></div>
+            <div class="marker" id="green"></div>
+            <div class="marker" id="orange"></div>
+            <div class="marker" id="yellow"></div>
+            <div class="marker" id="brown"></div>
+        </div>
+
+        <div id="sketch">
+        <canvas id="paint"></canvas>
+        </div>
+    <!--ends here!-->
+
+    <!--<div id=main></div>-->
+    <!--<script async defer src=/bundle.js></script>-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app/event-emitter.js"></script>
+    <script src="/app/whiteboard.js"></script>
+    <script src="/app/app.js"></script>
+  </body>
+</html>
