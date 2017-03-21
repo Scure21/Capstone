@@ -90,11 +90,11 @@ if (module === require.main) {
   // adding socketio
   const io = socketio(server)
 
-  setInterval(heartbeat, 33)
+  // setInterval(update, 10)
 
-  function heartbeat () {
-    io.sockets.emit('heartbeat', snakes)
-  }
+  // function update () {
+  //   io.sockets.emit('update', snakes)
+  // }
     // use socket server as an event emitter in order to listen for new connctions
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
@@ -103,6 +103,7 @@ if (module === require.main) {
       console.log(chalk.cyan('new snake: ' + socket.id + ' ' + data.x + ' ' + data.y))
       const snake = new Snake(socket.id, data.x, data.y)
       snakes.push(snake)
+      console.log('inside start event, snakes arr =', snakes)
     })
 
     // update the x and y values everytime they change
@@ -116,11 +117,21 @@ if (module === require.main) {
         }
         snake.x = data.x
         snake.y = data.y
+        io.sockets.emit('update', snakes)
       }
     )
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
+      var index
+      for (var i = 0; i < snakes.length; i++) {
+        if (socket.id === snakes[i].id) {
+          index = i
+          break
+        }
+      }
+      snakes.splice(index,1)
+      console.log('snakes after we deleted the user who\'s about to disconnect', snakes )
       console.log('socket id ' + socket.id + ' has disconnected. :(')
     })
   })

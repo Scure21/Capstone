@@ -7,7 +7,7 @@ var snakes = []
 function setup () {
   createCanvas(scl * 30, scl * 30)
   // in the future this would go in the actual server
-  socket = io.connect('http://localhost:1337')
+  socket = io.connect('http://192.168.2.140:1337')
   snake = new Snake()
   food = new Food()
   const snakeData = {
@@ -16,8 +16,8 @@ function setup () {
   }
   // send the snake info to the server
   socket.emit('start', snakeData)
-  socket.on('heartbeat', function (data) {
-    console.log('this is the data!!!', data)
+  socket.on('update', function (data) {
+    console.log('inside heartbeat this is the data!!!', data)
     snakes = data
   })
 
@@ -32,7 +32,7 @@ function draw () {
     var id = snakes[i].id
     if (id.substring(2, id.length) !== socket.id) {
       fill(color(0, 0, 255))
-      rect(snakes[i].x, snakes[i].y)
+      rect(snakes[i].x, snakes[i].y, scl, scl)
     }
   }
   snake.draw()
