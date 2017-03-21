@@ -9,6 +9,7 @@ import Int from './components/Int'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import SignUpContainer from './components/SignUpContainer'
+import Game from './components/Game'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -20,14 +21,14 @@ const ExampleApp = connect(
     <div id="login">
       <div>
         {user ? <WhoAmI/> : <Login/>}
-      </div> 
+      </div>
       {children}
   </div>
   <div id="sign-up">
     <SignUpContainer/>
   </div>
   </div>
-  
+
   )
   }
 )
@@ -43,12 +44,12 @@ export default class AppContainer extends React.Component{
 }
 
 
-/*connect() => function called connectFunc 
+/*connect() => function called connectFunc
 connectFunc(({ user, children }) =>
     <div>
       <nav>
         {user ? <WhoAmI/> : <Login/>}
-      </nav> 
+      </nav>
       {children}
     </div>) */
 
@@ -60,6 +61,7 @@ render (
       <IndexRedirect to="/login"/>
         <Route path="/interstitial" component={Int}/>
         <Route path="/login" component={ExampleApp}/>
+        <Route path="/game" component={Game}/>
       </Route>
     </Router>
   </Provider>,

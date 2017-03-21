@@ -2,13 +2,15 @@ var scl = 20;
 var snake;
 var food;
 
-
+  function setup(){
   var canvas = createCanvas(scl * 30, scl * 30);
   snake = new Snake();
   food  = new Food();
   frameRate(10);
+   canvas.parent("canvas");
+  }
 
-  canvas.parent("canvas");
+
 
 function draw() {
   background(51);

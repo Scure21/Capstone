@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 
-  <script src="p5.js"></script>
-      <script src="food.js"></script>
-      <script src="snake.js"></script>
-      <script src="sketch.js"></script>
+export default class Game extends Component{
+
+  render(){
+    return (
+
+       <div id="canvas">
+
+
+       </div>
+
+      )
+  }
+}
