@@ -3,14 +3,14 @@ import Snake from './snake';
 
 export default function sketch (p) {
 
-  console.log("~~~~~~~~~", p)
 
   var scl = 20;
   var snake;
   var food;
 
   p.setup = function(){
-    var canvas = p.createCanvas(window.innerWidth, window.innerHeight);
+    var canvas = p.createCanvas(scl * 30, scl * 30);
+    console.log(p.width, p.height)
     snake = new Snake(p, scl);
     food  = new Food(p, scl);
     p.frameRate(10);
@@ -28,7 +28,6 @@ export default function sketch (p) {
   }
 
   p.keyPressed = function() {
-    console.log("**********")
     if (p.keyCode === p.UP_ARROW) {
       snake.dir(0, -1);
     } else if (p.keyCode === p.DOWN_ARROW) {

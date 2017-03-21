@@ -15,10 +15,11 @@ export default function Snake(p, scl) {
   }
 
   this.eat = function(food) {
+
     if (this.x === food.x() && this.y === food.y()) {
       food.eaten();
       this.points++;
-      this.tail.push(createVector(this.x, this.y));
+      this.tail.push(p.createVector(this.x, this.y));
       console.log(this.points + " points");
     }
   }

@@ -15,6 +15,7 @@ export default function Food(p, scl) {
   }
 
   this.eaten = function() {
+    console.log("****", arguments)
     this.vec = p.randomVector().mult(scl);
   }
 }
