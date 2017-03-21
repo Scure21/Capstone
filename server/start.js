@@ -17,8 +17,14 @@ const socketio = require('socket.io')
 //
 // This next line requires our root index.js:
 const pkg = require('APP')
-
 const app = express()
+
+const snakes = []
+function Snake (id, x, y) {
+  this.id = id
+  this.x = x
+  this.y = y
+}
 
 if (!pkg.isProduction && !pkg.isTesting) {
   // Logging middleware (dev only)
@@ -83,23 +89,40 @@ if (module === require.main) {
   )
   // adding socketio
   const io = socketio(server)
+
+  setInterval(heartbeat, 33)
+
+  function heartbeat () {
+    io.sockets.emit('heartbeat', snakes)
+  }
     // use socket server as an event emitter in order to listen for new connctions
-  io.on('connection', function (socket) {
-    socket.on('chat message', function (msg) {
-      console.log(chalk.cyan('message: ' + msg))
+  io.sockets.on('connection', function (socket) {
+    console.log(chalk.yellow('We have a new user: ' + socket.id))
+
+    socket.on('start', function (data) {
+      console.log(chalk.cyan('new snake: ' + socket.id + ' ' + data.x + ' ' + data.y))
+      const snake = new Snake(socket.id, data.x, data.y)
+      snakes.push(snake)
     })
-    // receives the newly connected socket
-    // called for each browser that connects to our server
-    console.log(chalk.magenta('A new client has connected'))
-    console.log(chalk.yellow('socket id: ', socket.id))
+
+    // update the x and y values everytime they change
+    socket.on('update',
+      function (data) {
+        var snake
+        for (var i = 0; i < snakes.length; i++) {
+          if (socket.id === snakes[i].id) {
+            snake = snakes[i]
+          }
+        }
+        snake.x = data.x
+        snake.y = data.y
+      }
+    )
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
       console.log('socket id ' + socket.id + ' has disconnected. :(')
     })
-
-    // emit events
-    io.emit()
   })
 
   /*
