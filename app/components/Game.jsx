@@ -7,7 +7,7 @@ export default class Game extends Component{
   render(){
     return (
 
-       <P5Wrapper sketch={sketch} />
+       <P5Wrapper id="game" sketch={sketch} />
 
       )
   }

@@ -1,22 +1,26 @@
 import Food from './food';
 import Snake from './snake';
+//import {size} from 'p5'
 
 export default function sketch (p) {
 
-
-  var scl = 20;
+  var scl = 10;
   var snake;
   var food;
+  var canvas;
 
   p.setup = function(){
-    var canvas = p.createCanvas(scl * 30, scl * 30);
-    console.log(p.width, p.height)
+    canvas = p.createCanvas(window.innerWidth, window.innerHeight);
     snake = new Snake(p, scl);
     food  = new Food(p, scl);
-    p.frameRate(10);
+    p.frameRate(8);
+    // window.addEventListener('resize', resizeCanvas, false);
+
   }
 
-
+  // window.onresize = function() {
+  //   canvas.size(window.innerWidth, window.innerHeight);
+  // }
 
   p.draw = function() {
     p.background(51);
@@ -25,7 +29,13 @@ export default function sketch (p) {
     snake.move();
     snake.draw();
     food.draw();
+    // ellipse(width/2,height/2,100,100);
   }
+
+  window.onresize = function() {
+    canvas.size(window.innerWidth, window.innerHeight);
+  };
+
 
   p.keyPressed = function() {
     if (p.keyCode === p.UP_ARROW) {

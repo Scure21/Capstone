@@ -20,7 +20,6 @@ export default function Snake(p, scl) {
       food.eaten();
       this.points++;
       this.tail.push(p.createVector(this.x, this.y));
-      console.log(this.points + " points");
     }
   }
 
