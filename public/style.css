@@ -22,3 +22,18 @@
 .marker.selected {
     border: 2px solid white;
 }
+
+/*canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+}*/
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#login {
+    text-align: center;
+    margin-top: 50%;
+}

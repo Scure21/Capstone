@@ -3,7 +3,7 @@ var snake;
 var food;
 
   function setup(){
-  var canvas = createCanvas(scl * 30, scl * 30);
+  var canvas = createCanvas(window.innerWidth, window.innerHeight);
   snake = new Snake();
   food  = new Food();
   frameRate(10);
