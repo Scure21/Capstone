@@ -1,3 +1,4 @@
+
 var scl = 20
 var snake
 var food
