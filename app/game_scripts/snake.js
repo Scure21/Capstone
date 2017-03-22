@@ -1,11 +1,13 @@
-var scl = 20
+import { scl, randomVector } from './utils'
+import p from 'p5'
 
-export default function Snake (p, x, y) {
+export default function Snake (x, y) {
+  console.log('THIS IS P', p)
   if (x && y !== undefined) {
     this.x = x
     this.y = y
   } else {
-    const vector = p.randomVector().mult(scl)
+    const vector = randomVector.randomVector().mult(scl)
     this.x = vector.x
     this.y = vector.y
   }
@@ -17,8 +19,7 @@ export default function Snake (p, x, y) {
 }
 
 Snake.prototype.dir = function (x, y) {
-  if (x !== 0 && this.xspeed !== x * (-1) ||
-        y !== 0 && this.yspeed !== y * (-1)) {
+  if ((x !== 0 && this.xspeed !== x * (-1)) || (y !== 0 && this.yspeed !== y * (-1))) {
     this.xspeed = x
     this.yspeed = y
   }

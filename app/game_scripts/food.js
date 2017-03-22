@@ -1,3 +1,5 @@
+import { scl, randomVector } from './utils'
+
 export default function Food (p, scl) {
   this.vec = p.randomVector().mult(scl)
   this.scl = scl

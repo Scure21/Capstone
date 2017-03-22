@@ -1,15 +1,15 @@
 import Food from './food'
 import Snake from './snake'
-// import {size} from 'p5'
+import p from 'p5'
 
-export default function sketch (p) {
+export default function sketch () {
   var scl = 20
   var snake
   var food
   var socket
   var snakes = []
   var canvas
-
+  console.log('THIS P IN SKETCH', p)
   p.setup = function () {
     canvas = p.createCanvas(window.innerWidth, window.innerHeight)
   // in the future this would go in the actual server
@@ -77,17 +77,5 @@ export default function sketch (p) {
     } else if (p.keyCode === p.LEFT_ARROW) {
       snake.dir(-1, 0)
     }
-  }
-
-  p.cols = function () {
-    return p.floor(p.width / scl)
-  }
-
-  p.rows = function () {
-    return p.floor(p.height / scl)
-  }
-
-  p.randomVector = function () {
-    return p.createVector(p.floor(p.random(p.cols())), p.floor(p.random(p.rows())))
   }
 }
