@@ -10,31 +10,78 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
+import Modal from 'react-modal'
 
-const ExampleApp = connect(
-  ({ auth }) => ({ user: auth })
-)(
-  ({ user, children }) => {
-    console.log('hello!')
-    return (
-    <div>
-    <div id="login">
-      <div>
-        {user ? <WhoAmI/> : <Login/>}
-      </div>
-      {children}
-  </div>
-  <div id="sign-up">
-    <SignUpContainer/>
-  </div>
-  </div>
-
-  )
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
-)
+}
 
-export default class AppContainer extends React.Component{
-  render(){
+class ExampleApp extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      signupModalIsOpen: false,
+      loginModalIsOpen: false
+    }
+    this.openSignupModal = this.openSignupModal.bind(this)
+    this.openLoginModal = this.openLoginModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+  }
+
+  openSignupModal () {
+    this.setState({signupModalIsOpen: true})
+  }
+
+  openLoginModal () {
+    this.setState({modalIsOpen: true})
+  }
+
+  closeModal () {
+    this.setState({modalIsOpen: false})
+  }
+
+  render () {
+    return (
+      <div>
+        <div>
+          <button onClick={this.openLoginModal}> Login in! </button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+          <h2 ref="subtitle">Hello</h2>
+          <SignUpContainer />
+          </Modal>
+        </div>
+        <div>
+          <button onClick={this.openSignupModal}> Sign up! </button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+          <h2 ref="subtitle">Hello</h2>
+          <Login />
+          </Modal>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default class AppContainer extends React.Component {
+  render () {
     return (
       <div>
         {this.props.children}
@@ -43,22 +90,11 @@ export default class AppContainer extends React.Component{
   }
 }
 
-
-/*connect() => function called connectFunc
-connectFunc(({ user, children }) =>
-    <div>
-      <nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav>
-      {children}
-    </div>) */
-
-
-render (
+render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
-      <IndexRedirect to="/login"/>
+        <IndexRedirect to="/login"/>
         <Route path="/interstitial" component={Int}/>
         <Route path="/login" component={ExampleApp}/>
         <Route path="/game" component={Game}/>
