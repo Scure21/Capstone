@@ -14,6 +14,7 @@ export default function sketch (p) {
     snake = new Snake(p, scl);
     food  = new Food(p, scl);
     p.frameRate(8);
+    // bg = loadImage("");
     // window.addEventListener('resize', resizeCanvas, false);
 
   }
@@ -23,7 +24,7 @@ export default function sketch (p) {
   // }
 
   p.draw = function() {
-    p.background(51);
+    // p.background(51);
 
     snake.eat(food);
     snake.move();

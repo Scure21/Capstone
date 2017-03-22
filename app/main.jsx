@@ -10,28 +10,42 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
+import Modal from 'react-modal'
 
-const ExampleApp = connect(
-  ({ auth }) => ({ user: auth })
-)(
-  ({ user, children }) => {
-    console.log('hello!')
-    return (
+// const ExampleApp = connect(
+//   ({ auth }) => ({ user: auth })
+// )(
+//   ({ user, children }) => {
+//     console.log('hello!')
+//     return (
+//     <div id="parent-div">
+//       <div id="login children-div">
+//         <div>
+//           {user ? <WhoAmI/> : <Login/>}
+//         </div>
+//         {children}
+//       </div>
+//       <div id="sign-up children-div">
+//         <SignUpContainer/>
+//       </div>
+//   </div>
+
+//   )
+//   }
+// )
+
+
+const ExampleApp = (props) => {
+
+  return(
     <div>
-    <div id="login">
-      <div>
-        {user ? <WhoAmI/> : <Login/>}
-      </div>
-      {children}
-  </div>
-  <div id="sign-up">
-    <SignUpContainer/>
-  </div>
-  </div>
+      <button> Login in! </button>
+      <button> Sign up! </button>
+    </div>
 
   )
-  }
-)
+
+}
 
 export default class AppContainer extends React.Component{
   render(){
