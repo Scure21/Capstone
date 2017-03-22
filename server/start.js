@@ -19,11 +19,19 @@ const socketio = require('socket.io')
 const pkg = require('APP')
 const app = express()
 
+const foods = []
+function Food (x, y) {
+  this.x = x
+  this.y = y
+}
 const snakes = []
-function Snake (id, x, y) {
+function Snake (id, x, y, color, tail, points) {
   this.id = id
   this.x = x
   this.y = y
+  this.color = color
+  this.tail = tail
+  this.points = points
 }
 
 if (!pkg.isProduction && !pkg.isTesting) {
@@ -100,10 +108,13 @@ if (module === require.main) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
     socket.on('start', function (data) {
-      console.log(chalk.cyan('new snake: ' + socket.id + ' ' + data.x + ' ' + data.y))
-      const snake = new Snake(socket.id, data.x, data.y)
+      console.log(chalk.cyan('new snake: ' + socket.id + ' ' + data.x + ' ' + data.y, data.color, data.points))
+      const snake = new Snake(socket.id, data.x, data.y, data.color, data.tail, data.points)
+      const food = new Food(data.foodx, data.foody)
+      // data.snake.id = socket.id // In the future we will change the snakes DT to an object with keys being the socket id.
       snakes.push(snake)
-      console.log('inside start event, snakes arr =', snakes)
+      foods.push(food)
+      //console.log('inside start event, snakes arr =', snakes)
     })
 
     // update the x and y values everytime they change
@@ -117,9 +128,31 @@ if (module === require.main) {
         }
         snake.x = data.x
         snake.y = data.y
+        snake.tail = data.tail
+        snake.points = data.points
+        snake.color = data.color
+        // console.log('UPDATE SNAKES', snakes)
         io.sockets.emit('update', snakes)
       }
     )
+
+    // handle mobile devices
+    socket.on('mobile-device', function (device) {
+      console.log('Device', device)
+      var connected = true
+      if (device) {
+        connected = true
+        io.sockets.emit('activate-device-controls', connected)
+      } else {
+        connected = false
+        io.sockets.emit('activate-device-controls', connected)
+      }
+    })
+
+    //receive mobile device information
+    socket.on('snake_position_change', function (position) {
+      console.log('SNAKE POSITION', position)
+    })
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
@@ -130,8 +163,8 @@ if (module === require.main) {
           break
         }
       }
-      snakes.splice(index,1)
-      console.log('snakes after we deleted the user who\'s about to disconnect', snakes )
+      snakes.splice(index, 1)
+      console.log('snakes after we deleted the user who\'s about to disconnect', snakes)
       console.log('socket id ' + socket.id + ' has disconnected. :(')
     })
   })
