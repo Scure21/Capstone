@@ -94,7 +94,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
-      <IndexRedirect to="/login"/>
+        <IndexRedirect to="/login"/>
         <Route path="/interstitial" component={Int}/>
         <Route path="/login" component={ExampleApp}/>
         <Route path="/game" component={Game}/>
