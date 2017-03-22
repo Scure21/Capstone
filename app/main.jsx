@@ -12,7 +12,7 @@ import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
 import Modal from 'react-modal'
 
-// const ExampleApp = connect(
+// const App = connect(
 //   ({ auth }) => ({ user: auth })
 // )(
 //   ({ user, children }) => {
@@ -34,16 +34,74 @@ import Modal from 'react-modal'
 //   }
 // )
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
-const ExampleApp = (props) => {
 
-  return(
-    <div>
-      <button> Login in! </button>
-      <button> Sign up! </button>
-    </div>
+class ExampleApp extends React.Component{
 
-  )
+   constructor(props){
+    super(props)
+
+    this.state = {
+      signupModalIsOpen: false,
+      loginModalIsOpen: false
+    }
+    this.openSignupModal = this.openSignupModal.bind(this)
+    this.openLoginModal = this.openLoginModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+  }
+
+  openSignupModal(){
+    this.setState({signupModalIsOpen: true});
+  }
+
+  openLoginModal(){
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal(){
+    this.setState({modalIsOpen: false})
+  }
+
+  render(){
+    return(
+      <div>
+        <div>
+          <button onClick={this.openLoginModal}> Login in! </button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+          <h2 ref="subtitle">Hello</h2>
+          <SignUpContainer />
+          </Modal>
+        </div>
+        <div>
+          <button onClick={this.openSignupModal}> Sign up! </button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+          <h2 ref="subtitle">Hello</h2>
+          <Login />
+          </Modal>
+        </div>
+      </div>
+    )
+  }
 
 }
 
