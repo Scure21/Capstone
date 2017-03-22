@@ -1,5 +1,6 @@
 export default function Food (p, scl) {
   this.vec = p.randomVector().mult(scl)
+  this.scl = scl
 }
 
 Food.prototype.x = function () {
@@ -12,9 +13,9 @@ Food.prototype.y = function () {
 
 Food.prototype.draw = function (p) {
   p.fill(255, 0, 100)
-  p.rect(this.x(), this.y(), scl, scl)
+  p.rect(this.x(), this.y(), this.scl, this.scl)
 }
 
 Food.prototype.eaten = function (p) {
-  this.vec = p.randomVector().mult(scl)
+  this.vec = p.randomVector().mult(this.scl)
 }

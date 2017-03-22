@@ -1,3 +1,5 @@
+var scl = 20
+
 export default function Snake (p, x, y) {
   if (x && y !== undefined) {
     this.x = x
