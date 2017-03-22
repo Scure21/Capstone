@@ -6,7 +6,6 @@ const {resolve} = require('path')
 const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
-const chalk = require('chalk')
 const socketio = require('socket.io')
 
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
@@ -18,7 +17,6 @@ const socketio = require('socket.io')
 // This next line requires our root index.js:
 const pkg = require('APP')
 const app = express()
-
 
 if (!pkg.isProduction && !pkg.isTesting) {
   // Logging middleware (dev only)
@@ -67,7 +65,6 @@ module.exports = app
     finalHandler(req, res)(err)
   })
 
-
 if (module === require.main) {
   // Start listening only if we're the main module.
   //
@@ -85,9 +82,8 @@ if (module === require.main) {
   // adding socketio
   const io = socketio(server)
 
-  //all server-side socket handling happens in this module
+  // all server-side socket handling happens in this module
   require('./sockets')(io)
-
 }
 
 // This check on line 64 is only starting the server if this file is being run directly by Node, and not required by another file.

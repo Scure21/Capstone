@@ -1,19 +1,19 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
-    const foods = []
-    function Food (x, y) {
+  const foods = []
+  function Food (x, y) {
     this.x = x
     this.y = y
-    }
-    const snakes = {}
-    function SnakeInfo (x, y, color, tail, points) {
+  }
+  const snakes = {}
+  function SnakeInfo (x, y, color, tail, points) {
     this.x = x
     this.y = y
     this.color = color
     this.tail = tail
     this.points = points
-    }
+  }
 
   // use socket server as an event emitter in order to listen for new connctions
   io.sockets.on('connection', function (socket) {
@@ -26,7 +26,7 @@ module.exports = function (io) {
       // data.snake.id = socket.id // In the future we will change the snakes DT to an object with keys being the socket id.
       snakes[socket.id] = snake
       foods.push(food)
-      //console.log('inside start event, snakes arr =', snakes)
+      // console.log('inside start event, snakes arr =', snakes)
     })
 
     // update the x and y values everytime they change
@@ -57,9 +57,9 @@ module.exports = function (io) {
       }
     })
 
-    //receive mobile device information
+    // receive mobile device information
     socket.on('snake_position_change', function (position) {
-      //console.log('SNAKE POSITION', position)
+      // console.log('SNAKE POSITION', position)
     })
 
     // event that runs anytime a socket disconnects
