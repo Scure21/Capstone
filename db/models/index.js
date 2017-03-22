@@ -6,7 +6,8 @@
 
 const User = require('./user')
 const OAuth = require('./oauth')
+const Player = require('./player')
 
 OAuth.belongsTo(User)
 User.hasOne(OAuth)
-module.exports = {User}
+module.exports = {Player}

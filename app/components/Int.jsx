@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+//rendering waiting room
+
 export default class BonesJokes extends Component {
   componentDidMount() {
     this.nextJoke()
@@ -15,16 +17,12 @@ export default class BonesJokes extends Component {
     this.setState({answered: true})
 
   render() {
-    if (!this.state) { return null }
-
-    const {joke, answered} = this.state    
-    return (
-      <div onClick={answered ? this.nextJoke : this.answer}>
-        <h1>{joke.q}</h1>
-        {answered && <h2>{joke.a}</h2>}
-        <cite>~xoxo, bones</cite>
-      </div>
+    return(
+  <div id="welcome-page">
+    <h1>hello</h1>
+  </div>
     )
+    
   }
 }
 
