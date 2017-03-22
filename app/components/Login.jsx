@@ -1,9 +1,11 @@
 import React from 'react'
+import {browserHistory} from 'react-router'
 
 export const Login = ({ login }) => (
   <form onSubmit={evt => {
     evt.preventDefault()
     login(evt.target.username.value, evt.target.password.value)
+    browserHistory.push('/interstitial')
   } }>
     <input name="username" />
     <input name="password" type="password" />
@@ -15,6 +17,6 @@ import {login} from 'APP/app/reducers/auth'
 import {connect} from 'react-redux'
 
 export default connect (
-  state => ({}),
+  null,
   {login},
 ) (Login)

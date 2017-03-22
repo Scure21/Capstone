@@ -12,36 +12,48 @@ import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
 import Modal from 'react-modal'
 
-// const App = connect(
-//   ({ auth }) => ({ user: auth })
-// )(
-//   ({ user, children }) => {
-//     console.log('hello!')
-//     return (
-//     <div id="parent-div">
-//       <div id="login children-div">
-//         <div>
-//           {user ? <WhoAmI/> : <Login/>}
-//         </div>
-//         {children}
-//       </div>
-//       <div id="sign-up children-div">
-//         <SignUpContainer/>
-//       </div>
-//   </div>
+const App = connect(
+  ({ auth }) => ({ user: auth })
+)(
+  ({ user, children }) => {
+    console.log('hello!')
+    return (
+    <div id="parent-div">
+      <div id="login children-div">
+        <div>
+          {user ? <WhoAmI/> : <Login/>}
+        </div>
+        {children}
+      </div>
+  </div>
 
-//   )
-//   }
-// )
+  )
+  }
+)
 
 const customStyles = {
+  overlay : {
+    position          : 'fixed',
+    top               : 300,
+    left              : 300,
+    right             : 300,
+    bottom            : 300,
+    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+  },
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    position                   : 'absolute',
+    top                        : '20px',
+    left                       : '20px',
+    right                      : '20px',
+    bottom                     : '20px',
+    border                     : '1px solid #ccc',
+    background                 : 'grey',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px'
+
   }
 };
 
@@ -52,20 +64,16 @@ class ExampleApp extends React.Component{
     super(props)
 
     this.state = {
-      signupModalIsOpen: false,
-      loginModalIsOpen: false
+      modalIsOpen: false,
+      loginOrSignup: ''
     }
-    this.openSignupModal = this.openSignupModal.bind(this)
-    this.openLoginModal = this.openLoginModal.bind(this)
+    this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
-  openSignupModal(){
-    this.setState({signupModalIsOpen: true});
-  }
-
-  openLoginModal(){
-    this.setState({modalIsOpen: true});
+  openModal(e){
+    this.setState({modalIsOpen: true})
+    this.setState({loginOrSignup: e.target.name})
   }
 
   closeModal(){
@@ -75,30 +83,18 @@ class ExampleApp extends React.Component{
   render(){
     return(
       <div>
-        <div>
-          <button onClick={this.openLoginModal}> Login in! </button>
+          <button name="login" onClick={this.openModal}> Login in! </button>
+          <button name="signup" onClick={this.openModal}> Sign up! </button>
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
             style={customStyles}
-            contentLabel="Example Modal"
+            contentLabel="login Modal"
           >
-          <h2 ref="subtitle">Hello</h2>
-          <SignUpContainer />
+          {
+            this.state.loginOrSignup === 'signup' ? <SignUpContainer /> : <Login />
+          }
           </Modal>
-        </div>
-        <div>
-          <button onClick={this.openSignupModal}> Sign up! </button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-          <h2 ref="subtitle">Hello</h2>
-          <Login />
-          </Modal>
-        </div>
       </div>
     )
   }

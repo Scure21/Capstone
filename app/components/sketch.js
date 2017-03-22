@@ -4,13 +4,13 @@ import Snake from './snake';
 
 export default function sketch (p) {
 
-  var scl = 10;
+  var scl = 20;
   var snake;
   var food;
   var canvas;
 
   p.setup = function(){
-    canvas = p.createCanvas(window.innerWidth, window.innerHeight);
+    canvas = p.createCanvas(scl*30, scl*30);
     snake = new Snake(p, scl);
     food  = new Food(p, scl);
     p.frameRate(8);
@@ -33,9 +33,7 @@ export default function sketch (p) {
     // ellipse(width/2,height/2,100,100);
   }
 
-  window.onresize = function() {
-    canvas.size(window.innerWidth, window.innerHeight);
-  };
+
 
 
   p.keyPressed = function() {
