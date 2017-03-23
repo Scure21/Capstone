@@ -11,7 +11,7 @@ import WhoAmI from './components/WhoAmI'
 import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
 import ExampleApp from './components/ExampleApp'
-import Modal from 'react-modal'
+
 
 const App = connect(
   ({ auth }) => ({ user: auth })
