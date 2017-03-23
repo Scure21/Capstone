@@ -1,6 +1,4 @@
 import React from 'react'
-import MobileDetect from 'mobile-detect'
-    var md = new MobileDetect(window.navigator.userAgent);
 import Modal from 'react-modal'
 import Login from './Login'
 import SignUpContainer from './SignupContainer'
