@@ -56,14 +56,18 @@ componentWillMount = () => {
   else{
     this.setState({deviceType: 'phone'})
   }
-  //console.log()
 }
 
   render(){
     console.log('STAAAATE', this.state)
     return (
       <div>
-        {this.props.children}
+        {
+          (this.state.deviceType === "phone" ? <ExampleApp/> : <Int/>)
+          
+         
+          
+        }
       </div>
     )
   }
@@ -77,7 +81,6 @@ render (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
-      <IndexRedirect to="/login"/>
         <Route path="/interstitial" component={Int}/>
         <Route path="/login" component={ExampleApp}/>
         <Route path="/game" component={Game}/>
