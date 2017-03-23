@@ -13,6 +13,7 @@ import WhoAmI from './components/WhoAmI'
 import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
 import ExampleApp from './components/ExampleApp'
+import Controller from './components/Controller'
 
 
 const App = connect(
@@ -51,10 +52,10 @@ export default class AppContainer extends React.Component{
 componentWillMount = () => {
   var deviceType;
   if (!md.mobile()){
-    this.setState({deviceType: 'computer'})
+    this.setState({deviceType: 'phone'})
   }
   else{
-    this.setState({deviceType: 'phone'})
+    this.setState({deviceType: 'computer'})
   }
 }
 
