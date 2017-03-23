@@ -1,5 +1,4 @@
 'use strict'
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const {resolve} = require('path')
@@ -81,7 +80,6 @@ if (module === require.main) {
   )
   // adding socketio
   const io = socketio(server)
-
   // all server-side socket handling happens in this module
   require('./sockets')(io)
 }

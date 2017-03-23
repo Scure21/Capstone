@@ -30,19 +30,17 @@ module.exports = function (io) {
     })
 
     // update the x and y values everytime they change
-    socket.on('update',
-      function (data) {
-        var snake
-        snake = snakes[socket.id]
-        snake.x = data.x
-        snake.y = data.y
-        snake.tail = data.tail
-        snake.points = data.points
-        snake.color = data.color
-        // console.log('UPDATE SNAKES', snakes)
-        io.sockets.emit('update', snakes)
-      }
-    )
+    socket.on('clientUpdate', function (data) {
+      var snake
+      snake = snakes[socket.id]
+      snake.x = data.x
+      snake.y = data.y
+      snake.tail = data.tail
+      snake.points = data.points
+      snake.color = data.color
+      console.log('UPDATE SNAKES', snakes)
+      io.sockets.emit('serverUpdate', snakes)
+    })
 
     // handle mobile devices
     socket.on('mobile-device', function (device) {
@@ -64,14 +62,7 @@ module.exports = function (io) {
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
-      var index
-      for (var i = 0; i < snakes.length; i++) {
-        if (socket.id === snakes[i].id) {
-          index = i
-          break
-        }
-      }
-      snakes.splice(index, 1)
+      snakes[socket.id] = {}
       console.log('snakes after we deleted the user who\'s about to disconnect', snakes)
       console.log('socket id ' + socket.id + ' has disconnected. :(')
     })

@@ -1,13 +1,11 @@
-import { scl, randomVector } from './utils'
-import p from 'p5'
+import { scl, utils } from './utils'
 
-export default function Snake (x, y) {
-  console.log('THIS IS P', p)
-  if (x && y !== undefined) {
+export default function Snake (x, y, p) {
+  if (x && y !== null) {
     this.x = x
     this.y = y
   } else {
-    const vector = randomVector.randomVector().mult(scl)
+    const vector = utils.randomVector(p).mult(scl)
     this.x = vector.x
     this.y = vector.y
   }
@@ -27,9 +25,10 @@ Snake.prototype.dir = function (x, y) {
 
 Snake.prototype.eat = function (p, food) {
   if (this.x === food.x() && this.y === food.y()) {
-    food.eaten()
+    food.eaten(p)
     this.points++
-    this.tail.push(p.createVector(this.x, this.y))
+    this.tail.push({x: this.x, y: this.y})
+    console.log(this.tail)
     console.log(this.points + ' points')
   }
 }
