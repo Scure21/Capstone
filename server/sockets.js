@@ -31,14 +31,12 @@ module.exports = function (io) {
 
     // update the x and y values everytime they change
     socket.on('clientUpdate', function (data) {
-      var snake
-      snake = snakes[socket.id]
+      var snake = snakes[socket.id]
       snake.x = data.x
       snake.y = data.y
       snake.tail = data.tail
       snake.points = data.points
       snake.color = data.color
-      console.log('UPDATE SNAKES', snakes)
       io.sockets.emit('serverUpdate', snakes)
     })
 

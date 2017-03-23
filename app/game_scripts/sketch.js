@@ -25,9 +25,11 @@ export default function sketch (p) {
       foodx: food.x,
       foody: food.y
     }
- // console.log('DATA', data)
-
-  // send the snake info to the server
+    // Handle server disconnection
+    socket.on('disconnect', function () {
+      socket.close()
+    })
+    // send the snake info to the server
     socket.emit('start', data)
     socket.on('serverUpdate', function (data) {
     // console.log('inside heartbeat this is the data!!!', data)
@@ -42,7 +44,6 @@ export default function sketch (p) {
     snake.eat(p, food)
     food.draw(p)
     for (var id in snakes) {
-      console.log('snakes inside draw', snakes)
       if (id.substring(2, id.length) !== socket.id) {
         p.fill(snakes[id].color)
         p.rect(snakes[id].x, snakes[id].y, scl, scl)
