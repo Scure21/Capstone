@@ -36,13 +36,21 @@ export default class ExampleApp extends React.Component{
     super(props)
 
     this.state = {
-      modalIsOpen: false,
       loginOrSignup: ''
     }
     // this.openModal = this.openModal.bind(this)
     // this.closeModal = this.closeModal.bind(this)
+    this.openLogin = this.openLogin.bind(this)
+    this.openSignup = this.openSignup.bind(this)
   }
 
+  openLogin(e){
+    this.setState({loginOrSignup: e.target.name})
+  }
+
+  openSignup(e){
+    this.setState({loginOrSignup: e.target.name})
+  }
   // openModal(e){
   //   this.setState({modalIsOpen: true})
   //   this.setState({loginOrSignup: e.target.name})
@@ -56,20 +64,22 @@ export default class ExampleApp extends React.Component{
     console.log('EXAMPLE APP STATE', this.state)
     return(
       <div>
-        <button id="login-btn" name="login" onClick={this.openModal}> Login! </button>
-        <button id="signup-btn" name="signup" onClick={this.openModal}> Sign up! </button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="login Modal"
-        >
-        {
-          this.state.loginOrSignup === 'signup' ? <SignUpContainer /> : <Login closeModal={this.closeModal} />
-        }
-        </Modal>
+        <button id="login-btn" name="login" onClick={this.openLogin}> Login! </button>
+        <button id="login-btn" name="signup" onClick={this.openSignup}> Sign up! </button>
     </div>
   )
 }
 
 }
+
+
+// <Modal
+//           isOpen={this.state.modalIsOpen}
+//           onRequestClose={this.closeModal}
+//           style={customStyles}
+//           contentLabel="login Modal"
+//         >
+//         {
+//           this.state.loginOrSignup === 'signup' ? <SignUpContainer /> : <Login closeModal={this.closeModal} />
+//         }
+//         </Modal>
