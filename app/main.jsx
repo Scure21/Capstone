@@ -12,76 +12,97 @@ import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
 import Modal from 'react-modal'
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-}
+const App = connect(
+  ({ auth }) => ({ user: auth })
+)(
+  ({ user, children }) => {
+    console.log('hello!')
+    return (
+    <div id="parent-div">
+      <div id="login children-div">
+        <div>
+          {user ? <WhoAmI/> : <Login/>}
+        </div>
+        {children}
+      </div>
+  </div>
 
-class ExampleApp extends React.Component {
-  constructor (props) {
+  )
+  }
+)
+
+const customStyles = {
+  overlay : {
+    position          : 'fixed',
+    top               : 300,
+    left              : 300,
+    right             : 300,
+    bottom            : 300,
+    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+  },
+  content : {
+    position                   : 'absolute',
+    top                        : '20px',
+    left                       : '20px',
+    right                      : '20px',
+    bottom                     : '20px',
+    border                     : '1px solid #ccc',
+    background                 : 'grey',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px'
+
+  }
+};
+
+
+class ExampleApp extends React.Component{
+
+   constructor(props){
     super(props)
 
     this.state = {
-      signupModalIsOpen: false,
-      loginModalIsOpen: false
+      modalIsOpen: false,
+      loginOrSignup: ''
     }
-    this.openSignupModal = this.openSignupModal.bind(this)
-    this.openLoginModal = this.openLoginModal.bind(this)
+    this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
-  openSignupModal () {
-    this.setState({signupModalIsOpen: true})
-  }
-
-  openLoginModal () {
+  openModal(e){
     this.setState({modalIsOpen: true})
+    this.setState({loginOrSignup: e.target.name})
   }
 
-  closeModal () {
+  closeModal(){
     this.setState({modalIsOpen: false})
   }
 
-  render () {
-    return (
+  render(){
+    return(
       <div>
-        <div>
-          <button onClick={this.openLoginModal}> Login! </button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-          <h2 ref="subtitle">Hello</h2>
-          <SignUpContainer />
-          </Modal>
-        </div>
-        <div>
-          <button onClick={this.openSignupModal}> Sign up! </button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-          <h2 ref="subtitle">Hello</h2>
-          <Login />
-          </Modal>
-        </div>
-      </div>
-    )
-  }
+        <button id="login-btn" name="login" onClick={this.openModal}> Login! </button>
+        <button id="signup-btn" name="signup" onClick={this.openModal}> Sign up! </button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="login Modal"
+        >
+        {
+          this.state.loginOrSignup === 'signup' ? <SignUpContainer /> : <Login />
+        }
+        </Modal>
+    </div>
+  )
 }
 
-export default class AppContainer extends React.Component {
-  render () {
+}
+
+export default class AppContainer extends React.Component{
+  render(){
     return (
       <div>
         {this.props.children}
@@ -90,11 +111,22 @@ export default class AppContainer extends React.Component {
   }
 }
 
-render(
+
+/*connect() => function called connectFunc
+connectFunc(({ user, children }) =>
+    <div>
+      <nav>
+        {user ? <WhoAmI/> : <Login/>}
+      </nav>
+      {children}
+    </div>) */
+
+
+render (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
-        <IndexRedirect to="/login"/>
+      <IndexRedirect to="/login"/>
         <Route path="/interstitial" component={Int}/>
         <Route path="/login" component={ExampleApp}/>
         <Route path="/game" component={Game}/>
