@@ -37,10 +37,8 @@ const App = connect(
 
 
 
-
-
 export default class AppContainer extends React.Component{
-  
+
   constructor(props){
     super(props)
       this.state = {
@@ -48,14 +46,16 @@ export default class AppContainer extends React.Component{
       }
     // this.componentWillMount = this.onAppEnter.bind(this)
   }
-  
+
 componentWillMount = () => {
   var deviceType;
   if (!md.mobile()){
     this.setState({deviceType: 'phone'})
+    browserHistory.push('/exampleApp')
   }
   else{
     this.setState({deviceType: 'computer'})
+    browserHistory.push('/interstitial')
   }
 }
 
@@ -63,17 +63,19 @@ componentWillMount = () => {
     console.log('STAAAATE', this.state)
     return (
       <div>
-        {
-          (this.state.deviceType === "phone" ? <ExampleApp/> : <Int/>)
-          
-         
-          
-        }
+        {this.props.children}
       </div>
     )
   }
 }
 
+const mapStateToProps = (state, ownProps)=> {
+  return{
+    auth: state.auth
+  }
+}
+
+const dblContainer = connect(mapStateToProps)(AppContainer)
 
 
 
@@ -81,9 +83,11 @@ componentWillMount = () => {
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={AppContainer}>
+      <Route path="/" component={dblContainer}>
+        <Route path='/exampleApp' component={ExampleApp} />
+        <Route path="/login" component={Login}/>
+        <Route path="/signup" component={SignUpContainer}/>
         <Route path="/interstitial" component={Int}/>
-        <Route path="/login" component={ExampleApp}/>
         <Route path="/game" component={Game}/>
       </Route>
     </Router>

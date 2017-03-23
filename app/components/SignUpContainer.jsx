@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import SignUp from '../components/SignUp'
 import axios from 'axios'
 import {browserHistory} from 'react-router'
-import {signup} from '../reducers/auth'
+import {Signup} from '../reducers/auth'
 
 class SignUpContainer extends React.Component {
 
@@ -73,7 +73,7 @@ class SignUpContainer extends React.Component {
 
    return (
 
-     <Signup
+     <SignUp
         handleNameChange={this.handleNameChange}
         handleEmailChange={this.handleEmailChange}
         handlePassword1Change={this.handlePassword1Change}
