@@ -1,7 +1,7 @@
-import { scl, randomVector } from './utils'
+import { scl, utils } from './utils'
 
-export default function Food (p, scl) {
-  this.vec = p.randomVector().mult(scl)
+export default function Food (p) {
+  this.vec = utils.randomVector(p).mult(scl)
   this.scl = scl
 }
 
@@ -19,5 +19,5 @@ Food.prototype.draw = function (p) {
 }
 
 Food.prototype.eaten = function (p) {
-  this.vec = p.randomVector().mult(this.scl)
+  this.vec = utils.randomVector(p).mult(this.scl)
 }

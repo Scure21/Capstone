@@ -1,22 +1,20 @@
 import Food from './food'
 import Snake from './snake'
-import p from 'p5'
+import {scl} from './utils'
 
-export default function sketch () {
-  var scl = 20
+export default function sketch (p) {
   var snake
   var food
   var socket
   var snakes = []
   var canvas
-  console.log('THIS P IN SKETCH', p)
+
   p.setup = function () {
-    canvas = p.createCanvas(window.innerWidth, window.innerHeight)
+    canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
     socket = io.connect('http://192.168.1.184:1337')
-    console.log('SOCKET',socket)
-    snake = new Snake()
-    food = new Food()
+    snake = new Snake(null, null, p)
+    food = new Food(p)
     const data = {
     // snake: snake,
       x: snake.x,
@@ -31,7 +29,7 @@ export default function sketch () {
 
   // send the snake info to the server
     socket.emit('start', data)
-    socket.on('update', function (data) {
+    socket.on('serverUpdate', function (data) {
     // console.log('inside heartbeat this is the data!!!', data)
       snakes = data
     })
@@ -41,32 +39,37 @@ export default function sketch () {
 
   p.draw = function () {
     p.background(51)
-    snake.eat(food)
-    food.draw()
-    for (var i = snakes.length - 1; i >= 0; i--) {
-      var id = snakes[i].id
-    // console.log('snakes inside draw', snakes)
+    snake.eat(p, food)
+    food.draw(p)
+    for (var id in snakes) {
+      console.log('snakes inside draw', snakes)
       if (id.substring(2, id.length) !== socket.id) {
-        p.fill(snakes[i].color)
-        p.rect(snakes[i].x, snakes[i].y, scl, scl)
+        p.fill(snakes[id].color)
+        p.rect(snakes[id].x, snakes[id].y, scl, scl)
+        var tail = snakes[id].tail
+        for (var i = 0; i < tail.length; i++) {
+          var element = tail[i]
+          p.fill(snakes[id].color)
+          p.rect(element.x, element.y, scl, scl)
+        }
       }
     }
-    snake.draw()
-    snake.move()
+    snake.draw(p)
+    snake.move(p)
     var data = {
       x: snake.x,
       y: snake.y,
-    // tail: snake.tail,
+      tail: snake.tail,
       points: snake.points,
       color: snake.color
     }
   // console.log('Updated Snake', data)
-    socket.emit('update', data)
+    socket.emit('clientUpdate', data)
   }
 
-  window.onresize = function () {
-    canvas.size(window.innerWidth, window.innerHeight)
-  }
+  // window.onresize = function () {
+  //   canvas.size(window.innerWidth, window.innerHeight)
+  // }
 
   p.keyPressed = function () {
     if (p.keyCode === p.UP_ARROW) {
