@@ -2,6 +2,7 @@
 
 export const scl = 20
 
+
 export const utils = {
   cols: function (p) {
     return Math.floor(p.width / scl)
@@ -13,6 +14,7 @@ export const utils = {
 
   randomVector: function (p) {
     return p.createVector(p.floor(p.random(this.cols(p))), p.floor(p.random(this.rows(p))))
+
 
   }
 }
