@@ -71,7 +71,7 @@ module.exports = function (io) {
           break
         }
       }
-      snakes.splice(index, 1)
+      // snakes.splice(index, 1)
       console.log('snakes after we deleted the user who\'s about to disconnect', snakes)
       console.log('socket id ' + socket.id + ' has disconnected. :(')
     })
