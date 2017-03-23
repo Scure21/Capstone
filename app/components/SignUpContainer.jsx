@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Signup from '../components/Signup'
+import SignUp from '../components/SignUp'
 import axios from 'axios'
 import {browserHistory} from 'react-router'
 import {signup} from '../reducers/auth'
 
-class SignupContainer extends React.Component {
+class SignUpContainer extends React.Component {
 
  constructor(props){
     super(props)
@@ -100,4 +100,4 @@ const mapDispatchToProps = (dispatch) => {
  }
 }
 
-export default connect(null, mapDispatchToProps)(SignupContainer)
+export default connect(null, mapDispatchToProps)(SignUpContainer)

@@ -3,6 +3,8 @@ import React from 'react'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
+import MobileDetect from 'mobile-detect'
+    var md = new MobileDetect(window.navigator.userAgent);
 
 import store from './store'
 import Int from './components/Int'
@@ -33,8 +35,32 @@ const App = connect(
 )
 
 
+
+
+
 export default class AppContainer extends React.Component{
+  
+  constructor(props){
+    super(props)
+      this.state = {
+        deviceType: ''
+      }
+    // this.componentWillMount = this.onAppEnter.bind(this)
+  }
+  
+componentWillMount = () => {
+  var deviceType;
+  if (!md.mobile()){
+    this.setState({deviceType: 'computer'})
+  }
+  else{
+    this.setState({deviceType: 'phone'})
+  }
+  //console.log()
+}
+
   render(){
+    console.log('STAAAATE', this.state)
     return (
       <div>
         {this.props.children}
@@ -42,6 +68,9 @@ export default class AppContainer extends React.Component{
     )
   }
 }
+
+
+
 
 
 render (
