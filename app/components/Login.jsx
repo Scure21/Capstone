@@ -1,4 +1,5 @@
 import React from 'react'
+import {browserHistory} from 'react-router'
 
 export const Login = ({ login }) => (
   <form onSubmit={evt => {
