@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import {Link, browserHistory} from 'react-router'
 import Login from './Login'
 import SignUpContainer from './SignUpContainer'
+import Controller from './Controller'
 
 // const customStyles = {
 //   overlay : {
@@ -31,7 +32,7 @@ import SignUpContainer from './SignUpContainer'
 // };
 
 
-export default class ExampleApp extends React.Component{
+export default (props) => {
 
    // constructor(props){
     // super(props)
@@ -63,8 +64,8 @@ export default class ExampleApp extends React.Component{
   //   this.setState({modalIsOpen: false})
   // }
 
-  render(){
     return(
+      props.auth ? <Controller /> :
       <div>
         <Link to={'/login'}>
           <button id="login-btn" name="login"> Login! </button>
@@ -76,7 +77,6 @@ export default class ExampleApp extends React.Component{
 
     </div>
   )
-}
 
 }
 

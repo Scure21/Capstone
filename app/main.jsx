@@ -50,29 +50,29 @@ export default class AppContainer extends React.Component{
 componentWillMount = () => {
   var deviceType;
   if (!md.mobile()){
-    this.setState({deviceType: 'phone'})
+    this.setState({deviceType: 'computer'})
     console.log("NOT MOBILE")
-    if(this.props.auth) {
+    // if(this.state.auth) {
+    //   browserHistory.push('/controller')
+    // }
+    // else{
       browserHistory.push('/interstitial')
-    }
-    else{
-      browserHistory.push('/exampleApp')
-    }
   }
   else{
-    this.setState({deviceType: 'computer'})
-    if(this.props.auth){
-      console.log("************ HELLLOOOO")
-      browserHistory.push('/interstitial')
-    }
-    else{
-      browserHistory.push('/exampleApp')
-    }
+    this.setState({deviceType: 'phone'})
+    // if(this.state.auth){
+    //   console.log("************ HELLLOOOO")
+    //   browserHistory.push('/interstitial')
+    // }
+    // else{
+    //   browserHistory.push('/exampleApp')
+    // }
+    browserHistory.push('/exampleApp')
   }
 }
 
   render(){
-    console.log('STAAAATE', this.state)
+    console.log('STAAAATE', this.state.auth)
     return (
       <div>
         {this.props.children}
@@ -86,7 +86,6 @@ const mapStateToProps = (state, ownProps)=> {
     auth: state.auth
   }
 }
-
 const dblContainer = connect(mapStateToProps)(AppContainer)
 
 
@@ -100,6 +99,7 @@ render (
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
         <Route path="/interstitial" component={Int}/>
+        <Route path="/controller" component={Controller}/>
         <Route path="/game" component={Game}/>
       </Route>
     </Router>

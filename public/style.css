@@ -77,3 +77,8 @@ body {
 #parent-div{
     position:relative;
 }
+
+button#controller{
+  height:50px;
+  width:50px;
+}
