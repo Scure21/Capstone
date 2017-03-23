@@ -13,7 +13,8 @@ export default function sketch () {
   p.setup = function () {
     canvas = p.createCanvas(window.innerWidth, window.innerHeight)
   // in the future this would go in the actual server
-    socket = io.connect('http://localhost:1337')
+    socket = io.connect('http://192.168.1.184:1337')
+    console.log('SOCKET',socket)
     snake = new Snake()
     food = new Food()
     const data = {
