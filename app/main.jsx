@@ -51,11 +51,23 @@ componentWillMount = () => {
   var deviceType;
   if (!md.mobile()){
     this.setState({deviceType: 'phone'})
-    browserHistory.push('/exampleApp')
+    console.log("NOT MOBILE")
+    if(this.props.auth) {
+      browserHistory.push('/interstitial')
+    }
+    else{
+      browserHistory.push('/exampleApp')
+    }
   }
   else{
     this.setState({deviceType: 'computer'})
-    browserHistory.push('/interstitial')
+    if(this.props.auth){
+      console.log("************ HELLLOOOO")
+      browserHistory.push('/interstitial')
+    }
+    else{
+      browserHistory.push('/exampleApp')
+    }
   }
 }
 

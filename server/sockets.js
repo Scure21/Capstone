@@ -63,6 +63,7 @@ module.exports = function (io) {
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
       snakes[socket.id] = {}
+      delete snakes[socket.id]
 
       console.log('snakes after we deleted the user who\'s about to disconnect', snakes)
       console.log('socket id ' + socket.id + ' has disconnected. :(')

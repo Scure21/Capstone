@@ -12,7 +12,7 @@ export default function sketch (p) {
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
-    socket = io.connect('http://192.168.1.184:1337')
+    socket = io.connect('http://192.168.2.167:1337')
     snake = new Snake(null, null, p)
     food = new Food(p)
     const data = {
@@ -41,19 +41,21 @@ export default function sketch (p) {
     p.background(51)
     snake.eat(p, food)
     food.draw(p)
-    for (var id in snakes) {
-      console.log('snakes inside draw', snakes)
-      if (id.substring(2, id.length) !== socket.id) {
-        p.fill(snakes[id].color)
-        p.rect(snakes[id].x, snakes[id].y, scl, scl)
-        var tail = snakes[id].tail
-        for (var i = 0; i < tail.length; i++) {
-          var element = tail[i]
+      for (var id in snakes) {
+        console.log('snakes inside draw', snakes)
+        if (id.substring(2, id.length) !== socket.id) {
+          console.log("***********", snakes[id].color)
           p.fill(snakes[id].color)
-          p.rect(element.x, element.y, scl, scl)
+          p.rect(snakes[id].x, snakes[id].y, scl, scl)
+          var tail = snakes[id].tail
+          for (var i = 0; i < tail.length; i++) {
+            var element = tail[i]
+            p.fill(snakes[id].color)
+            p.rect(element.x, element.y, scl, scl)
+          }
         }
       }
-    }
+
     snake.draw(p)
     snake.move(p)
     var data = {
