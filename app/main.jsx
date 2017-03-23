@@ -52,7 +52,7 @@ class ExampleApp extends React.Component {
     return (
       <div>
         <div>
-          <button onClick={this.openLoginModal}> Login in! </button>
+          <button onClick={this.openLoginModal}> Login! </button>
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
