@@ -35,6 +35,7 @@ export default function sketch (p) {
             x: food.vec.x,
             y: food.vec.y
           }
+
           // Handle server disconnection
           socket.on('disconnect', function () {
             socket.close()

@@ -41,6 +41,7 @@ module.exports = function (io) {
       var food = foods[socket.id]
       food.x = data.foodUpdatedData.x
       food.y = data.foodUpdatedData.y
+
       io.sockets.emit('serverUpdate', {snakes, foods})
     })
 
@@ -64,6 +65,7 @@ module.exports = function (io) {
      } else {
        io.sockets.emit('activate-device-controls', true)
      }
+
    })
 
     // receive mobile device information
