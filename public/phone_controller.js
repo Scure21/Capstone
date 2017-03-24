@@ -2,10 +2,12 @@ var socket = io.connect('http://192.168.2.167:1337')
 var device
 // device =  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 device = window.navigator.userAgent
+
 socket.emit('mobile-device', device)
-socket.on('activate-device-controls', function (connected) {
-  if (connected) {
-    console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
+
+socket.on('activate-device-controls', function (isPhone) {
+
+  if (isPhone) {
     var snake_position = {
         x: 0,
         y: 0
@@ -14,7 +16,7 @@ socket.on('activate-device-controls', function (connected) {
         socket.emit('snake_position_change', snake_position)
       }
     touchstart = function (e) {
-      console.log('THIS IS E', e)
+      // console.log('THIS IS E', e)
       e.preventDefault()
       if (e) {
           snake_position.event = touchStarted()
@@ -37,6 +39,6 @@ socket.on('activate-device-controls', function (connected) {
     window.addEventListener('devicemotion', devicemotion, false)
   } else {
         // Failed connection
-    alert('Not connected!')
+    console.log("Not a phone!")
   }
 })

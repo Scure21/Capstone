@@ -32,7 +32,7 @@ const customStyles = {
 };
 
 
-class ExampleApp extends React.Component{
+export default class ExampleApp extends React.Component{
 
    constructor(props){
     super(props)
@@ -74,3 +74,4 @@ class ExampleApp extends React.Component{
 }
 
 }
+

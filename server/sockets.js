@@ -46,16 +46,25 @@ module.exports = function (io) {
 
     // handle mobile devices
     socket.on('mobile-device', function (device) {
-      console.log('Device', device)
-      var connected = true
-      if (device) {
-        connected = true
-        io.sockets.emit('activate-device-controls', connected)
-      } else {
-        connected = false
-        io.sockets.emit('activate-device-controls', connected)
+      function detectPhone() {
+       if( device.match(/Android/i)
+       || device.match(/webOS/i)
+       || device.match(/iPhone/i)
+       || device.match(/iPad/i)
+       || device.match(/iPod/i)
+       || device.match(/BlackBerry/i)
+       || device.match(/Windows Phone/i)
+       ) return true;
+       else return false;
       }
-    })
+
+      const isPhone = detectPhone();
+     if (!isPhone) {
+       io.sockets.emit('activate-device-controls', false)
+     } else {
+       io.sockets.emit('activate-device-controls', true)
+     }
+   })
 
     // receive mobile device information
     socket.on('snake_position_change', function (position) {
