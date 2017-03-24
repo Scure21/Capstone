@@ -1,6 +1,11 @@
-var socket = io.connect('http://192.168.1.184:1337')
+var socket = io.connect('http://192.168.1.184:1337') 
 var device
 // device =  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+// CW -- so code in this file has been moved from game.html?  I think it's a good idea to 
+// keep it in a separate file, but I've already commented on the code in game.html, so I'm not 
+// going to copy those comments here
+
 device = window.navigator.userAgent
 socket.emit('mobile-device', device)
 socket.on('activate-device-controls', function (connected) {

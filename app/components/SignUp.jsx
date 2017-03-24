@@ -1,6 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 
+// CW -- do you need users to create an account?  can't they just enter a room name?  Then you can
+// either make a new game with that name, or send them to an already-existing room with the
+// name they enter.  I'm just not sure what your app would gain from making users create an account
+
+
+
 
 export default (props) => {
 

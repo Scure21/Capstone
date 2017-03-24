@@ -2,6 +2,9 @@ import Food from './food'
 import Snake from './snake'
 import {scl} from './utils'
 
+// CW -- what does this file do?  is this the drawing/rendering file?  
+
+
 export default function sketch (p) {
   var snake
   var food
@@ -12,8 +15,8 @@ export default function sketch (p) {
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
-    socket = io.connect('http://192.168.1.184:1337')
-    snake = new Snake(null, null, p)
+    socket = io.connect('http://192.168.1.184:1337')   // CW -- if this is the rendering code,
+    snake = new Snake(null, null, p) // maybe emit something to indicate this is the projector? 
     food = new Food(p)
     const data = {
     // snake: snake,
@@ -27,7 +30,7 @@ export default function sketch (p) {
     }
  // console.log('DATA', data)
 
-  // send the snake info to the server
+  // send the snake info to the server -- CW -- I suggest generating snake on server side
     socket.emit('start', data)
     socket.on('serverUpdate', function (data) {
     // console.log('inside heartbeat this is the data!!!', data)

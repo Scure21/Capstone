@@ -1,3 +1,6 @@
+<!-- CW - do you need this file?  You've already moved the player move logic to phone_controller; perhaps you could just make the scripts available in index.html ?   -->
+
+
 <!doctype html>
 <html>
   <head>
@@ -26,14 +29,25 @@
     var device;
     //device =  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     device = window.navigator.userAgent
+
+    // CW -- don't you want to do some kind of check on device before emitting mobile-device?
+    // like, checking to make sure device is one of those mobile devices?  Right now, the server
+    // side check ONLY checks that there is a device
+
     socket.emit('mobile-device', device)
     socket.on('activate-device-controls', function (connected) {
       if(connected){
         console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
-        var snake_position = {
+
+        // CW -- maybe generate initial snake position on server side, when new snake is made?
+        // EITHER random location on board, or start each of the four snakes in a specific position
+        // i.e. first snake, upper right corner; second snake, lower right corner, etc.
+
+
+        var snake_position = { 
               x: 0,
               y: 0
-            },
+            },   // CW -- what is this comma doing here?  
             emit_updates = function(){
               socket.emit('snake_position_change', snake_position);
             }
@@ -45,16 +59,21 @@
                snake_position.event = touchStarted()
               }
               emit_updates();
-            },
+            }, // CW
             touchend = function(e){
               e.preventDefault();
               snake_position.event = e;
               emit_updates();
-            },
+            }, // CW 
             devicemotion = function(e){
               snake_position.event = e;
               emit_updates();
             }
+            // CW -- re. the above events -- it seems like you could simplify things since you've
+            // decided to use arrow buttons -- all you need is one event (button hit, playerMove, etc), and pass a direction with it (up, down, left, or right)
+
+
+            // CW -- what is the third parameter passed to the listeners below? 
             document.body.addEventListener('touchstart', touchstart, false); // iOS & Android
             document.body.addEventListener('MSPointerDown', touchstart, false); // Windows Phone
             document.body.addEventListener('touchend', touchend, false); // iOS & Android
