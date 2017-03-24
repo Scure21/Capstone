@@ -64,8 +64,8 @@ module.exports = function (io) {
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
-      snakes[socket.id] = {}
       console.log('socket id ' + socket.id + ' has disconnected. :(')
+      delete snakes[socket.id]
     })
   })
 }
@@ -97,7 +97,7 @@ module.exports = function (io) {
   //     socket.on('newDraw', function (start, end, color) {
   //         // data
   //         console.log('new draw', start, end, color)
-  //         drawHistory[room].push({ start: start, end: end, color: color });        
+  //         drawHistory[room].push({ start: start, end: end, color: color });
   //         socket.broadcast.to(room).emit('someoneElseDrew', start, end, color);
   //     });
 
