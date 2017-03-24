@@ -47,7 +47,7 @@
         var snake_position = { 
               x: 0,
               y: 0
-            },   // CW -- what is this comma doing here?  
+            },   // CW -- what is this comma doing here?  maybe more reader-friendly formatting? 
             emit_updates = function(){
               socket.emit('snake_position_change', snake_position);
             }
@@ -72,7 +72,10 @@
             // CW -- re. the above events -- it seems like you could simplify things since you've
             // decided to use arrow buttons -- all you need is one event (button hit, playerMove, etc), and pass a direction with it (up, down, left, or right)
 
+            // CW -- could potentially use refs to attach listeners to appropriate
+            // place in react code (the jsx component)
 
+            // seems React supports touch events -- see React docs
             // CW -- what is the third parameter passed to the listeners below? 
             document.body.addEventListener('touchstart', touchstart, false); // iOS & Android
             document.body.addEventListener('MSPointerDown', touchstart, false); // Windows Phone

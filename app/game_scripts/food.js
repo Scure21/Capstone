@@ -4,7 +4,13 @@ import { scl, utils } from './utils'
 // CW --- not sure what this code does?  You will need to draw the food on the gameboard on the front end,
 // but the logic -- where to generate it, where it is, how the snake interacts with it (ie, gets points, grows bigger, etc) -- can all be in the server code.  
 
-// the server side code can be the "brain."  the browser code just needs to 1) submit playerMoves (for mobile devices) and 2) render the current game board state (projector-computer) including possibly animations (when snake eats food, when snakes collide ... )
+
+// QUESTION:  how much work does P5 do in the browser? 
+
+// to what extent can the server side code be the "brain"?
+//  the browser code needs to 1) submit playerMoves (for mobile devices) 
+// 2) render the current game board state (projector-computer) including possibly animations (when snake eats food, when snakes collide ... )
+// 3) question: how much calculating does p5 do on the front end?  how can you name the result of those calculations so you can emit them as discrete events to the server so the server can update the game board state? 
 
 
 export default function Food (p) {

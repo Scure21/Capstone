@@ -111,6 +111,9 @@ module.exports = function (io) {
 // easier to remember and type than random strings/numbers
 
 
+
+
+
  /*
   ROOMS: this may work for the rooms of the game, so the players wait for all the people to join the room
   */
