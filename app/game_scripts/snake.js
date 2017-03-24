@@ -28,7 +28,7 @@ Snake.prototype.eat = function (p, food) {
     food.eaten(p)
     this.points++
     this.tail.push({x: this.x, y: this.y})
-    console.log(this.tail)
+    //console.log(this.tail)
     console.log(this.points + ' points')
   }
 }

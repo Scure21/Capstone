@@ -13,8 +13,9 @@ export default function sketch (p) {
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
-  // in the future this would go in the actual server
-    socket = io.connect('http://192.168.2.167:1337')
+    p.frameRate(10)
+    // in the future this would go in the actual server
+    socket = io.connect('http://192.168.2.140:1337')
 
     snake = new Snake(null, null, p, snakeImg)
     food = new Food(p)
@@ -29,21 +30,25 @@ export default function sketch (p) {
       x: food.vec.x,
       y: food.vec.y
     }
-    // Handle server disconnection
-    socket.on('disconnect', function () {
-      socket.close()
-    })
-    // send the snake info to the server
+
+    // send initial snake info to the server
     socket.emit('start', {snakeData, foodData})
+    
+    //whne server sends an update, set that data on global objects
     socket.on('serverUpdate', function (data) {
       snakes = data.snakes
       foods = data.foods
     })
-    p.frameRate(10)
+
+    // Handle server disconnection
+    socket.on('disconnect', function () {
+      socket.close()
+    })
   }
 
   p.draw = function () {
     p.background(51)
+
     snake.eat(p, food)
     food.draw(p)
     // Draw the tail for each snake
@@ -61,10 +66,10 @@ export default function sketch (p) {
     }
     // Draw the food for each snake
     for (var foodId in foods) {
-      if (foodId !== socket.id) {
+      //if (foodId !== socket.id) {
         p.fill(255, 0, 100)
         p.rect(foods[foodId].x, foods[foodId].y, scl, scl)
-      }
+      //}
     }
 
     snake.draw(p)

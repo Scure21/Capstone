@@ -1,12 +1,15 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
-  const foods = {}
-  function Food (x, y) {
+  //food doesn't need to be associated with a user - any user can eat any food
+  const foods = []
+  const snakes = {}
+
+  function FoodInfo (x, y) {
     this.x = x
     this.y = y
   }
-  const snakes = {}
+  
   function SnakeInfo (x, y, color, tail, points) {
     this.x = x
     this.y = y
@@ -23,9 +26,9 @@ module.exports = function (io) {
       const snakeData = data.snakeData
       const foodData = data.foodData
       const snake = new SnakeInfo(snakeData.x, snakeData.y, snakeData.color, snakeData.tail, snakeData.points)
-      const food = new Food(foodData.x, foodData.y)
+      const food = new FoodInfo(foodData.x, foodData.y)
       snakes[socket.id] = snake
-      foods[socket.id] = food
+      foods.push(food)
       console.log('SERVER DATA', data)
     })
 
@@ -38,6 +41,7 @@ module.exports = function (io) {
       snake.points = data.snakeUpdatedData.points
       snake.color = data.snakeUpdatedData.color
 
+      
       var food = foods[socket.id]
       food.x = data.foodUpdatedData.x
       food.y = data.foodUpdatedData.y

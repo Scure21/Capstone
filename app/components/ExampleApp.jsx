@@ -3,7 +3,7 @@ import MobileDetect from 'mobile-detect'
     var md = new MobileDetect(window.navigator.userAgent);
 import Modal from 'react-modal'
 import Login from './Login'
-import SignUpContainer from './SignupContainer'
+import SignUpContainer from './SignUpContainer'
 
 const customStyles = {
   overlay : {
@@ -32,7 +32,7 @@ const customStyles = {
 };
 
 
-class ExampleApp extends React.Component{
+export default class ExampleApp extends React.Component{
 
    constructor(props){
     super(props)
