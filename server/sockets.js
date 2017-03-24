@@ -1,7 +1,7 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
-  const foods = []
+  const foods = {}
   function Food (x, y) {
     this.x = x
     this.y = y
@@ -22,22 +22,25 @@ module.exports = function (io) {
     socket.on('start', function (data) {
       const snakeData = data.snakeData
       const foodData = data.foodData
-      console.log(chalk.cyan('new snake: ' + socket.id + ' ' + data.x + ' ' + data.y, data.color, data.points))
       const snake = new SnakeInfo(snakeData.x, snakeData.y, snakeData.color, snakeData.tail, snakeData.points)
       const food = new Food(foodData.x, foodData.y)
       snakes[socket.id] = snake
-      foods.push(food)
+      foods[socket.id] = food
       console.log('SERVER DATA', data)
     })
 
-    // update the x and y values everytime they change
+    // update the snake information for specific user everytime they change
     socket.on('clientUpdate', function (data) {
       var snake = snakes[socket.id]
-      snake.x = data.x
-      snake.y = data.y
-      snake.tail = data.tail
-      snake.points = data.points
-      snake.color = data.color
+      snake.x = data.snakeUpdatedData.x
+      snake.y = data.snakeUpdatedData.y
+      snake.tail = data.snakeUpdatedData.tail
+      snake.points = data.snakeUpdatedData.points
+      snake.color = data.snakeUpdatedData.color
+
+      var food = foods[socket.id]
+      food.x = data.foodUpdatedData.x
+      food.y = data.foodUpdatedData.y
       io.sockets.emit('serverUpdate', {snakes, foods})
     })
 
@@ -62,9 +65,7 @@ module.exports = function (io) {
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
       snakes[socket.id] = {}
-      console.log('snakes after we deleted the user who\'s about to disconnect', snakes)
       console.log('socket id ' + socket.id + ' has disconnected. :(')
-      socket.emit('disconnect')
     })
   })
 }

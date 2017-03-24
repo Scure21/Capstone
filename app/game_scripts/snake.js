@@ -1,6 +1,6 @@
 import { scl, utils } from './utils'
 
-export default function Snake (x, y, p, snakeImg) {
+export default function Snake (x, y, p) {
   if (x && y !== null) {
     this.x = x
     this.y = y
@@ -9,8 +9,6 @@ export default function Snake (x, y, p, snakeImg) {
     this.x = vector.x
     this.y = vector.y
   }
-  this.snakeImg = snakeImg
-  console.log('SNAKE IMAGE:', snakeImg)
   this.xspeed = -1
   this.yspeed = 0
   this.tail = []
@@ -62,10 +60,8 @@ Snake.prototype.move = function (p) {
 }
 
 Snake.prototype.draw = function (p) {
-  // p.fill(p.color(this.color))
-  // p.rect(this.x, this.y, scl, scl)
-  p.imageMode(p.CENTER)
-  p.image(this.snakeImg, this.x, this.y, scl, scl)
+  p.fill(p.color(this.color))
+  p.rect(this.x, this.y, scl, scl)
   for (var i = 0; i < this.tail.length; i++) {
     p.rect(this.tail[i].x, this.tail[i].y, scl, scl)
   }

@@ -11,10 +11,6 @@ export default function sketch (p) {
   var foods
   var snakeImg
 
-  p.preload = function () {
-    snakeImg = p.loadImage('./purpleHeadStraight.png')
-  }
-
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
@@ -42,7 +38,7 @@ export default function sketch (p) {
       snakes = data.snakes
       foods = data.foods
     })
-    p.frameRate(5)
+    p.frameRate(10)
   }
 
   p.draw = function () {
@@ -50,35 +46,40 @@ export default function sketch (p) {
     snake.eat(p, food)
     food.draw(p)
     // Draw the tail for each snake
-    // for (var id in snakes) {
-    //   if (id.substring(2, id.length) !== socket.id) {
-    //     // p.fill(snakes[id].color)
-    //     // p.rect(snakes[id].x, snakes[id].y, scl, scl)
-    //     p.image(snakeImg, snakes[id].x, snakes[id].y, scl, scl)
-    //     var tail = snakes[id].tail
-    //     for (var i = 0; i < tail.length; i++) {
-    //       var element = tail[i]
-    //       p.fill(snakes[id].color)
-    //       p.rect(element.x, element.y, scl, scl)
-    //     }
-    //   }
-    // }
+    for (var id in snakes) {
+      if (id.substring(2, id.length) !== socket.id) {
+        p.fill(snakes[id].color)
+        p.rect(snakes[id].x, snakes[id].y, scl, scl)
+        var tail = snakes[id].tail
+        for (var i = 0; i < tail.length; i++) {
+          var element = tail[i]
+          p.fill(snakes[id].color)
+          p.rect(element.x, element.y, scl, scl)
+        }
+      }
+    }
     // Draw the food for each snake
-    for (var foodCoord in foods) {
-      console.log('food', foodCoord)
+    for (var foodId in foods) {
+      if (foodId !== socket.id) {
+        p.fill(255, 0, 100)
+        p.rect(foods[foodId].x, foods[foodId].y, scl, scl)
+      }
     }
 
     snake.draw(p)
     snake.move(p)
-    var data = {
+    var snakeUpdatedData = {
       x: snake.x,
       y: snake.y,
       tail: snake.tail,
       points: snake.points,
       color: snake.color
     }
-  // console.log('Updated Snake', data)
-    socket.emit('clientUpdate', data)
+    var foodUpdatedData = {
+      x: food.vec.x,
+      y: food.vec.y
+    }
+    socket.emit('clientUpdate', {snakeUpdatedData, foodUpdatedData})
   }
 
   // window.onresize = function () {
