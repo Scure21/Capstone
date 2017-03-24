@@ -6,34 +6,38 @@ export default function sketch (p) {
   var snake
   var food
   var socket
-  var snakes = []
+  var snakes
   var canvas
+  var foods
+  var snakeImg
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
     socket = io.connect('http://192.168.1.184:1337')
-    snake = new Snake(null, null, p)
+    snake = new Snake(null, null, p, snakeImg)
     food = new Food(p)
-    const data = {
-    // snake: snake,
+    const snakeData = {
       x: snake.x,
       y: snake.y,
       color: snake.color,
       points: snake.points,
-      tail: snake.tail,
-      foodx: food.x,
-      foody: food.y
+      tail: snake.tail
     }
- // console.log('DATA', data)
-
-  // send the snake info to the server
-    socket.emit('start', data)
-    socket.on('serverUpdate', function (data) {
-    // console.log('inside heartbeat this is the data!!!', data)
-      snakes = data
+    const foodData = {
+      x: food.vec.x,
+      y: food.vec.y
+    }
+    // Handle server disconnection
+    socket.on('disconnect', function () {
+      socket.close()
     })
-
+    // send the snake info to the server
+    socket.emit('start', {snakeData, foodData})
+    socket.on('serverUpdate', function (data) {
+      snakes = data.snakes
+      foods = data.foods
+    })
     p.frameRate(10)
   }
 
@@ -41,8 +45,8 @@ export default function sketch (p) {
     p.background(51)
     snake.eat(p, food)
     food.draw(p)
+    // Draw the tail for each snake
     for (var id in snakes) {
-      console.log('snakes inside draw', snakes)
       if (id.substring(2, id.length) !== socket.id) {
         p.fill(snakes[id].color)
         p.rect(snakes[id].x, snakes[id].y, scl, scl)
@@ -54,17 +58,28 @@ export default function sketch (p) {
         }
       }
     }
+    // Draw the food for each snake
+    for (var foodId in foods) {
+      if (foodId !== socket.id) {
+        p.fill(255, 0, 100)
+        p.rect(foods[foodId].x, foods[foodId].y, scl, scl)
+      }
+    }
+
     snake.draw(p)
     snake.move(p)
-    var data = {
+    var snakeUpdatedData = {
       x: snake.x,
       y: snake.y,
       tail: snake.tail,
       points: snake.points,
       color: snake.color
     }
-  // console.log('Updated Snake', data)
-    socket.emit('clientUpdate', data)
+    var foodUpdatedData = {
+      x: food.vec.x,
+      y: food.vec.y
+    }
+    socket.emit('clientUpdate', {snakeUpdatedData, foodUpdatedData})
   }
 
   // window.onresize = function () {
