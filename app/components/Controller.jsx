@@ -5,19 +5,19 @@ export default class Controller extends Component{
     render(){
         return(
             <div>
-                <button id='up controller'>
-                    <span class='glyphicon glyphicon-chevron-up'></span>
+                <button id='up' className="controller">
+                    <span className='glyphicon glyphicon-chevron-up'></span>
                 </button>
-                <button id='down controller'>
-                     <span class='glyphicon glyphicon-chevron-down'></span>
+                <button id='left' className="controller">
+                     <span className='glyphicon glyphicon-chevron-left'></span>
                 </button>
-                <button id='left controller'>
-                     <span class='glyphicon glyphicon-chevron-left'></span>
+                <button id='right' className="controller">
+                     <span className='glyphicon glyphicon-chevron-right'></span>
                 </button>
-                <button id='right controller'>
-                     <span class='glyphicon glyphicon-chevron-right'></span>
+                <button id='down' className="controller">
+                     <span className='glyphicon glyphicon-chevron-down'></span>
                 </button>
-                <button> speed up</button>
+                <button id="speed"> power </button>
             </div>
         )
     }

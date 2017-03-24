@@ -1,6 +1,6 @@
 'use strict'
 import React from 'react'
-import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
+import {Router, Link, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import MobileDetect from 'mobile-detect'
@@ -14,6 +14,7 @@ import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
 import ExampleApp from './components/ExampleApp'
 import Controller from './components/Controller'
+
 
 
 const App = connect(
@@ -75,7 +76,8 @@ componentWillMount = () => {
     console.log('STAAAATE', this.state.auth)
     return (
       <div>
-        {this.props.children}
+        {this.props.children}]
+        <Link to={'/game'}><button>click me!</button></Link>
       </div>
     )
   }
