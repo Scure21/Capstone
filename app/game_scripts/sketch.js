@@ -6,55 +6,68 @@ export default function sketch (p) {
   var snake
   var food
   var socket
-  var snakes = []
+  var snakes
   var canvas
+  var foods
+  var snakeImg
+
+  p.preload = function () {
+    snakeImg = p.loadImage('./purpleHeadStraight.png')
+  }
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
     socket = io.connect('http://192.168.1.184:1337')
-    snake = new Snake(null, null, p)
+    snake = new Snake(null, null, p, snakeImg)
     food = new Food(p)
-    const data = {
-    // snake: snake,
+    const snakeData = {
       x: snake.x,
       y: snake.y,
       color: snake.color,
       points: snake.points,
-      tail: snake.tail,
-      foodx: food.x,
-      foody: food.y
+      tail: snake.tail
+    }
+    const foodData = {
+      x: food.vec.x,
+      y: food.vec.y
     }
     // Handle server disconnection
     socket.on('disconnect', function () {
       socket.close()
     })
     // send the snake info to the server
-    socket.emit('start', data)
+    socket.emit('start', {snakeData, foodData})
     socket.on('serverUpdate', function (data) {
-    // console.log('inside heartbeat this is the data!!!', data)
-      snakes = data
+      snakes = data.snakes
+      foods = data.foods
     })
-
-    p.frameRate(10)
+    p.frameRate(5)
   }
 
   p.draw = function () {
     p.background(51)
     snake.eat(p, food)
     food.draw(p)
-    for (var id in snakes) {
-      if (id.substring(2, id.length) !== socket.id) {
-        p.fill(snakes[id].color)
-        p.rect(snakes[id].x, snakes[id].y, scl, scl)
-        var tail = snakes[id].tail
-        for (var i = 0; i < tail.length; i++) {
-          var element = tail[i]
-          p.fill(snakes[id].color)
-          p.rect(element.x, element.y, scl, scl)
-        }
-      }
+    // Draw the tail for each snake
+    // for (var id in snakes) {
+    //   if (id.substring(2, id.length) !== socket.id) {
+    //     // p.fill(snakes[id].color)
+    //     // p.rect(snakes[id].x, snakes[id].y, scl, scl)
+    //     p.image(snakeImg, snakes[id].x, snakes[id].y, scl, scl)
+    //     var tail = snakes[id].tail
+    //     for (var i = 0; i < tail.length; i++) {
+    //       var element = tail[i]
+    //       p.fill(snakes[id].color)
+    //       p.rect(element.x, element.y, scl, scl)
+    //     }
+    //   }
+    // }
+    // Draw the food for each snake
+    for (var foodCoord in foods) {
+      console.log('food', foodCoord)
     }
+
     snake.draw(p)
     snake.move(p)
     var data = {

@@ -20,13 +20,14 @@ module.exports = function (io) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
     socket.on('start', function (data) {
+      const snakeData = data.snakeData
+      const foodData = data.foodData
       console.log(chalk.cyan('new snake: ' + socket.id + ' ' + data.x + ' ' + data.y, data.color, data.points))
-      const snake = new SnakeInfo(data.x, data.y, data.color, data.tail, data.points)
-      const food = new Food(data.foodx, data.foody)
-      // data.snake.id = socket.id // In the future we will change the snakes DT to an object with keys being the socket id.
+      const snake = new SnakeInfo(snakeData.x, snakeData.y, snakeData.color, snakeData.tail, snakeData.points)
+      const food = new Food(foodData.x, foodData.y)
       snakes[socket.id] = snake
       foods.push(food)
-      // console.log('inside start event, snakes arr =', snakes)
+      console.log('SERVER DATA', data)
     })
 
     // update the x and y values everytime they change
@@ -37,7 +38,7 @@ module.exports = function (io) {
       snake.tail = data.tail
       snake.points = data.points
       snake.color = data.color
-      io.sockets.emit('serverUpdate', snakes)
+      io.sockets.emit('serverUpdate', {snakes, foods})
     })
 
     // handle mobile devices
@@ -63,6 +64,7 @@ module.exports = function (io) {
       snakes[socket.id] = {}
       console.log('snakes after we deleted the user who\'s about to disconnect', snakes)
       console.log('socket id ' + socket.id + ' has disconnected. :(')
+      socket.emit('disconnect')
     })
   })
 }
