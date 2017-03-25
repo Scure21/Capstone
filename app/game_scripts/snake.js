@@ -1,4 +1,7 @@
 import { scl, utils } from './utils'
+import { connect } from 'react-redux';
+import { updateSnakePoints } from '../reducers/snakes'
+
 
 export default function Snake (x, y, p) {
   if (x && y !== null) {
@@ -30,6 +33,8 @@ Snake.prototype.eat = function (p, food) {
     this.tail.push({x: this.x, y: this.y})
     console.log(this.tail)
     console.log(this.points + ' points')
+    console.log('THIS: ', this)
+    dispatch(updateSnakePoints(this))
   }
 }
 

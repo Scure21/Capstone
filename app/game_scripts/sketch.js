@@ -17,11 +17,11 @@ export default function sketch (p) {
     canvas = p.createCanvas(600, 600)
     p.frameRate(1)
     // in the future this would go in the actual server
-    socket = io.connect('http://192.168.2.140:1337')
+    socket = io.connect('http://192.168.2.167:1337')
 
     //these 2 lines are from phone_controller
     device = window.navigator.userAgent
-    console.log('inside of setup device=', device)
+    // console.log('inside of setup device=', device)
     socket.emit('mobile-device', device)
 
     socket.on('serverUpdate', function (data) {

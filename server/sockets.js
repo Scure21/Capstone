@@ -59,8 +59,8 @@ module.exports = function (io) {
       }
 
       const isPhone = detectPhone();
-      console.log('inside on mobile-device; device=,', device)
-      console.log('inside on mobile-device; device=,isPhone=', isPhone)
+      // console.log('inside on mobile-device; device=,', device)
+      // console.log('inside on mobile-device; device=,isPhone=', isPhone)
       if (!isPhone) {
         io.sockets.emit('activate-device-controls', false)
       } else {
