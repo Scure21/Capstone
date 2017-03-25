@@ -24,10 +24,10 @@
     border: 2px solid white;
 }
 
-/*canvas {
+canvas {
     width: 100vw !important;
     height: 100vh !important;
-}*/
+}
 
 body {
     padding: 0;
@@ -61,6 +61,7 @@ button.controller{
 button#up{
   display:block;
   margin-left:25px;
+  cursor: pointer;
 }
 
 button#down{

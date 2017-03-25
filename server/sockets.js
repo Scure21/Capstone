@@ -44,9 +44,11 @@ module.exports = function (io) {
 
     // handle mobile devices
     socket.on('mobile-device', function (device) {
+      var devices = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'IEMobile', 'Opera Mini']
       console.log('Device', device)
       var connected = true
-      if (device) {
+      var deviceName = device.slice(device.indexOf('(') + 1, device.indexOf(';'))
+      if (devices.indexOf(deviceName) !== -1) {
         connected = true
         io.sockets.emit('activate-device-controls', connected)
       } else {
@@ -57,7 +59,8 @@ module.exports = function (io) {
 
     // receive mobile device information
     socket.on('snake_position_change', function (position) {
-      // console.log('SNAKE POSITION', position)
+      console.log('hi i am here')
+      console.log('SNAKE POSITION', position)
     })
 
     // event that runs anytime a socket disconnects

@@ -57,7 +57,7 @@ componentWillMount = () => {
     //   browserHistory.push('/controller')
     // }
     // else{
-      browserHistory.push('/interstitial')
+      // browserHistory.push('/interstitial')
   }
   else{
     this.setState({deviceType: 'phone'})
@@ -76,7 +76,7 @@ componentWillMount = () => {
     console.log('STAAAATE', this.state.auth)
     return (
       <div>
-        {this.props.children}]
+        {this.props.children}
         <Link to={'/game'}><button>click me!</button></Link>
       </div>
     )

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import SignUp from '../components/SignUp'
+import SignUp from './SignUp'
 import axios from 'axios'
 import {browserHistory} from 'react-router'
 import {Signup} from '../reducers/auth'

@@ -1,8 +1,9 @@
-var socket = io.connect('http://192.168.0.8:1337')
+var socket = io.connect('http://192.168.2.111:1337')
 var device
 // device =  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 device = window.navigator.userAgent
 socket.emit('mobile-device', device)
+
 socket.on('activate-device-controls', function (connected) {
   if (connected) {
     console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
