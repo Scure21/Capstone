@@ -58,16 +58,30 @@ export default function sketch (p) {
 
     snake.draw(p)
     snake.move(p)
-    var data = {
-      x: snake.x,
-      y: snake.y,
+    // var data = {
+    //   x: snake.x,
+    //   y: snake.y,
+    //   tail: snake.tail,
+    //   points: snake.points,
+    //   color: snake.color
+    // }
+
+    socket.on('send_change', function(snake_position){
+      console.log('hi i am here in sketch', snake_position)
+      snake.dir(snake_position.x, snake_position.y)
+    })
+      var data = {
+      x: snake.x + snake_position.x,
+      y: snake.y + snake_position.y,
       tail: snake.tail,
       points: snake.points,
       color: snake.color
     }
-  // console.log('Updated Snake', data)
     socket.emit('clientUpdate', data)
   }
+
+      //old version
+    //socket.emit('clientUpdate', data)
 
   // window.onresize = function () {
   //   canvas.size(window.innerWidth, window.innerHeight)

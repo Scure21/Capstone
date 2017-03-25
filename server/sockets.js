@@ -15,7 +15,7 @@ module.exports = function (io) {
     this.points = points
   }
 
-  // use socket server as an event emitter in order to listen for new connctions
+  // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
@@ -58,14 +58,14 @@ module.exports = function (io) {
     })
 
     // receive mobile device information
-    socket.on('snake_position_change', function (position) {
-      console.log('hi i am here')
-      console.log('SNAKE POSITION', position)
+    socket.on('snake_position_change', function (snake_position) {
+      console.log('hi i am here in sockets')
+      console.log('SNAKE POSITION', snake_position)
+      socket.emit('send_change', snake_position)
     })
 
     // event that runs anytime a socket disconnects
-    socket.on('disconnect', function () {
-
+    socket.on('disconnect', function(){
       snakes[socket.id] = {}
       delete snakes[socket.id]
 
