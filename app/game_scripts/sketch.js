@@ -9,7 +9,6 @@ export default function sketch (p) {
   var snakes
   var canvas
   var foods
-  var snakeImg
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
@@ -17,7 +16,7 @@ export default function sketch (p) {
     // in the future this would go in the actual server
     socket = io.connect('http://192.168.2.140:1337')
 
-    snake = new Snake(null, null, p, snakeImg)
+    snake = new Snake(null, null, p)
     food = new Food(p)
     const snakeData = {
       x: snake.x,

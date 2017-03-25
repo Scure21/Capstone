@@ -42,9 +42,9 @@ module.exports = function (io) {
       snake.color = data.snakeUpdatedData.color
 
       
-      var food = foods[socket.id]
-      food.x = data.foodUpdatedData.x
-      food.y = data.foodUpdatedData.y
+      // var food = foods[socket.id]
+      // food.x = data.foodUpdatedData.x
+      // food.y = data.foodUpdatedData.y
       io.sockets.emit('serverUpdate', {snakes, foods})
     })
 

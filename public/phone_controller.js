@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.2.167:1337')
+var socket = io.connect('http://192.168.2.140:1337')
 var device
 // device =  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 device = window.navigator.userAgent
