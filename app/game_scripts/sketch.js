@@ -6,45 +6,71 @@ export default function sketch (p) {
   var snake
   var food
   var socket
-  var snakes = []
+  var snakes
   var canvas
+  var foods
+  var snakeImg
+  var isPhone
+  var device
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
-  // in the future this would go in the actual server
-    socket = io.connect('http://192.168.0.8:1337')
-    snake = new Snake(null, null, p)
-    food = new Food(p)
-    const data = {
-    // snake: snake,
-      x: snake.x,
-      y: snake.y,
-      color: snake.color,
-      points: snake.points,
-      tail: snake.tail,
-      foodx: food.x,
-      foody: food.y
-    }
- // console.log('DATA', data)
+    p.frameRate(1)
+    // in the future this would go in the actual server
+    socket = io.connect('http://192.168.2.111:1337')
 
-  // send the snake info to the server
-    socket.emit('start', data)
+    //these 2 lines are from phone_controller
+    device = window.navigator.userAgent
+    console.log('inside of setup device=', device)
+    socket.emit('mobile-device', device)
+
     socket.on('serverUpdate', function (data) {
-    // console.log('inside heartbeat this is the data!!!', data)
-      snakes = data
+      snakes = data.snakes
+      foods = data.foods
+      //console.log('snakes on ServerUpdate', snakes)
     })
 
-    p.frameRate(10)
+    // Handle server disconnection
+    socket.on('disconnect', function () {
+      socket.close()
+    })
+
+    socket.on('activate-device-controls', function(_isPhone){
+        if(_isPhone) {
+          isPhone = _isPhone;
+          snake = new Snake(null, null, p, snakeImg)
+          food = new Food(p)
+
+          const snakeData = {
+            x: snake.x,
+            y: snake.y,
+            color: snake.color,
+            points: snake.points,
+            tail: snake.tail
+          }
+
+          const foodData = {
+            x: food.vec.x,
+            y: food.vec.y
+          }
+
+          // send the snake info to the server
+          socket.emit('start', {snakeData, foodData})
+
+       }
+    })
   }
 
+
   p.draw = function () {
-    p.background(51)
-    snake.eat(p, food)
-    food.draw(p)
+    if(!isPhone) {
+      console.log('snakes inside draw', snakes)
+      //I am a projector
+      p.background(51)
+
+      // Draw each snake
       for (var id in snakes) {
-        console.log('snakes inside draw', snakes)
-        if (id.substring(2, id.length) !== socket.id) {
-          console.log("***********", snakes[id].color)
+        //if (id.substring(2, id.length) !== socket.id) {
           p.fill(snakes[id].color)
           p.rect(snakes[id].x, snakes[id].y, scl, scl)
           var tail = snakes[id].tail
@@ -53,31 +79,38 @@ export default function sketch (p) {
             p.fill(snakes[id].color)
             p.rect(element.x, element.y, scl, scl)
           }
-        }
+        //}
       }
 
-    snake.draw(p)
-    snake.move(p)
-    // var data = {
-    //   x: snake.x,
-    //   y: snake.y,
-    //   tail: snake.tail,
-    //   points: snake.points,
-    //   color: snake.color
-    // }
+      // Draw the food for each snake
+      for (var foodId in foods) {
+        if (foodId !== socket.id) {
+          p.fill(255, 0, 100)
+          p.rect(foods[foodId].x, foods[foodId].y, scl, scl)
+        }
+      }
+    } else {
+      //I am a phone
+      snake.eat(p, food)
+      //food.draw(p)
+      //snake.draw(p)
+      snake.move(p)
 
-    socket.on('send_change', function(snake_position){
-      console.log('hi i am here in sketch', snake_position)
-      snake.dir(snake_position.x, snake_position.y)
-    })
-      var data = {
-      x: snake.x + snake_position.x,
-      y: snake.y + snake_position.y,
-      tail: snake.tail,
-      points: snake.points,
-      color: snake.color
+      var snakeUpdatedData = {
+        x: snake.x,
+        y: snake.y,
+        tail: snake.tail,
+        points: snake.points,
+        color: snake.color
+      }
+
+      var foodUpdatedData = {
+        x: food.vec.x,
+        y: food.vec.y
+      }
+
+      socket.emit('clientUpdate', {snakeUpdatedData, foodUpdatedData})
     }
-    socket.emit('clientUpdate', data)
   }
 
       //old version

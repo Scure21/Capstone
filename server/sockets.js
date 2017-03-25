@@ -1,7 +1,7 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
-  const foods = []
+  const foods = {}
   function Food (x, y) {
     this.x = x
     this.y = y
@@ -20,57 +20,63 @@ module.exports = function (io) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
     socket.on('start', function (data) {
-      console.log(chalk.cyan('new snake: ' + socket.id + ' ' + data.x + ' ' + data.y, data.color, data.points))
-      const snake = new SnakeInfo(data.x, data.y, data.color, data.tail, data.points)
-      const food = new Food(data.foodx, data.foody)
-      // data.snake.id = socket.id // In the future we will change the snakes DT to an object with keys being the socket id.
+      const snakeData = data.snakeData
+      const foodData = data.foodData
+      const snake = new SnakeInfo(snakeData.x, snakeData.y, snakeData.color, snakeData.tail, snakeData.points)
+      const food = new Food(foodData.x, foodData.y)
       snakes[socket.id] = snake
-      foods.push(food)
-      // console.log('inside start event, snakes arr =', snakes)
+      foods[socket.id] = food
+      console.log('SERVER DATA', data)
     })
 
-    // update the x and y values everytime they change
+    // update the snake information for specific user everytime they change
     socket.on('clientUpdate', function (data) {
-      var snake
-      snake = snakes[socket.id]
-      snake.x = data.x
-      snake.y = data.y
-      snake.tail = data.tail
-      snake.points = data.points
-      snake.color = data.color
-      console.log('UPDATE SNAKES', snakes)
-      io.sockets.emit('serverUpdate', snakes)
+      var snake = snakes[socket.id]
+      snake.x = data.snakeUpdatedData.x
+      snake.y = data.snakeUpdatedData.y
+      snake.tail = data.snakeUpdatedData.tail
+      snake.points = data.snakeUpdatedData.points
+      snake.color = data.snakeUpdatedData.color
+
+      var food = foods[socket.id]
+      food.x = data.foodUpdatedData.x
+      food.y = data.foodUpdatedData.y
+      io.sockets.emit('serverUpdate', {snakes, foods})
     })
 
     // handle mobile devices
     socket.on('mobile-device', function (device) {
-      var devices = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'IEMobile', 'Opera Mini']
-      console.log('Device', device)
-      var connected = true
-      var deviceName = device.slice(device.indexOf('(') + 1, device.indexOf(';'))
-      if (devices.indexOf(deviceName) !== -1) {
-        connected = true
-        io.sockets.emit('activate-device-controls', connected)
-      } else {
-        connected = false
-        io.sockets.emit('activate-device-controls', connected)
+      function detectPhone() {
+       if( device.match(/Android/i)
+       || device.match(/webOS/i)
+       || device.match(/iPhone/i)
+       || device.match(/iPad/i)
+       || device.match(/iPod/i)
+       || device.match(/BlackBerry/i)
+       || device.match(/Windows Phone/i)
+       ) return true;
+       else return false;
       }
-    })
+
+      const isPhone = detectPhone();
+      console.log('inside on mobile-device; device=,', device)
+      console.log('inside on mobile-device; device=,isPhone=', isPhone)
+      if (!isPhone) {
+        io.sockets.emit('activate-device-controls', false)
+      } else {
+        io.sockets.emit('activate-device-controls', true)
+      }
+   })
 
     // receive mobile device information
-    socket.on('snake_position_change', function (snake_position) {
-      console.log('hi i am here in sockets')
-      console.log('SNAKE POSITION', snake_position)
-      socket.emit('send_change', snake_position)
-    })
+    //socket.on('snake_position_change', function (position) {
+      // console.log('SNAKE POSITION', position)
+    //})
 
     // event that runs anytime a socket disconnects
-    socket.on('disconnect', function(){
-      snakes[socket.id] = {}
+    socket.on('disconnect', function () {
+      console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
       delete snakes[socket.id]
-
-      console.log('snakes after we deleted the user who\'s about to disconnect', snakes)
-      console.log('socket id ' + socket.id + ' has disconnected. :(')
     })
   })
 }

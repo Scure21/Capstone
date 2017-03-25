@@ -50,7 +50,7 @@ export default class Controller extends Component{
             x: 0,
             y: -1
         }
-    socket.emit('send_change', snake_position)
+    socket.emit('clientUpdate', snake_position)
     }
 
     moveDown = function(){

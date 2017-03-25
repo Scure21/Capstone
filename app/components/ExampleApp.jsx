@@ -5,6 +5,7 @@ import Login from './Login'
 import SignUpContainer from './SignUpContainer'
 import Controller from './Controller'
 
+
 // const customStyles = {
 //   overlay : {
 //     position          : 'fixed',
@@ -32,7 +33,7 @@ import Controller from './Controller'
 // };
 
 
-export default (props) => {
+export default class ExampleApp extends React.Component{
 
    // constructor(props){
     // super(props)
@@ -81,13 +82,6 @@ export default (props) => {
 }
 
 
-// <Modal
-//           isOpen={this.state.modalIsOpen}
-//           onRequestClose={this.closeModal}
-//           style={customStyles}
-//           contentLabel="login Modal"
-//         >
-//         {
-//           this.state.loginOrSignup === 'signup' ? <SignUpContainer /> : <Login closeModal={this.closeModal} />
-//         }
-//         </Modal>
+}
+
+
