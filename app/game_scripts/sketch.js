@@ -10,12 +10,30 @@ export default function sketch (p) {
   var canvas
   var foods
   var snakeImg
-  let isPhone
+  var isPhone
+  var device
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
-  // in the future this would go in the actual server
-    socket = io.connect('http://192.168.2.167:1337')
+    p.frameRate(1)
+    // in the future this would go in the actual server
+    socket = io.connect('http://192.168.2.140:1337')
+
+    //these 2 lines are from phone_controller
+    device = window.navigator.userAgent
+    console.log('inside of setup device=', device)
+    socket.emit('mobile-device', device)
+
+    socket.on('serverUpdate', function (data) {
+      snakes = data.snakes
+      foods = data.foods
+      //console.log('snakes on ServerUpdate', snakes)
+    })
+
+    // Handle server disconnection
+    socket.on('disconnect', function () {
+      socket.close()
+    })
 
     socket.on('activate-device-controls', function(_isPhone){
         if(_isPhone) {
@@ -35,20 +53,10 @@ export default function sketch (p) {
             x: food.vec.x,
             y: food.vec.y
           }
-          // Handle server disconnection
-          socket.on('disconnect', function () {
-            socket.close()
-          })
 
           // send the snake info to the server
           socket.emit('start', {snakeData, foodData})
 
-          socket.on('serverUpdate', function (data) {
-            snakes = data.snakes
-            foods = data.foods
-          })
-
-          p.frameRate(10)
        }
     })
   }
@@ -56,11 +64,13 @@ export default function sketch (p) {
 
   p.draw = function () {
     if(!isPhone) {
+      console.log('snakes inside draw', snakes)
+      //I am a projector
       p.background(51)
 
       // Draw each snake
       for (var id in snakes) {
-        if (id.substring(2, id.length) !== socket.id) {
+        //if (id.substring(2, id.length) !== socket.id) {
           p.fill(snakes[id].color)
           p.rect(snakes[id].x, snakes[id].y, scl, scl)
           var tail = snakes[id].tail
@@ -69,7 +79,7 @@ export default function sketch (p) {
             p.fill(snakes[id].color)
             p.rect(element.x, element.y, scl, scl)
           }
-        }
+        //}
       }
 
       // Draw the food for each snake
@@ -80,9 +90,10 @@ export default function sketch (p) {
         }
       }
     } else {
+      //I am a phone
       snake.eat(p, food)
-      food.draw(p)
-      snake.draw(p)
+      //food.draw(p)
+      //snake.draw(p)
       snake.move(p)
 
       var snakeUpdatedData = {

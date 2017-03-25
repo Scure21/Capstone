@@ -59,21 +59,23 @@ module.exports = function (io) {
       }
 
       const isPhone = detectPhone();
-     if (!isPhone) {
-       io.sockets.emit('activate-device-controls', false)
-     } else {
-       io.sockets.emit('activate-device-controls', true)
-     }
+      console.log('inside on mobile-device; device=,', device)
+      console.log('inside on mobile-device; device=,isPhone=', isPhone)
+      if (!isPhone) {
+        io.sockets.emit('activate-device-controls', false)
+      } else {
+        io.sockets.emit('activate-device-controls', true)
+      }
    })
 
     // receive mobile device information
-    socket.on('snake_position_change', function (position) {
+    //socket.on('snake_position_change', function (position) {
       // console.log('SNAKE POSITION', position)
-    })
+    //})
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
-      console.log('socket id ' + socket.id + ' has disconnected. :(')
+      console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
       delete snakes[socket.id]
     })
   })
