@@ -1,12 +1,12 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
-  const foods = {}
+  var foods = {}
   function Food (x, y) {
     this.x = x
     this.y = y
   }
-  const snakes = {}
+  var snakes = {}
   function SnakeInfo (x, y, color, tail, points) {
     this.x = x
     this.y = y
@@ -15,56 +15,69 @@ module.exports = function (io) {
     this.points = points
   }
 
-  // use socket server as an event emitter in order to listen for new connctions
+  // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
-    socket.on('start', function (data) {
-      const snakeData = data.snakeData
-      const foodData = data.foodData
-      const snake = new SnakeInfo(snakeData.x, snakeData.y, snakeData.color, snakeData.tail, snakeData.points)
-      const food = new Food(foodData.x, foodData.y)
+    socket.on('start', function ({snakeData, foodData}) {
+      const newSnakeData = snakeData
+      const newFoodData = foodData
+      const snake = new SnakeInfo(newSnakeData.x, newSnakeData.y, newSnakeData.color, newSnakeData.tail, newSnakeData.points)
+      const food = new Food(newFoodData.x, newFoodData.y)
       snakes[socket.id] = snake
       foods[socket.id] = food
-      console.log('SERVER DATA', data)
+      console.log('SERVER DATA', {snakeData, foodData})
     })
 
     // update the snake information for specific user everytime they change
-    socket.on('clientUpdate', function (data) {
-      var snake = snakes[socket.id]
-      snake.x = data.snakeUpdatedData.x
-      snake.y = data.snakeUpdatedData.y
-      snake.tail = data.snakeUpdatedData.tail
-      snake.points = data.snakeUpdatedData.points
-      snake.color = data.snakeUpdatedData.color
+    socket.on('clientMovementUpdate', function (data) {
+      console.log('receiving!!!', data)
+      
+      // var snake = snakes[socket.id]
+       
+      // snake.x = data.snakeUpdatedData.x
+      // snake.y = data.snakeUpdatedData.y
+      // snake.tail = data.snakeUpdatedData.tail
+      // snake.points = data.snakeUpdatedData.points
+      // snake.color = data.snakeUpdatedData.color
 
-      var food = foods[socket.id]
-      food.x = data.foodUpdatedData.x
-      food.y = data.foodUpdatedData.y
-      io.sockets.emit('serverUpdate', {snakes, foods})
+      // var food = foods[socket.id]
+      // food.x = data.foodUpdatedData.x
+      // food.y = data.foodUpdatedData.y
+      io.sockets.emit('serverDirUpdate', data)
     })
 
     // handle mobile devices
     socket.on('mobile-device', function (device) {
-      console.log('Device', device)
-      var connected = true
-      if (device) {
-        connected = true
-        io.sockets.emit('activate-device-controls', connected)
-      } else {
-        connected = false
-        io.sockets.emit('activate-device-controls', connected)
+      function detectPhone() {
+       if (device.match(/Android/i)
+       || device.match(/webOS/i)
+       || device.match(/iPhone/i)
+       || device.match(/iPad/i)
+       || device.match(/iPod/i)
+       || device.match(/BlackBerry/i)
+       || device.match(/Windows Phone/i)
+        ) {return true;}
+       else {return false;}
       }
-    })
+
+      const isPhone = detectPhone(device);
+      if (isPhone === true) {
+        io.sockets.emit('activate-device-controls', isPhone)
+      } 
+      else {
+        io.sockets.emit('activate-device-controls', true)
+      }
+   })
 
     // receive mobile device information
-    socket.on('snake_position_change', function (position) {
+    //socket.on('snake_position_change', function (position) {
       // console.log('SNAKE POSITION', position)
-    })
+    //})
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
-      console.log('socket id ' + socket.id + ' has disconnected. :(')
+      console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
       delete snakes[socket.id]
     })
   })
