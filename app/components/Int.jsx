@@ -7,8 +7,8 @@ export default class Int extends Component {
     return (
   <div id="welcome-page">
     <div id="logo">
-      <img src="logo.png" className="img-responsive" id="logoName"/>
-      <img src="banner.png" className="img-responsive" id="banner"/>
+      <img src="images/sketch_images/logo.png" className="img-responsive" id="logoName"/>
+      <img src="images/sketch_images/banner.png" className="img-responsive" id="banner"/>
     </div>
   </div>
     )

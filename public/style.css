@@ -28,7 +28,7 @@
 body {
     padding: 0;
     margin: 0;
-    background-image: url('./tryme.png');
+    background-image: url('./images/bg.png');
     background-size: cover;
 }
 
