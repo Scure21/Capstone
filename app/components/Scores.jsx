@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export default (props) => {
-  let scores = props.snakes.map((a,b) => {
+  let scores = props.snakes.sort((a,b) => {
     return b.points - a.points
   })
   return(
