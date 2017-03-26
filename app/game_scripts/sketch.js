@@ -4,7 +4,6 @@ import {scl} from './utils'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
 
-
 export default function sketch (p) {
   var snake
   var food
@@ -17,14 +16,14 @@ export default function sketch (p) {
   var device
   var dir
   var snakesArr = []
- 
+
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
     p.frameRate(1)
     // in the future this would go in the actual server
     socket = io.connect('http://10.148.202.177:1337')
 
-    //these 2 lines are from phone_controller
+    // these 2 lines are from phone_controller
     device = window.navigator.userAgent
     console.log('inside of setup device=', device)
     socket.emit('mobile-device', device)
@@ -33,7 +32,7 @@ export default function sketch (p) {
       dir = (data.x, data.y)
       // snakes = data.snakes
       // foods = data.foods
-      //console.log('snakes on ServerUpdate', snakes)
+      // console.log('snakes on ServerUpdate', snakes)
     })
 
     // Handle server disconnection
@@ -41,9 +40,9 @@ export default function sketch (p) {
       socket.close()
     })
 
-    //creating new snake for mobile user
-    socket.on('activate-device-controls', function(isPhone){
-        if(isPhone === true) {
+    // creating new snake for mobile user
+    socket.on('activate-device-controls', function (isPhone) {
+      if (isPhone === true) {
           snake = new Snake(null, null, p, snakeImg)
           food = new Food(p)
 
@@ -62,32 +61,30 @@ export default function sketch (p) {
 
           // send the snake info to the server
           socket.emit('start', {snakeData, foodData})
-           socket.on('serverUpdate', function (data) {
-      snakes = data.snakes
-      foods = data.foods
-      let _snakes = [];
-      for(var snake in snakes) {
-        _snakes.push(snakes[snake])
-      }
-      store.dispatch(getSnakes(_snakes))
-
-       }
+          socket.on('serverUpdate', function (data) {
+            snakes = data.snakes
+            foods = data.foods
+            let _snakes = []
+            for (var snake in snakes) {
+            _snakes.push(snakes[snake])
+          }
+            store.dispatch(getSnakes(_snakes))
+          })
+        }
     })
   }
 
-
   p.draw = function () {
-    if(!isPhone) {
-      //I am a projector
+    if (!isPhone) {
+      // I am a projector
       p.background(51)
 
       // Draw each snake
       for (var id in snakes) {
-        //if (id.substring(2, id.length) !== socket.id) {
-         p.fill(snakes[id].color)
-         p.rect(snakes[id].x, snakes[id].y, scl, scl)
-          var tail = snakes[id].tail
-          for (var i = 0; i < tail.length; i++) {
+        p.fill(snakes[id].color)
+        p.rect(snakes[id].x, snakes[id].y, scl, scl)
+        var tail = snakes[id].tail
+        for (var i = 0; i < tail.length; i++) {
             var element = tail[i]
             p.fill(snakes[id].color)
             p.rect(snakes[id].x, snakes[id].y, scl, scl)
@@ -97,7 +94,7 @@ export default function sketch (p) {
               p.fill(snakes[id].color)
               p.rect(element.x, element.y, scl, scl)
             }
-        //}          
+          }
       }
       // Draw the food for each snake
       for (var foodId in foods) {
@@ -107,10 +104,10 @@ export default function sketch (p) {
         }
       }
     } else {
-      //I am a phone
+      // I am a phone
       snake.eat(p, food)
-      //food.draw(p)
-      //snake.draw(p)
+      // food.draw(p)
+      // snake.draw(p)
       snake.move(p)
 
       var snakeUpdatedData = {
@@ -130,8 +127,8 @@ export default function sketch (p) {
     }
   }
 
-      //old version
-    //socket.emit('clientUpdate', data)
+      // old version
+    // socket.emit('clientUpdate', data)
 
   // window.onresize = function () {
   //   canvas.size(window.innerWidth, window.innerHeight)
