@@ -12,6 +12,7 @@ export default function sketch (p) {
   var snakeImg
   var isPhone
   var device
+  var dir
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
@@ -24,9 +25,10 @@ export default function sketch (p) {
     console.log('inside of setup device=', device)
     socket.emit('mobile-device', device)
 
-    socket.on('serverUpdate', function (data) {
-      snakes = data.snakes
-      foods = data.foods
+    socket.on('serverDirUpdate', function (data) {
+      dir = (data.x, data.y)
+      // snakes = data.snakes
+      // foods = data.foods
       //console.log('snakes on ServerUpdate', snakes)
     })
 
@@ -35,9 +37,9 @@ export default function sketch (p) {
       socket.close()
     })
 
-    socket.on('activate-device-controls', function(_isPhone){
-        if(_isPhone) {
-          isPhone = _isPhone;
+    //creating new snake for mobile user
+    socket.on('activate-device-controls', function(isPhone){
+        if(isPhone === true) {
           snake = new Snake(null, null, p, snakeImg)
           food = new Food(p)
 
@@ -122,7 +124,7 @@ export default function sketch (p) {
 
   p.keyPressed = function () {
     if (p.keyCode === p.UP_ARROW) {
-      snake.dir(0, -1)
+      snake.dir(dir)
     } else if (p.keyCode === p.DOWN_ARROW) {
       snake.dir(0, 1)
     } else if (p.keyCode === p.RIGHT_ARROW) {

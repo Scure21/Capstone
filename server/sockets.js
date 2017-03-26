@@ -1,12 +1,12 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
-  const foods = {}
+  var foods = {}
   function Food (x, y) {
     this.x = x
     this.y = y
   }
-  const snakes = {}
+  var snakes = {}
   function SnakeInfo (x, y, color, tail, points) {
     this.x = x
     this.y = y
@@ -19,30 +19,32 @@ module.exports = function (io) {
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
-    socket.on('start', function (data) {
-      const snakeData = data.snakeData
-      const foodData = data.foodData
-      const snake = new SnakeInfo(snakeData.x, snakeData.y, snakeData.color, snakeData.tail, snakeData.points)
-      const food = new Food(foodData.x, foodData.y)
+    socket.on('start', function ({snakeData, foodData}) {
+      const newSnakeData = snakeData
+      const newFoodData = foodData
+      const snake = new SnakeInfo(newSnakeData.x, newSnakeData.y, newSnakeData.color, newSnakeData.tail, newSnakeData.points)
+      const food = new Food(newFoodData.x, newFoodData.y)
       snakes[socket.id] = snake
       foods[socket.id] = food
-      console.log('SERVER DATA', data)
+      console.log('SERVER DATA', {snakeData, foodData})
     })
 
     // update the snake information for specific user everytime they change
-    socket.on('clientUpdate', function (data) {
-      console.log('receiving!!!')
-      var snake = snakes[socket.id]
-      snake.x = data.snakeUpdatedData.x
-      snake.y = data.snakeUpdatedData.y
-      snake.tail = data.snakeUpdatedData.tail
-      snake.points = data.snakeUpdatedData.points
-      snake.color = data.snakeUpdatedData.color
+    socket.on('clientMovementUpdate', function (data) {
+      console.log('receiving!!!', data)
+      
+      // var snake = snakes[socket.id]
+       
+      // snake.x = data.snakeUpdatedData.x
+      // snake.y = data.snakeUpdatedData.y
+      // snake.tail = data.snakeUpdatedData.tail
+      // snake.points = data.snakeUpdatedData.points
+      // snake.color = data.snakeUpdatedData.color
 
-      var food = foods[socket.id]
-      food.x = data.foodUpdatedData.x
-      food.y = data.foodUpdatedData.y
-      io.sockets.emit('serverUpdate', {snakes, foods})
+      // var food = foods[socket.id]
+      // food.x = data.foodUpdatedData.x
+      // food.y = data.foodUpdatedData.y
+      io.sockets.emit('serverDirUpdate', data)
     })
 
     // handle mobile devices
@@ -60,14 +62,12 @@ module.exports = function (io) {
       }
 
       const isPhone = detectPhone(device);
-      console.log('inside on mobile-device; device =', device)
-      console.log('inside on mobile-device; device =', device, 'isPhone =', isPhone)
       if (isPhone === true) {
-        io.sockets.emit('activate-device-controls', true)
+        io.sockets.emit('activate-device-controls', isPhone)
       } 
-      // else {
-      //   io.sockets.emit('activate-device-controls', true)
-      // }
+      else {
+        io.sockets.emit('activate-device-controls', true)
+      }
    })
 
     // receive mobile device information

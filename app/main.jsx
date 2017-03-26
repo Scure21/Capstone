@@ -68,7 +68,7 @@ componentWillMount = () => {
     // else{
     //   browserHistory.push('/exampleApp')
     // }
-    browserHistory.push('/exampleApp')
+    browserHistory.push('/controller')
   }
 }
 

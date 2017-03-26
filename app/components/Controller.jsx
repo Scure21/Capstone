@@ -21,38 +21,36 @@ export default class Controller extends Component{
     componentDidMount(){
         socket.emit('mobile-device', device)
 
-        socket.on('activate-device-controls', function(connected) {
-            if (connected === true){
-                console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
-                var snake_position = {
-                    x: 0,
-                    y: 0
-                }
-            }
-        })
+        // socket.on('activate-device-controls', function(isPhone) {
+        //         console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
+        //         var snake_position = {
+        //             x: 0,
+        //             y: 0
+        //         }
+        
+        // })
 
-        var up = document.getElementById('up')
-        var down = document.getElementById('down')
-        var left = document.getElementById('left')
-        var right = document.getElementById('right')
-        var power = document.getElementById('speed')
-
-        up.addEventListener('touchstart', this.moveUp, false)
-        down.addEventListener('touchstart', this.moveDown, false)
-        left.addEventListener('touchstart', this.moveLeft, false)
-        right.addEventListener('touchstart', this.moveRight, false)
-        power.addEventListener('touchstart', this.powerUp, false)
+        // var up = document.getElementById('up')
+        // var down = document.getElementById('down')
+        // var left = document.getElementById('left')
+        // var right = document.getElementById('right')
+        // var power = document.getElementById('speed')
+        
+        
+        // up.addEventListener('touchstart', this.moveUp, false)
+        // down.addEventListener('touchstart', this.moveDown, false)
+        // left.addEventListener('touchstart', this.moveLeft, false)
+        // right.addEventListener('touchstart', this.moveRight, false)
+        // power.addEventListener('touchstart', this.powerUp, false)
     }
     
 
     moveUp = function(){
         var data = {
-            snakeUpdatedData: {
                 x: 0,
                 y: -1
-            }
         }
-    socket.emit('clientUpdate', data)
+    socket.emit('clientMovementUpdate', data)
     }
 
     moveDown = function(){
@@ -92,7 +90,7 @@ export default class Controller extends Component{
         console.log('socket!!!', socket)
         return (
              <div ref="nv">
-                <button className='ui-btn' id='up' className='controller'>
+                <button className='ui-btn' id='up' className='controller' onClick={this.moveUp}>
                     <span className='glyphicon glyphicon-chevron-up'></span>
                 </button>
                 <button id='left' className="controller" >
