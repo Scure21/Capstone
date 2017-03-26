@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
-import io from 'socket.io-client' 
-var socket = io.connect('http://10.148.202.177:1337')
+import io from 'socket.io-client'
+var socket = io.connect('http://192.168.0.8:1337')
 var device
     device = window.navigator.userAgent
-    
+
 
 export default class Controller extends Component{
-    
+
     constructor(props){
         super(props)
-        
+
         this.moveUp = this.moveUp.bind(this)
         this.moveDown = this.moveDown.bind(this)
         this.moveLeft = this.moveLeft.bind(this)
@@ -27,7 +27,7 @@ export default class Controller extends Component{
         //             x: 0,
         //             y: 0
         //         }
-        
+
         // })
 
         // var up = document.getElementById('up')
@@ -35,15 +35,15 @@ export default class Controller extends Component{
         // var left = document.getElementById('left')
         // var right = document.getElementById('right')
         // var power = document.getElementById('speed')
-        
-        
+
+
         // up.addEventListener('touchstart', this.moveUp, false)
         // down.addEventListener('touchstart', this.moveDown, false)
         // left.addEventListener('touchstart', this.moveLeft, false)
         // right.addEventListener('touchstart', this.moveRight, false)
         // power.addEventListener('touchstart', this.powerUp, false)
     }
-    
+
 
     moveUp = function(){
         var data = {

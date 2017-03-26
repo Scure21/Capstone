@@ -21,7 +21,7 @@ export default function sketch (p) {
     canvas = p.createCanvas(600, 600)
     p.frameRate(1)
     // in the future this would go in the actual server
-    socket = io.connect('http://10.148.202.177:1337')
+    socket = io.connect('http://192.168.0.8:1337')
 
     // these 2 lines are from phone_controller
     device = window.navigator.userAgent
