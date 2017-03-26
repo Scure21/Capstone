@@ -1,6 +1,9 @@
 import Food from './food'
 import Snake from './snake'
 import {scl} from './utils'
+import store from '../store'
+import { getSnakes } from '../reducers/snakes'
+
 
 export default function sketch (p) {
   var snake
@@ -10,11 +13,12 @@ export default function sketch (p) {
   var canvas
   var foods
   var snakeImg
+  var snakesArr = []
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
-    socket = io.connect('http://192.168.2.167:1337')
+    socket = io.connect('http://192.168.0.8:1337')
 
     snake = new Snake(null, null, p, snakeImg)
     food = new Food(p)
@@ -38,6 +42,11 @@ export default function sketch (p) {
     socket.on('serverUpdate', function (data) {
       snakes = data.snakes
       foods = data.foods
+      let _snakes = [];
+      for(var snake in snakes) {
+        _snakes.push(snakes[snake])
+      }
+      store.dispatch(getSnakes(_snakes))
     })
     p.frameRate(10)
   }
@@ -46,6 +55,9 @@ export default function sketch (p) {
     p.background(51)
     snake.eat(p, food)
     food.draw(p)
+
+    // store.dispatch(getSnakes(snakes))
+
     // Draw the tail for each snake
     for (var id in snakes) {
       if (id.substring(2, id.length) !== socket.id) {

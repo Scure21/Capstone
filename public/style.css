@@ -55,3 +55,8 @@ body {
 #parent-div{
     position:relative;
 }
+
+#leaderboard{
+  border:1px solid yellow;
+  color:yellow;
+}
