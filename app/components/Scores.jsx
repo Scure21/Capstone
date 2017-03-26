@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
 
 export default (props) => {
-  console.log("~~~~~~", props.snakes)
+  let scores = props.snakes.map((a,b) => {
+    return b.points - a.points
+  })
   return(
     <div id="leaderboard">
       <table>
-        <tr>
-          <th> Name </th>
-          <th> Score </th>
-        </tr>
-        {
-          props.snakes.map((snake, indx) => {
-            return(
-              <tr>
-                <td>{`snake ${indx}`}</td>
-                <td>{snake.points}</td>
-              </tr>
-            )
-          })
-        }
+        <tbody>
+          <tr>
+            <th> Name </th>
+            <th> Score </th>
+          </tr>
+          {
+            scores.map((snake, indx) => {
+              return(
+                <tr key={indx}>
+                  <td>{`snake ${indx}`}</td>
+                  <td>{snake.points}</td>
+                </tr>
+              )
+            })
+          }
+        </tbody>
       </table>
     </div>
   )

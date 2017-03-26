@@ -59,4 +59,9 @@ body {
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
+  display:inline-flex;
+  padding:20px;
+  position:absolute;
+  right:100px;
+  opacity:.3;
 }
