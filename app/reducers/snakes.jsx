@@ -4,6 +4,7 @@
 /* ------- ACTIONS -------- */
 // const GET_SNAKES = "GET_SNAKES"
 const UPDATE_SNAKE_POINTS = "UPDATE_SNAKE_POINTS"
+const GET_SNAKES = "GET_SNAKES"
 
 
 /* -------------  ACTION CREATORS  --------------- */
@@ -13,10 +14,15 @@ export const updateSnakePoints = snake => ({
   snake
 })
 
+export const getSnakes = snakes => ({
+  // console.log("INSIDE ACTION CREATOR: ", snakes)
+  type: GET_SNAKES,
+  snakes
+})
 
 const initialSnakesState = {
-  selected: {} // name and points of each snake
-  // list: [] // all snakes
+  selected: {}, // name and points of each snake
+  list: [] // all snakes
 }
 
 
@@ -27,7 +33,11 @@ export default function (state = initialSnakesState, action){
   switch(action.type){
     case UPDATE_SNAKE_POINTS:
       newState.selected.points = action.snake
-      console.log('THIS IS THE REDUCER TALKING: ', newState.selected.points)
+      // console.log('THIS IS THE REDUCER TALKING: ', newState.selected.points)
+      break;
+
+    case GET_SNAKES:
+      newState.list = action.snakes
       break;
 
     default:
