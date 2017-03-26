@@ -31,6 +31,7 @@ module.exports = function (io) {
 
     // update the snake information for specific user everytime they change
     socket.on('clientUpdate', function (data) {
+      console.log('receiving!!!')
       var snake = snakes[socket.id]
       snake.x = data.snakeUpdatedData.x
       snake.y = data.snakeUpdatedData.y
@@ -47,25 +48,26 @@ module.exports = function (io) {
     // handle mobile devices
     socket.on('mobile-device', function (device) {
       function detectPhone() {
-       if( device.match(/Android/i)
+       if (device.match(/Android/i)
        || device.match(/webOS/i)
        || device.match(/iPhone/i)
        || device.match(/iPad/i)
        || device.match(/iPod/i)
        || device.match(/BlackBerry/i)
        || device.match(/Windows Phone/i)
-       ) return true;
-       else return false;
+        ) {return true;}
+       else {return false;}
       }
 
-      const isPhone = detectPhone();
-      console.log('inside on mobile-device; device=,', device)
-      console.log('inside on mobile-device; device=,isPhone=', isPhone)
-      if (!isPhone) {
-        io.sockets.emit('activate-device-controls', false)
-      } else {
+      const isPhone = detectPhone(device);
+      console.log('inside on mobile-device; device =', device)
+      console.log('inside on mobile-device; device =', device, 'isPhone =', isPhone)
+      if (isPhone === true) {
         io.sockets.emit('activate-device-controls', true)
-      }
+      } 
+      // else {
+      //   io.sockets.emit('activate-device-controls', true)
+      // }
    })
 
     // receive mobile device information

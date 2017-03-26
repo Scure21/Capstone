@@ -64,15 +64,14 @@ export default class ExampleApp extends React.Component{
   // closeModal(){
   //   this.setState({modalIsOpen: false})
   // }
-
+    render(){
     return(
-      props.auth ? <Controller /> :
       <div>
-        <Link to={'/login'}>
+        <Link to='/login'>
           <button id="login-btn" name="login"> Login! </button>
         </Link>
 
-        <Link to={'/signup'}>
+        <Link to='/signup'>
           <button id="signup-btn" name="signup"> Sign up! </button>
         </Link>
 
@@ -81,7 +80,7 @@ export default class ExampleApp extends React.Component{
 
 }
 
-
 }
+
 
 

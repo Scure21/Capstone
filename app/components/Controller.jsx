@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import io from 'socket.io-client' 
-var socket = io.connect('http://192.168.2.111:1337')
+var socket = io.connect('http://10.148.202.177:1337')
 var device
     device = window.navigator.userAgent
     
@@ -46,11 +46,13 @@ export default class Controller extends Component{
     
 
     moveUp = function(){
-        var snake_position = {
-            x: 0,
-            y: -1
+        var data = {
+            snakeUpdatedData: {
+                x: 0,
+                y: -1
+            }
         }
-    socket.emit('clientUpdate', snake_position)
+    socket.emit('clientUpdate', data)
     }
 
     moveDown = function(){
@@ -58,7 +60,7 @@ export default class Controller extends Component{
             x: 0,
             y: 0
         }
-    socket.emit('snake_position_change', snake_position)
+    socket.emit('clientUpdate', snake_position)
     }
 
     moveLeft = function(){
@@ -66,7 +68,7 @@ export default class Controller extends Component{
             x: 0,
             y: 0
         }
-    socket.emit('snake_position_change', snake_position)
+    socket.emit('clientUpdate', snake_position)
     }
 
     moveRight = function(){
@@ -74,7 +76,7 @@ export default class Controller extends Component{
             x: 0,
             y: 0
         }
-    socket.emit('snake_position_change', snake_position)
+    socket.emit('clientUpdate', snake_position)
     }
 
     powerUp = function(){
@@ -82,7 +84,7 @@ export default class Controller extends Component{
             x: 0,
             y: 0
         }
-    socket.emit('snake_position_change', snake_position)
+    socket.emit('clientUpdate', snake_position)
     }
 
 
