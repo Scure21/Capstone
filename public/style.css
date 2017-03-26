@@ -103,3 +103,7 @@ button#speed{
     position:relative;
 }
 
+#leaderboard{
+  border:1px solid yellow;
+  color:yellow;
+}

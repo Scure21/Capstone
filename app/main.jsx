@@ -14,8 +14,7 @@ import SignUpContainer from './components/SignUpContainer'
 import Game from './components/Game'
 import ExampleApp from './components/ExampleApp'
 import Controller from './components/Controller'
-
-
+import ScoresContainer from './containers/ScoresContainer'
 
 const App = connect(
   ({ auth }) => ({ user: auth })
@@ -103,6 +102,7 @@ render (
         <Route path="/interstitial" component={Int}/>
         <Route path="/controller" component={Controller}/>
         <Route path="/game" component={Game}/>
+        <Route path="/scores" component={ScoresContainer} />
       </Route>
     </Router>
   </Provider>,

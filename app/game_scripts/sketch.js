@@ -1,6 +1,9 @@
 import Food from './food'
 import Snake from './snake'
 import {scl} from './utils'
+import store from '../store'
+import { getSnakes } from '../reducers/snakes'
+
 
 export default function sketch (p) {
   var snake
@@ -13,7 +16,8 @@ export default function sketch (p) {
   var isPhone
   var device
   var dir
-
+  var snakesArr = []
+ 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
     p.frameRate(1)
@@ -58,6 +62,14 @@ export default function sketch (p) {
 
           // send the snake info to the server
           socket.emit('start', {snakeData, foodData})
+           socket.on('serverUpdate', function (data) {
+      snakes = data.snakes
+      foods = data.foods
+      let _snakes = [];
+      for(var snake in snakes) {
+        _snakes.push(snakes[snake])
+      }
+      store.dispatch(getSnakes(_snakes))
 
        }
     })
@@ -66,24 +78,27 @@ export default function sketch (p) {
 
   p.draw = function () {
     if(!isPhone) {
-      console.log('snakes inside draw', snakes)
       //I am a projector
       p.background(51)
 
       // Draw each snake
       for (var id in snakes) {
         //if (id.substring(2, id.length) !== socket.id) {
-          p.fill(snakes[id].color)
-          p.rect(snakes[id].x, snakes[id].y, scl, scl)
+         p.fill(snakes[id].color)
+         p.rect(snakes[id].x, snakes[id].y, scl, scl)
           var tail = snakes[id].tail
           for (var i = 0; i < tail.length; i++) {
             var element = tail[i]
             p.fill(snakes[id].color)
-            p.rect(element.x, element.y, scl, scl)
-          }
-        //}
+            p.rect(snakes[id].x, snakes[id].y, scl, scl)
+            var tail = snakes[id].tail
+            for (var i = 0; i < tail.length; i++) {
+              var element = tail[i]
+              p.fill(snakes[id].color)
+              p.rect(element.x, element.y, scl, scl)
+            }
+        //}          
       }
-
       // Draw the food for each snake
       for (var foodId in foods) {
         if (foodId !== socket.id) {
