@@ -34,7 +34,7 @@ Snake.prototype.eat = function (p, food) {
     this.tail.push({x: this.x, y: this.y})
     // console.log(this.tail)
     // console.log(this.points + ' points')
-    console.log(this)
+    // console.log(this)
     store.dispatch(updateSnakePoints(this))
   }
 }

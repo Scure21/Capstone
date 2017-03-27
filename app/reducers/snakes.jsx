@@ -32,10 +32,7 @@ export default function (state = initialSnakesState, action){
 
   switch(action.type){
     case UPDATE_SNAKE_POINTS:
-    console.log("~~~ REDUCER: ", action.snake)
-    console.log("~~~ REDUCER AGAIN: ", newState.list[action.snake.id])
       newState.list[action.snake.id].points = action.snake.points
-      // console.log('THIS IS THE REDUCER TALKING: ', newState.selected.points)
       break;
 
     case GET_SNAKES:
