@@ -2,20 +2,15 @@ import { scl, utils } from './utils'
 import { updateSnakePoints } from '../reducers/snakes'
 import store from '../store'
 
-
-export default function Snake (x, y, p) {
-  if (x && y !== null) {
-    this.x = x
-    this.y = y
-  } else {
-    const vector = utils.randomVector(p).mult(scl)
-    this.x = vector.x
-    this.y = vector.y
-  }
+export default function Snake (p) {
+  const vector = utils.randomVector(p).mult(scl)
+  this.x = vector.x
+  this.y = vector.y
   this.xspeed = -1
   this.yspeed = 0
   this.tail = []
   this.points = 0
+  this.visible = true
   this.color = [p.floor(p.random(0, 255)), p.floor(p.random(0, 255)), p.floor(p.random(0, 255))]
 }
 
@@ -31,17 +26,22 @@ Snake.prototype.eat = function (p, food) {
     food.eaten(p)
     this.points++
     this.tail.push({x: this.x, y: this.y})
-    console.log(this.tail)
     console.log(this.points + ' points')
-    console.log(this)
     // send new score to store
     store.dispatch(updateSnakePoints(this.points))
   }
 }
 
-Snake.prototype.die = function(snake2, p){
-  console.log("~~~~~~~~~~~~~", p.collideRectRect)
-  // p.collideRectRect(this.x, this.y, scl, scl, snake2.x, snake2.y, scl, scl)
+Snake.prototype.die = function (snake2) {
+  if (this.x === snake2.x && this.y === snake2.y) {
+    this.visible = false
+  } else {
+    for (let i = 0; i < this.tail.length; i++) {
+      if (this.tail[i].x === snake2.x && this.tail[i].y === snake2.y) {
+        snake2.visible = false
+      }
+    }
+  }
 }
 
 Snake.prototype.move = function (p) {
@@ -71,9 +71,11 @@ Snake.prototype.move = function (p) {
 }
 
 Snake.prototype.draw = function (p) {
-  p.fill(p.color(this.color))
-  p.rect(this.x, this.y, scl, scl)
-  for (var i = 0; i < this.tail.length; i++) {
-    p.rect(this.tail[i].x, this.tail[i].y, scl, scl)
+  if (this.visible) {
+    p.fill(p.color(this.color))
+    p.rect(this.x, this.y, scl, scl)
+    for (var i = 0; i < this.tail.length; i++) {
+      p.rect(this.tail[i].x, this.tail[i].y, scl, scl)
+    }
   }
 }

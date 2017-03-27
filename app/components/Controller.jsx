@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
 
-const socket = io.connect('http://192.168.2.167:1337')
+const socket = io.connect('http://192.168.1.184:1337')
 const device = window.navigator.userAgent
 
 export default class Controller extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {x: 0, y:0}
+    this.state = {x: 0, y: 0}
     this.moveUp = this.moveUp.bind(this)
     this.moveDown = this.moveDown.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
@@ -20,15 +20,15 @@ export default class Controller extends Component {
 
     socket.emit('check-device-type', device)
 
-        var up = document.getElementById('up')
-        var down = document.getElementById('down')
-        var left = document.getElementById('left')
-        var right = document.getElementById('right')
+    var up = document.getElementById('up')
+    var down = document.getElementById('down')
+    var left = document.getElementById('left')
+    var right = document.getElementById('right')
 
-        up.addEventListener('touchstart', this.moveUp, false)
-        down.addEventListener('touchstart', this.moveDown, false)
-        left.addEventListener('touchstart', this.moveLeft, false)
-        right.addEventListener('touchstart', this.moveRight, false)
+    up.addEventListener('touchstart', this.moveUp, false)
+    down.addEventListener('touchstart', this.moveDown, false)
+    left.addEventListener('touchstart', this.moveLeft, false)
+    right.addEventListener('touchstart', this.moveRight, false)
   }
 
   moveUp () {
@@ -62,7 +62,6 @@ export default class Controller extends Component {
     })
     socket.emit('user-movement-update', this.state)
   }
-
 
   render () {
     return (

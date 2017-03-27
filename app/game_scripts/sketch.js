@@ -5,91 +5,78 @@ import store from '../store'
 import { getSnakes } from '../reducers/snakes'
 
 export default function sketch (p) {
- var socket
- var snakes = {}
- var canvas
- var foods = []
- var device
+  var socket
+  var snakes = {}
+  var canvas
+  var foods = []
+  var device
 
- p.setup = function () {
-   canvas = p.createCanvas(600, 600)
-   p.frameRate(10)
+  p.setup = function () {
+    canvas = p.createCanvas(600, 600)
+    p.frameRate(10)
    // connect client to the server through sockets
-   socket = io.connect('http://192.168.2.167:1337')
+    socket = io.connect('http://192.168.1.184:1337')
 
    // receives device type from server and if it is a mobile, make a new snake
-   socket.on('send-device-type', function ({deviceType, users}) {
-     if (deviceType === 'mobile') {
+    socket.on('send-device-type', function ({deviceType, users}) {
+      if (deviceType === 'mobile') {
        // loop through the users array and assign each user a new snake
-       users.forEach(user => { snakes[user] = new Snake(null, null, p) })
+        users.forEach(user => { snakes[user] = new Snake(p) })
        // we are going to have 5 foods on the canvas for all the players
-       for (let i = 0; i < 6; i++) {
-         const food = new Food(p)
-         foods.push(food)
-       }
+        for (let i = 0; i < 6; i++) {
+          const food = new Food(p)
+          foods.push(food)
+        }
        // getting users information to display the scores
-       let _snakes = []
-       for (var id in snakes) {
-         _snakes.push(snakes[id])
-       }
-       //send all snakes to store
-       store.dispatch(getSnakes(_snakes))
-     }
-   })
+        let _snakes = []
+        for (var id in snakes) {
+          _snakes.push(snakes[id])
+        }
+       // send all snakes to store
+        store.dispatch(getSnakes(_snakes))
+      }
+    })
 
    // we get the information from the server of each user movement and we update each user movement
-   socket.on('server-dir-update', function ({data, userId}) {
+    socket.on('server-dir-update', function ({data, userId}) {
      // get the specific user and update the direction of movement
      // This would need to change because we dont have a single snake anymore, we have an snakes OBJ
-     snakes[userId].dir(data.x, data.y)
-   })
+      snakes[userId].dir(data.x, data.y)
+    })
 
    // Handle server disconnection, close the socket connection
-   socket.on('disconnect', function () {
-     socket.close()
-   })
- }
+    socket.on('disconnect', function () {
+      socket.close()
+    })
+  }
 
 // -----------------DRAW-------------------- //
- p.draw = function () {
-   p.background(51)
+  p.draw = function () {
+    p.background(51)
 
      // Draw each snake
-   for (let id in snakes) {
-     snakes[id].draw(p)
-   }
+    for (let id in snakes) {
+      snakes[id].draw(p)
+    }
 
      // Draw the food
-   foods.forEach(food => food.draw(p))
+    foods.forEach(food => food.draw(p))
 
      // Loop through all the snakes and run the .eat and .move function
-   for (let id in snakes) {
-     snakes[id].move(p)
-     foods.forEach(food => snakes[id].eat(p, food))
-   }
+    for (let id in snakes) {
+      snakes[id].move(p)
+      foods.forEach(food => snakes[id].eat(p, food))
+    }
 
    // detect collisions
-   for(let id in snakes){
-     var curr = snakes[id]
-     for(let id2 in snakes){
-      curr.die(snakes[id2], p)
-      // now we loop trhoug the tail
-      for( let i= 0; i< curr.tail.length; i++){
-        for (let j =0; i < snakes[id2].tail.length; j++) {
-          curr.tail[i].die(snakes[id2].tail[j], p)
+    for (let id1 in snakes) {
+      var snake1 = snakes[id1]
+      for (let id2 in snakes) {
+        var snake2 = snakes[id2]
+        if (id1 !== id2) {
+          snake1.die(snake2)
         }
       }
-
-
-      if(snakes[id] !== snakes[id2]){
-        var tail = snakes[id].tail
-        for(var i = 0; i < tail.length; i++){
-          snakes[id].die(snakes[id2], p)
-        }
-      }
-     }
-   }
-
- }
-
+    }
+  }
 }
