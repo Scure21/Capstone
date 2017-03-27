@@ -32,7 +32,7 @@ Snake.prototype.eat = function (p, food) {
   }
 }
 
-Snake.prototype.die = function (snake2) {
+Snake.prototype.collide = function (snake2) {
   if (this.x === snake2.x && this.y === snake2.y) {
     this.visible = false
   } else {

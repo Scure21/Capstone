@@ -12,7 +12,7 @@ export default function sketch (p) {
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
     p.frameRate(10)
-    
+
    // connect client to the server through sockets
     socket = io.connect('http://192.168.1.184:1337')
 
@@ -72,7 +72,7 @@ export default function sketch (p) {
       for (let id2 in snakes) {
         var snake2 = snakes[id2]
         if (id1 !== id2) {
-          snake1.die(snake2)
+          snake1.collide(snake2)
         }
       }
     }
