@@ -20,15 +20,6 @@ export default class Controller extends Component {
 
     socket.emit('check-device-type', device)
 
-        // socket.on('activate-device-controls', function(isPhone) {
-        //         console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
-        //         var snake_position = {
-        //             x: 0,
-        //             y: 0
-        //         }
-
-        // })
-
         var up = document.getElementById('up')
         var down = document.getElementById('down')
         var left = document.getElementById('left')
@@ -41,34 +32,22 @@ export default class Controller extends Component {
   }
 
   moveUp () {
-    this.setState({
-      x: 0,
-      y: -1
-    })  
+    this.setState({x: 0, y: -1})  
     socket.emit('user-movement-update', this.state)
   }
 
   moveDown () {
-    this.setState({
-      x: 0,
-      y: 1
-    })
+    this.setState({x: 0, y: 1})
     socket.emit('user-movement-update', this.state)
   }
 
   moveLeft () {
-    this.setState({
-      x: -1,
-      y: 0
-    })
+    this.setState({x: -1, y: 0})
     socket.emit('user-movement-update', this.state)
   }
 
   moveRight () {
-    this.setState({
-      x: 1,
-      y: 0
-    })
+    this.setState({x: 1, y: 0})
     socket.emit('user-movement-update', this.state)
   }
 

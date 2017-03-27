@@ -52,6 +52,119 @@ body {
 
 }
 
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+
+    button.controller{
+      height:50px !important;
+      width:50px !important;
+      max-width : 480px;
+    }
+
+    button#up{
+      display:block;
+      margin-left:25px;
+      cursor: pointer;
+    }
+    #up:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+    button#down{
+      display:block;
+      margin-left:25px;
+    }
+    #down:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+    button#left{
+      display:block;
+      margin-left:25px;
+    }
+    #left:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+    button#right{
+      display:block;
+      margin-left:25px;
+    }
+    #right:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+}
+
+
+
+
+/* general layouts smaller than 480px, iPhone and older mobiles */
+@media only screen
+and (max-width : 480px){
+
+    button.controller{
+      height:50px !important;
+      width:50px !important;
+      max-width : 480px;
+    }
+
+    button#up{
+      display:block;
+      margin-left:25px;
+      cursor: pointer;
+    }
+    #up:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+    button#down{
+      display:block;
+      margin-left:25px;
+    }
+    #down:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+    button#left{
+      display:block;
+      margin-left:25px;
+    }
+    #left:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+    button#right{
+      display:block;
+      margin-left:25px;
+    }
+    #right:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+
+
+}  
+
 button.controller{
   height:50px !important;
   width:50px !important;
