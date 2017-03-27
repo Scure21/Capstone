@@ -63,23 +63,38 @@ button#up{
   margin-left:25px;
   cursor: pointer;
 }
-/*#up:active {
+#up:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
-}*/
+}
 
 button#down{
   display:block;
   margin-left:25px;
 }
+#down:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
-button#speed{
-  background-color:red;
-  border-radius: 50%;
-  height:60px;
-  width:60px;
-  margin-top:25px;
+button#left{
+
+}
+#left:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+button#right{
+
+}
+#right:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 #login-btn{
