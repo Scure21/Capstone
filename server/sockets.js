@@ -1,71 +1,50 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
-  const foods = {}
-  function Food (x, y) {
-    this.x = x
-    this.y = y
-  }
-  const snakes = {}
-  function SnakeInfo (x, y, color, tail, points) {
-    this.x = x
-    this.y = y
-    this.color = color
-    this.tail = tail
-    this.points = points
-  }
+  // users obj to keep track of all the connected users
+  const users = []
 
-  // use socket server as an event emitter in order to listen for new connctions
+  // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
-    socket.on('start', function (data) {
-      const snakeData = data.snakeData
-      const foodData = data.foodData
-      const snake = new SnakeInfo(snakeData.x, snakeData.y, snakeData.color, snakeData.tail, snakeData.points)
-      const food = new Food(foodData.x, foodData.y)
-      snakes[socket.id] = snake
-      foods[socket.id] = food
-      console.log('SERVER DATA', data)
-    })
-
-    // update the snake information for specific user everytime they change
-    socket.on('clientUpdate', function (data) {
-      var snake = snakes[socket.id]
-      snake.x = data.snakeUpdatedData.x
-      snake.y = data.snakeUpdatedData.y
-      snake.tail = data.snakeUpdatedData.tail
-      snake.points = data.snakeUpdatedData.points
-      snake.color = data.snakeUpdatedData.color
-
-      var food = foods[socket.id]
-      food.x = data.foodUpdatedData.x
-      food.y = data.foodUpdatedData.y
-      io.sockets.emit('serverUpdate', {snakes, foods})
-    })
-
-    // handle mobile devices
-    socket.on('mobile-device', function (device) {
-      console.log('Device', device)
-      var connected = true
-      if (device) {
-        connected = true
-        io.sockets.emit('activate-device-controls', connected)
-      } else {
-        connected = false
-        io.sockets.emit('activate-device-controls', connected)
+    // Check the device type
+    socket.on('check-device-type', function (device) {
+      function detectDevice () {
+        if (device.match(/Android/i) ||
+            device.match(/webOS/i) ||
+            device.match(/iPhone/i) ||
+            device.match(/iPad/i) ||
+            device.match(/iPod/i) ||
+            device.match(/BlackBerry/i) ||
+            device.match(/Windows Phone/i)
+        ) {
+          // if its a mobile device push it to the users array
+          users.push(socket.id)
+          return 'mobile'
+        } else {
+          return 'computer'
+        }
       }
+      // send type to client side and use it to determine which view to render
+      // user connected, eventually we want to check till we have 4 users
+      // connected and then emit to the sketch so the match starts
+      const deviceType = detectDevice(device)
+      io.sockets.emit('send-device-type', {deviceType, users})
     })
 
-    // receive mobile device information
-    socket.on('snake_position_change', function (position) {
-      // console.log('SNAKE POSITION', position)
+    // update the snake position according the touch event on the mobile screen
+    socket.on('user-movement-update', function (data) {
+      const userId = socket.id
+      // emit the snake information to the sketch and send the socketId so we know which snake to move
+      io.sockets.emit('server-dir-update', {data, userId})
     })
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
-      console.log('socket id ' + socket.id + ' has disconnected. :(')
-      delete snakes[socket.id]
+      console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
+      // If a user is disconnected, remove it from the users array by checking the socket that's getting disconnected
+      users.filter(socket => socket !== socket.id)
     })
   })
 }

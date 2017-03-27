@@ -3,9 +3,8 @@
 
 /* ------- ACTIONS -------- */
 // const GET_SNAKES = "GET_SNAKES"
-const UPDATE_SNAKE_POINTS = "UPDATE_SNAKE_POINTS"
-const GET_SNAKES = "GET_SNAKES"
-
+const UPDATE_SNAKE_POINTS = 'UPDATE_SNAKE_POINTS'
+const GET_SNAKES = 'GET_SNAKES'
 
 /* -------------  ACTION CREATORS  --------------- */
 
@@ -25,24 +24,22 @@ const initialSnakesState = {
   list: [] // all snakes
 }
 
-
 /* --------------- REDUCER ----------------- */
-export default function (state = initialSnakesState, action){
-  const newState = Object.assign({}, state);
+export default function (state = initialSnakesState, action) {
+  const newState = Object.assign({}, state)
 
-  switch(action.type){
+  switch (action.type) {
     case UPDATE_SNAKE_POINTS:
       newState.selected.points = action.snake
       // console.log('THIS IS THE REDUCER TALKING: ', newState.selected.points)
-      break;
+      break
 
     case GET_SNAKES:
       newState.list = action.snakes
-      break;
+      break
 
     default:
       return state
   }
   return newState
 }
-
