@@ -1,20 +1,8 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
+  // users obj to keep track of all the connected users
   const users = []
-  var foods = {}
-  function Food (x, y) {
-    this.x = x
-    this.y = y
-  }
-  var snakes = {}
-  function SnakeInfo (x, y, color, tail, points) {
-    this.x = x
-    this.y = y
-    this.color = color
-    this.tail = tail
-    this.points = points
-  }
 
   // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
@@ -39,16 +27,11 @@ module.exports = function (io) {
         }
       }
       // send type to client side and use it to determine which view to render
+      // user connected, eventually we want to check till we have 4 users
+      // connected and then emit to the sketch so the match starts
       const deviceType = detectDevice(device)
-      console.log('deviceType Sockets', deviceType)
       io.sockets.emit('send-device-type', {deviceType, users})
     })
-
-    // // user connected, eventually we want to check till we have 4 users connected and then emit to the sketch so the match starts
-    // socket.on('user-connected', function () {
-    //   users.push(socket.id)
-    //   io.sockets.emmit('users', users)
-    // })
 
     // update the snake position according the touch event on the mobile screen
     socket.on('user-movement-update', function (data) {

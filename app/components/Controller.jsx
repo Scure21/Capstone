@@ -86,16 +86,16 @@ export default class Controller extends Component {
   render () {
     return (
         <div ref="nv">
-            <button className='ui-btn' id='up' className='controller' onClick={this.moveUp}>
+            <button id='up' className='ui-btn' className='controller' onClick={this.moveUp}>
                 <span className='glyphicon glyphicon-chevron-up'></span>
             </button>
-            <button id='left' className="controller" >
+            <button id='left' className='ui-btn' className="controller" onClick={this.moveLeft} >
                     <span className='glyphicon glyphicon-chevron-left'></span>
             </button>
-            <button id='right' className="controller">
+            <button id='right' className='ui-btn' className="controller" onClick={this.moveRight}>
                     <span className='glyphicon glyphicon-chevron-right'></span>
             </button>
-            <button id='down' className="controller" >
+            <button id='down' className='ui-btn' className="controller" onClick={this.moveDown}>
                     <span className='glyphicon glyphicon-chevron-down'></span>
             </button>
             <button id='speed' > power </button>
