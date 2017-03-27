@@ -3,7 +3,14 @@ import { updateSnakePoints } from '../reducers/snakes'
 import store from '../store'
 
 
-export default function Snake (x, y, p, user) {
+const colors = {
+  "blue": "34b7ea",
+  "yellow": "ffff00",
+  "purple": "8e66d9",
+  "green": "b2d080"
+}
+
+export default function Snake (x, y, p, user, colorName) {
   if (x && y !== null) {
     this.x = x
     this.y = y
@@ -12,12 +19,16 @@ export default function Snake (x, y, p, user) {
     this.x = vector.x
     this.y = vector.y
   }
+
   this.id = user
   this.xspeed = -1
   this.yspeed = 0
   this.tail = []
   this.points = 0
-  this.color = [p.floor(p.random(0, 255)), p.floor(p.random(0, 255)), p.floor(p.random(0, 255))]
+  this.color = colors[colorName]
+  this.name = colorName
+  // this.color = [p.floor(p.random(0, 255)), p.floor(p.random(0, 255)), p.floor(p.random(0, 255))] --> this should plug in a random color chosen from an array of four colors.
+  // this.name
 }
 
 Snake.prototype.dir = function (x, y) {
@@ -66,7 +77,7 @@ Snake.prototype.move = function (p) {
 }
 
 Snake.prototype.draw = function (p) {
-  p.fill(p.color(this.color))
+  p.fill(p.color(`#${this.color}`))
   p.rect(this.x, this.y, scl, scl)
   for (var i = 0; i < this.tail.length; i++) {
     p.rect(this.tail[i].x, this.tail[i].y, scl, scl)

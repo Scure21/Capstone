@@ -19,7 +19,17 @@ export default function sketch (p) {
     socket.on('send-device-type', function ({deviceType, users}) {
       if (deviceType === 'mobile') {
         // loop through the users array and assign each user a new snake
-        users.forEach(user => { snakes[user] = new Snake(null, null, p, user) })
+
+        let colors = ["blue", "yellow", "purple", "green"]
+
+        users.forEach(user => {
+
+          // assign color to snake, delete color from colors object
+          let colorName = p.floor(p.random(0, 4))
+          let color = colors[colorName]
+          colors = colors.splice(color, 1)
+          snakes[user] = new Snake(null, null, p, user, color)
+        })
         // we are going to have 5 foods on the canvas for all the players
         for (let i = 0; i < 6; i++) {
           const food = new Food(p)
