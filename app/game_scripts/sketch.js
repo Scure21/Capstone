@@ -1,6 +1,5 @@
 import Food from './food'
 import Snake from './snake'
-import {scl} from './utils'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
 
@@ -9,11 +8,11 @@ export default function sketch (p) {
   var snakes = {}
   var canvas
   var foods = []
-  var device
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
     p.frameRate(10)
+    
    // connect client to the server through sockets
     socket = io.connect('http://192.168.1.184:1337')
 
@@ -54,21 +53,20 @@ export default function sketch (p) {
   p.draw = function () {
     p.background(51)
 
-     // Draw each snake
+    // Draw each snake
     for (let id in snakes) {
       snakes[id].draw(p)
     }
-
-     // Draw the food
+    // Draw the food
     foods.forEach(food => food.draw(p))
 
-     // Loop through all the snakes and run the .eat and .move function
+    // Loop through all the snakes and run the .eat and .move function
     for (let id in snakes) {
       snakes[id].move(p)
       foods.forEach(food => snakes[id].eat(p, food))
     }
 
-   // detect collisions
+    // detect collisions
     for (let id1 in snakes) {
       var snake1 = snakes[id1]
       for (let id2 in snakes) {
