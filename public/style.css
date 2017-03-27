@@ -24,10 +24,10 @@
     border: 2px solid white;
 }
 
-canvas {
+/*canvas {
     width: 100vw !important;
     height: 100vh !important;
-}
+}*/
 
 body {
     padding: 0;

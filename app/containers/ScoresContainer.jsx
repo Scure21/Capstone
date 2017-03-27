@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Scores from '../components/Scores'
 
-
 const mapStateToProps = (state) => {
-  return{
+  return {
     snakes: state.snakes.list // should gives us all the snakes on board (obj with all their info)
   }
 }
