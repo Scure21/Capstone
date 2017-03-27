@@ -14,7 +14,7 @@ export default function sketch (p) {
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
   // in the future this would go in the actual server
-    socket = io.connect('http://192.168.0.8:1337')
+    socket = io.connect('http://192.168.2.167:1337')
 
     snake = new Snake(null, null, p, snakeImg)
     food = new Food(p)
