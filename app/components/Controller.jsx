@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
-import { connect } from 'react-redux'
 
 const socket = io.connect('http://192.168.2.111:1337')
 const device = window.navigator.userAgent
@@ -9,6 +8,7 @@ export default class Controller extends Component {
   constructor (props) {
     super(props)
 
+    this.state = {x: 0, y:0}
     this.moveUp = this.moveUp.bind(this)
     this.moveDown = this.moveDown.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
@@ -41,38 +41,36 @@ export default class Controller extends Component {
   }
 
   moveUp () {
-    var data = {
+    this.setState({
       x: 0,
       y: -1
-    }
-    socket.emit('user-movement-update', data)
+    })  
+    socket.emit('user-movement-update', this.state)
   }
 
   moveDown () {
-    var data = {
+    this.setState({
       x: 0,
       y: 1
-    }
-    socket.emit('user-movement-update', data)
+    })
+    socket.emit('user-movement-update', this.state)
   }
 
   moveLeft () {
-    var data = {
+    this.setState({
       x: -1,
       y: 0
-    }
-    socket.emit('user-movement-update', data)
+    })
+    socket.emit('user-movement-update', this.state)
   }
 
   moveRight () {
-    var data = {
+    this.setState({
       x: 1,
       y: 0
-    }
-    socket.emit('user-movement-update', data)
+    })
+    socket.emit('user-movement-update', this.state)
   }
-
-
 
 
   render () {
@@ -90,7 +88,6 @@ export default class Controller extends Component {
             <button id='down' className='ui-btn' className="controller">
                     <span className='glyphicon glyphicon-chevron-down'></span>
             </button>
-            <button id='speed' > power </button>
         </div>
     )
   }
