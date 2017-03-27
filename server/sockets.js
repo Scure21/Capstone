@@ -1,6 +1,7 @@
 const chalk = require('chalk')
 
 module.exports = function (io) {
+  const users = []
   var foods = {}
   function Food (x, y) {
     this.x = x
@@ -19,66 +20,48 @@ module.exports = function (io) {
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
 
-    socket.on('start', function ({snakeData, foodData}) {
-      const newSnakeData = snakeData
-      const newFoodData = foodData
-      const snake = new SnakeInfo(newSnakeData.x, newSnakeData.y, newSnakeData.color, newSnakeData.tail, newSnakeData.points)
-      const food = new Food(newFoodData.x, newFoodData.y)
-      snakes[socket.id] = snake
-      foods[socket.id] = food
-      console.log('SERVER DATA', {snakeData, foodData})
+    // Check the device type
+    socket.on('check-device-type', function (device) {
+      function detectDevice () {
+        if (device.match(/Android/i) ||
+            device.match(/webOS/i) ||
+            device.match(/iPhone/i) ||
+            device.match(/iPad/i) ||
+            device.match(/iPod/i) ||
+            device.match(/BlackBerry/i) ||
+            device.match(/Windows Phone/i)
+        ) {
+          // if its a mobile device push it to the users array
+          users.push(socket.id)
+          return 'mobile'
+        } else {
+          return 'computer'
+        }
+      }
+      // send type to client side and use it to determine which view to render
+      const deviceType = detectDevice(device)
+      console.log('deviceType Sockets', deviceType)
+      io.sockets.emit('send-device-type', {deviceType, users})
     })
 
-    // update the snake information for specific user everytime they change
-    socket.on('clientMovementUpdate', function (data) {
-      console.log('receiving!!!', data)
-      
-      // var snake = snakes[socket.id]
-       
-      // snake.x = data.snakeUpdatedData.x
-      // snake.y = data.snakeUpdatedData.y
-      // snake.tail = data.snakeUpdatedData.tail
-      // snake.points = data.snakeUpdatedData.points
-      // snake.color = data.snakeUpdatedData.color
+    // // user connected, eventually we want to check till we have 4 users connected and then emit to the sketch so the match starts
+    // socket.on('user-connected', function () {
+    //   users.push(socket.id)
+    //   io.sockets.emmit('users', users)
+    // })
 
-      // var food = foods[socket.id]
-      // food.x = data.foodUpdatedData.x
-      // food.y = data.foodUpdatedData.y
-      io.sockets.emit('serverDirUpdate', data)
+    // update the snake position according the touch event on the mobile screen
+    socket.on('user-movement-update', function (data) {
+      const userId = socket.id
+      // emit the snake information to the sketch and send the socketId so we know which snake to move
+      io.sockets.emit('server-dir-update', {data, userId})
     })
-
-    // handle mobile devices
-    socket.on('mobile-device', function (device) {
-      function detectPhone() {
-       if (device.match(/Android/i)
-       || device.match(/webOS/i)
-       || device.match(/iPhone/i)
-       || device.match(/iPad/i)
-       || device.match(/iPod/i)
-       || device.match(/BlackBerry/i)
-       || device.match(/Windows Phone/i)
-        ) {return true;}
-       else {return false;}
-      }
-
-      const isPhone = detectPhone(device);
-      if (isPhone === true) {
-        io.sockets.emit('activate-device-controls', isPhone)
-      } 
-      else {
-        io.sockets.emit('activate-device-controls', true)
-      }
-   })
-
-    // receive mobile device information
-    //socket.on('snake_position_change', function (position) {
-      // console.log('SNAKE POSITION', position)
-    //})
 
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
       console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
-      delete snakes[socket.id]
+      // If a user is disconnected, remove it from the users array by checking the socket that's getting disconnected
+      users.filter(socket => socket !== socket.id)
     })
   })
 }

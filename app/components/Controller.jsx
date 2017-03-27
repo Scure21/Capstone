@@ -1,25 +1,25 @@
-import React, {Component} from 'react'
-import io from 'socket.io-client' 
-var socket = io.connect('http://10.148.202.177:1337')
-var device
-    device = window.navigator.userAgent
-    
+import React, { Component } from 'react'
+import io from 'socket.io-client'
+import { connect } from 'react-redux'
 
-export default class Controller extends Component{
-    
-    constructor(props){
-        super(props)
-        
-        this.moveUp = this.moveUp.bind(this)
-        this.moveDown = this.moveDown.bind(this)
-        this.moveLeft = this.moveLeft.bind(this)
-        this.moveRight = this.moveRight.bind(this)
-        this.powerUp = this.powerUp.bind(this)
-    }
+const socket = io.connect('http://192.168.1.5:1337')
+const device = window.navigator.userAgent
 
+export default class Controller extends Component {
+  constructor (props) {
+    super(props)
 
-    componentDidMount(){
-        socket.emit('mobile-device', device)
+    this.moveUp = this.moveUp.bind(this)
+    this.moveDown = this.moveDown.bind(this)
+    this.moveLeft = this.moveLeft.bind(this)
+    this.moveRight = this.moveRight.bind(this)
+    this.powerUp = this.powerUp.bind(this)
+  }
+
+  componentDidMount () {
+      // when the component mounts on the mobile device, we add the user to the State with a new Snake instance
+
+    socket.emit('check-device-type', device)
 
         // socket.on('activate-device-controls', function(isPhone) {
         //         console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
@@ -27,7 +27,7 @@ export default class Controller extends Component{
         //             x: 0,
         //             y: 0
         //         }
-        
+
         // })
 
         // var up = document.getElementById('up')
@@ -35,79 +35,71 @@ export default class Controller extends Component{
         // var left = document.getElementById('left')
         // var right = document.getElementById('right')
         // var power = document.getElementById('speed')
-        
-        
+
         // up.addEventListener('touchstart', this.moveUp, false)
         // down.addEventListener('touchstart', this.moveDown, false)
         // left.addEventListener('touchstart', this.moveLeft, false)
         // right.addEventListener('touchstart', this.moveRight, false)
         // power.addEventListener('touchstart', this.powerUp, false)
+  }
+
+  moveUp () {
+    var data = {
+      x: 0,
+      y: -1
     }
-    
+    socket.emit('user-movement-update', data)
+  }
 
-    moveUp = function(){
-        var data = {
-                x: 0,
-                y: -1
-        }
-    socket.emit('clientMovementUpdate', data)
+  moveDown () {
+    var data = {
+      x: 0,
+      y: 0
     }
+    socket.emit('user-movement-update', data)
+  }
 
-    moveDown = function(){
-        var snake_position = {
-            x: 0,
-            y: 0
-        }
-    socket.emit('clientUpdate', snake_position)
+  moveLeft () {
+    var data = {
+      x: 0,
+      y: 0
     }
+    socket.emit('user-movement-update', data)
+  }
 
-    moveLeft = function(){
-        var snake_position = {
-            x: 0,
-            y: 0
-        }
-    socket.emit('clientUpdate', snake_position)
+  moveRight () {
+    var data = {
+      x: 0,
+      y: 0
     }
+    socket.emit('user-movement-update', data)
+  }
 
-    moveRight = function(){
-        var snake_position = {
-            x: 0,
-            y: 0
-        }
-    socket.emit('clientUpdate', snake_position)
+  powerUp () {
+    var data = {
+      x: 0,
+      y: 0
     }
+    socket.emit('user-movement-update', data)
+  }
 
-    powerUp = function(){
-        var snake_position = {
-            x: 0,
-            y: 0
-        }
-    socket.emit('clientUpdate', snake_position)
-    }
-
-
-    render(){
-        console.log('socket!!!', socket)
-        return (
-             <div ref="nv">
-                <button className='ui-btn' id='up' className='controller' onClick={this.moveUp}>
-                    <span className='glyphicon glyphicon-chevron-up'></span>
-                </button>
-                <button id='left' className="controller" >
-                     <span className='glyphicon glyphicon-chevron-left'></span>
-                </button>
-                <button id='right' className="controller">
-                     <span className='glyphicon glyphicon-chevron-right'></span>
-                </button>
-                <button id='down' className="controller" >
-                     <span className='glyphicon glyphicon-chevron-down'></span>
-                </button>
-                <button id='speed' > power </button>
-                </div>
-            )
-    }
-
+  render () {
+    return (
+        <div ref="nv">
+            <button className='ui-btn' id='up' className='controller' onClick={this.moveUp}>
+                <span className='glyphicon glyphicon-chevron-up'></span>
+            </button>
+            <button id='left' className="controller" >
+                    <span className='glyphicon glyphicon-chevron-left'></span>
+            </button>
+            <button id='right' className="controller">
+                    <span className='glyphicon glyphicon-chevron-right'></span>
+            </button>
+            <button id='down' className="controller" >
+                    <span className='glyphicon glyphicon-chevron-down'></span>
+            </button>
+            <button id='speed' > power </button>
+        </div>
+    )
+  }
 }
-
-
-

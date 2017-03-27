@@ -5,7 +5,6 @@ import Login from './Login'
 import SignUpContainer from './SignUpContainer'
 import Controller from './Controller'
 
-
 // const customStyles = {
 //   overlay : {
 //     position          : 'fixed',
@@ -32,9 +31,7 @@ import Controller from './Controller'
 //   }
 // };
 
-
-export default class ExampleApp extends React.Component{
-
+export default class ExampleApp extends React.Component {
    // constructor(props){
     // super(props)
 
@@ -64,23 +61,16 @@ export default class ExampleApp extends React.Component{
   // closeModal(){
   //   this.setState({modalIsOpen: false})
   // }
-    render(){
-    return(
+  render () {
+    return (
       <div>
         <Link to='/login'>
           <button id="login-btn" name="login"> Login! </button>
         </Link>
-
         <Link to='/signup'>
           <button id="signup-btn" name="signup"> Sign up! </button>
         </Link>
-
-    </div>
-  )
-
+      </div>
+    )
+  }
 }
-
-}
-
-
-
