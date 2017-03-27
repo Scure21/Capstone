@@ -24,15 +24,10 @@
     border: 2px solid white;
 }
 
-/*canvas {
-    width: 100vw !important;
-    height: 100vh !important;
-}*/
-
 body {
     padding: 0;
     margin: 0;
-    background-image: url('./tryme.png');
+    background-image: url('./images/bg.png');
     background-size: cover;
 }
 
@@ -53,8 +48,8 @@ body {
 }
 
 
-@media only screen 
-  and (min-device-width: 320px) 
+@media only screen
+  and (min-device-width: 320px)
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
@@ -163,7 +158,7 @@ and (max-width : 480px){
     }
 
 
-}  
+}
 
 button.controller{
   height:50px !important;

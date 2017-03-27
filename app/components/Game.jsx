@@ -6,7 +6,6 @@ import ScoresContainer from '../containers/ScoresContainer'
 export default class Game extends Component {
   render () {
     return (
-
       <div>
         <ScoresContainer />
         <P5Wrapper id="game" sketch={sketch} />

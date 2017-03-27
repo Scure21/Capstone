@@ -1,11 +1,11 @@
 import React from 'react'
 import MobileDetect from 'mobile-detect'
-import {connect} from 'react-redux'
-import {Link, browserHistory} from 'react-router'
+import { connect } from 'react-redux'
+import { Link, browserHistory } from 'react-router'
 
 const md = new MobileDetect(window.navigator.userAgent)
 
-export default class AppContainer extends React.Component {
+class AppContainer extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -16,6 +16,7 @@ export default class AppContainer extends React.Component {
   componentWillMount () {
     if (!md.mobile()) {
       this.setState({deviceType: 'computer'})
+      browserHistory.push('/game')
     } else {
       this.setState({deviceType: 'phone'})
       browserHistory.push('/controller')
@@ -26,7 +27,6 @@ export default class AppContainer extends React.Component {
     return (
       <div>
         {this.props.children}
-        <Link to={'/game'}><button>click me!</button></Link>
       </div>
     )
   }
@@ -37,4 +37,4 @@ const mapStateToProps = (state, ownProps) => {
     auth: state.auth
   }
 }
-export const dblContainer = connect(mapStateToProps)(AppContainer)
+export default connect(mapStateToProps)(AppContainer)
