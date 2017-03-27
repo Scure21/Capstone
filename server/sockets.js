@@ -2,7 +2,7 @@ const chalk = require('chalk')
 
 module.exports = function (io) {
   // users obj to keep track of all the connected users
-  const users = []
+  var users = []
 
   // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
@@ -43,8 +43,10 @@ module.exports = function (io) {
     // event that runs anytime a socket disconnects
     socket.on('disconnect', function () {
       console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
-      // If a user is disconnected, remove it from the users array by checking the socket that's getting disconnected
-      users.filter(socket => socket !== socket.id)
+      users = users.filter(userId => {
+        io.sockets.emit('update-users', userId)
+        return userId !== socket.id
+      })
     })
   })
 }

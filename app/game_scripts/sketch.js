@@ -42,8 +42,12 @@ export default function sketch (p) {
      // This would need to change because we dont have a single snake anymore, we have an snakes OBJ
       snakes[userId].dir(data.x, data.y)
     })
-
-   // Handle server disconnection, close the socket connection
+    // Update users
+    socket.on('update-users', function (user) {
+      console.log('-----------------', user)
+      delete snakes[user]
+    })
+    // Handle server disconnection, close the socket connection
     socket.on('disconnect', function () {
       socket.close()
     })
