@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 export default (props) => {
+  console.log('inside scores.jsx: ', props)
   return (
     <div id="leaderboard">
       <table>
