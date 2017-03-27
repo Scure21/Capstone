@@ -3,7 +3,7 @@ import { updateSnakePoints } from '../reducers/snakes'
 import store from '../store'
 
 
-export default function Snake (x, y, p) {
+export default function Snake (x, y, p, user) {
   if (x && y !== null) {
     this.x = x
     this.y = y
@@ -12,6 +12,7 @@ export default function Snake (x, y, p) {
     this.x = vector.x
     this.y = vector.y
   }
+  this.id = user
   this.xspeed = -1
   this.yspeed = 0
   this.tail = []
@@ -31,10 +32,10 @@ Snake.prototype.eat = function (p, food) {
     food.eaten(p)
     this.points++
     this.tail.push({x: this.x, y: this.y})
-    console.log(this.tail)
-    console.log(this.points + ' points')
+    // console.log(this.tail)
+    // console.log(this.points + ' points')
     console.log(this)
-    store.dispatch(updateSnakePoints(this.points))
+    store.dispatch(updateSnakePoints(this))
   }
 }
 

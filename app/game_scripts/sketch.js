@@ -19,18 +19,18 @@ export default function sketch (p) {
     socket.on('send-device-type', function ({deviceType, users}) {
       if (deviceType === 'mobile') {
         // loop through the users array and assign each user a new snake
-        users.forEach(user => { snakes[user] = new Snake(null, null, p) })
+        users.forEach(user => { snakes[user] = new Snake(null, null, p, user) })
         // we are going to have 5 foods on the canvas for all the players
         for (let i = 0; i < 6; i++) {
           const food = new Food(p)
           foods.push(food)
         }
         // getting users information to display the scores
-        let _snakes = []
-        for (var id in snakes) {
-          _snakes.push(snakes[id])
-        }
-        store.dispatch(getSnakes(_snakes))
+        // let _snakes = []
+        // for (var id in snakes) {
+        //   _snakes.push(snakes[id])
+        // }
+        store.dispatch(getSnakes(snakes))
       }
     })
 
