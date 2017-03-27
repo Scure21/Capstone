@@ -13,21 +13,29 @@ export default function sketch (p) {
     canvas = p.createCanvas(600, 600)
     p.frameRate(10)
     // connect client to the server through sockets
-    socket = io.connect('http://192.168.2.167:1337')
+    socket = io.connect('http://192.168.0.8:1337')
 
     // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
       if (deviceType === 'mobile') {
         // loop through the users array and assign each user a new snake
 
-        let colors = ["blue", "yellow", "purple", "green"]
+        var colors = ["blue", "yellow", "purple", "green"]
 
         users.forEach(user => {
 
-          // assign color to snake, delete color from colors object
-          let colorName = p.floor(p.random(0, 4))
-          let color = colors[colorName]
-          colors = colors.splice(color, 1)
+          // assign color to snake
+          var randomId = p.floor(p.random(0, 4))
+          var colorKey = randomId;
+
+          for(var snake in snakes){
+            if(snake.name == colors[colorKey]){
+              colorKey +=1
+            }
+          }
+
+          var color = colors[colorKey]
+
           snakes[user] = new Snake(null, null, p, user, color)
         })
         // we are going to have 5 foods on the canvas for all the players
