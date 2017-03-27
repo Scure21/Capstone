@@ -13,7 +13,7 @@ export default function sketch (p) {
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
-    p.frameRate(1)
+    p.frameRate(10)
     // connect client to the server through sockets
     socket = io.connect('http://192.168.1.5:1337')
 
