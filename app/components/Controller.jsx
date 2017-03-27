@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import io from 'socket.io-client'
 import { connect } from 'react-redux'
 
-const socket = io.connect('http://192.168.1.5:1337')
+const socket = io.connect('http://192.168.2.111:1337')
 const device = window.navigator.userAgent
 
 export default class Controller extends Component {
@@ -13,7 +13,6 @@ export default class Controller extends Component {
     this.moveDown = this.moveDown.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
     this.moveRight = this.moveRight.bind(this)
-    this.powerUp = this.powerUp.bind(this)
   }
 
   componentDidMount () {
@@ -30,17 +29,15 @@ export default class Controller extends Component {
 
         // })
 
-        // var up = document.getElementById('up')
-        // var down = document.getElementById('down')
-        // var left = document.getElementById('left')
-        // var right = document.getElementById('right')
-        // var power = document.getElementById('speed')
+        var up = document.getElementById('up')
+        var down = document.getElementById('down')
+        var left = document.getElementById('left')
+        var right = document.getElementById('right')
 
-        // up.addEventListener('touchstart', this.moveUp, false)
-        // down.addEventListener('touchstart', this.moveDown, false)
-        // left.addEventListener('touchstart', this.moveLeft, false)
-        // right.addEventListener('touchstart', this.moveRight, false)
-        // power.addEventListener('touchstart', this.powerUp, false)
+        up.addEventListener('touchstart', this.moveUp, false)
+        down.addEventListener('touchstart', this.moveDown, false)
+        left.addEventListener('touchstart', this.moveLeft, false)
+        right.addEventListener('touchstart', this.moveRight, false)
   }
 
   moveUp () {
@@ -54,14 +51,14 @@ export default class Controller extends Component {
   moveDown () {
     var data = {
       x: 0,
-      y: 0
+      y: 1
     }
     socket.emit('user-movement-update', data)
   }
 
   moveLeft () {
     var data = {
-      x: 0,
+      x: -1,
       y: 0
     }
     socket.emit('user-movement-update', data)
@@ -69,33 +66,28 @@ export default class Controller extends Component {
 
   moveRight () {
     var data = {
-      x: 0,
+      x: 1,
       y: 0
     }
     socket.emit('user-movement-update', data)
   }
 
-  powerUp () {
-    var data = {
-      x: 0,
-      y: 0
-    }
-    socket.emit('user-movement-update', data)
-  }
+
+
 
   render () {
     return (
         <div ref="nv">
-            <button id='up' className='ui-btn' className='controller' onClick={this.moveUp}>
+            <button id='up' className='ui-btn' className='controller'>
                 <span className='glyphicon glyphicon-chevron-up'></span>
             </button>
-            <button id='left' className='ui-btn' className="controller" onClick={this.moveLeft} >
+            <button id='left' className='ui-btn' className="controller">
                     <span className='glyphicon glyphicon-chevron-left'></span>
             </button>
-            <button id='right' className='ui-btn' className="controller" onClick={this.moveRight}>
+            <button id='right' className='ui-btn' className="controller">
                     <span className='glyphicon glyphicon-chevron-right'></span>
             </button>
-            <button id='down' className='ui-btn' className="controller" onClick={this.moveDown}>
+            <button id='down' className='ui-btn' className="controller">
                     <span className='glyphicon glyphicon-chevron-down'></span>
             </button>
             <button id='speed' > power </button>
