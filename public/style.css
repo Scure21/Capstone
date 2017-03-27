@@ -1,9 +1,10 @@
 * {
-/*    width: 100%;
-    height: 100%;*/
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+@viewport {
+  width: device-width;
+}
 
 #color-selector {
     position: fixed;
@@ -24,156 +25,47 @@
     border: 2px solid white;
 }
 
-/*canvas {
-    width: 100vw !important;
-    height: 100vh !important;
-}*/
-
 body {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 0;
     margin: 0;
     background-image: url('./tryme.png');
     background-size: cover;
 }
 
-#login {
-    text-align: center;
-}
-
 #main{
 /*    height: 100%;
     width: 100%;*/
   padding:100px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  /*transform: translate(-50%, -50%);*/
   border: 1px solid yellow;
-
 }
 
-
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
-
-
-    button.controller{
-      height:50px !important;
-      width:50px !important;
-      max-width : 480px;
-    }
-
-    button#up{
-      display:block;
-      margin-left:25px;
-      cursor: pointer;
-    }
-    #up:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
-
-    button#down{
-      display:block;
-      margin-left:25px;
-    }
-    #down:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
-
-    button#left{
-      display:block;
-      margin-left:25px;
-    }
-    #left:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
-
-    button#right{
-      display:block;
-      margin-left:25px;
-    }
-    #right:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
+#login {
+  text-align: center;
 }
-
-
-
-
-/* general layouts smaller than 480px, iPhone and older mobiles */
-@media only screen
-and (max-width : 480px){
-
-    button.controller{
-      height:50px !important;
-      width:50px !important;
-      max-width : 480px;
-    }
-
-    button#up{
-      display:block;
-      margin-left:25px;
-      cursor: pointer;
-    }
-    #up:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
-
-    button#down{
-      display:block;
-      margin-left:25px;
-    }
-    #down:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
-
-    button#left{
-      display:block;
-      margin-left:25px;
-    }
-    #left:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
-
-    button#right{
-      display:block;
-      margin-left:25px;
-    }
-    #right:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
-      transform: translateY(4px);
-    }
-
-
-}  
 
 button.controller{
+  text-align: center;
   height:50px !important;
   width:50px !important;
 }
 
 
+
+
+
 button#up{
-  display:block;
-  margin-left:25px;
+  margin-left:50%;
   cursor: pointer;
 }
 #up:active {
@@ -183,8 +75,7 @@ button#up{
 }
 
 button#down{
-  display:block;
-  margin-left:25px;
+  margin-left:50%;
 }
 #down:active {
   background-color: #3e8e41;
@@ -193,7 +84,8 @@ button#down{
 }
 
 button#left{
-
+  margin-left: 40%;
+  margin-bottom: -5%;
 }
 #left:active {
   background-color: #3e8e41;
@@ -202,7 +94,8 @@ button#left{
 }
 
 button#right{
-
+  margin-left: 60%;
+  margin-bottom: -5%;
 }
 #right:active {
   background-color: #3e8e41;
