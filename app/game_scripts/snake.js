@@ -34,8 +34,14 @@ Snake.prototype.eat = function (p, food) {
     console.log(this.tail)
     console.log(this.points + ' points')
     console.log(this)
+    // send new score to store
     store.dispatch(updateSnakePoints(this.points))
   }
+}
+
+Snake.prototype.die = function(snake2, p){
+  console.log("~~~~~~~~~~~~~", p.collideRectRect)
+  // p.collideRectRect(this.x, this.y, scl, scl, snake2.x, snake2.y, scl, scl)
 }
 
 Snake.prototype.move = function (p) {

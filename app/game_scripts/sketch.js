@@ -17,17 +17,11 @@ export default function sketch (p) {
    // connect client to the server through sockets
    socket = io.connect('http://192.168.2.167:1337')
 
-   // // get the device type
-   // device = window.navigator.userAgent
-   // // on connection, emit to the server the device type
-   // socket.emit('check-device-type', device)
-
    // receives device type from server and if it is a mobile, make a new snake
    socket.on('send-device-type', function ({deviceType, users}) {
      if (deviceType === 'mobile') {
        // loop through the users array and assign each user a new snake
        users.forEach(user => { snakes[user] = new Snake(null, null, p) })
-       console.log('I AM A MOBILE IN SKETCH!!', snakes)
        // we are going to have 5 foods on the canvas for all the players
        for (let i = 0; i < 6; i++) {
          const food = new Food(p)
@@ -38,6 +32,7 @@ export default function sketch (p) {
        for (var id in snakes) {
          _snakes.push(snakes[id])
        }
+       //send all snakes to store
        store.dispatch(getSnakes(_snakes))
      }
    })
@@ -72,18 +67,29 @@ export default function sketch (p) {
      snakes[id].move(p)
      foods.forEach(food => snakes[id].eat(p, food))
    }
- }
-}
 
-// In case we need it tomorrow otherwise we can just delete it
-// p.keyPressed = function () {
-//   if (p.keyCode === p.UP_ARROW) {
-//     snake.dir(dir)
-//   } else if (p.keyCode === p.DOWN_ARROW) {
-//     snake.dir(0, 1)
-//   } else if (p.keyCode === p.RIGHT_ARROW) {
-//     snake.dir(1, 0)
-//   } else if (p.keyCode === p.LEFT_ARROW) {
-//     snake.dir(-1, 0)
-//   }
-// }
+   // detect collisions
+   for(let id in snakes){
+     var curr = snakes[id]
+     for(let id2 in snakes){
+      curr.die(snakes[id2], p)
+      // now we loop trhoug the tail
+      for( let i= 0; i< curr.tail.length; i++){
+        for (let j =0; i < snakes[id2].tail.length; j++) {
+          curr.tail[i].die(snakes[id2].tail[j], p)
+        }
+      }
+
+
+      if(snakes[id] !== snakes[id2]){
+        var tail = snakes[id].tail
+        for(var i = 0; i < tail.length; i++){
+          snakes[id].die(snakes[id2], p)
+        }
+      }
+     }
+   }
+
+ }
+
+}

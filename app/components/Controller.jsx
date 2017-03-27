@@ -5,7 +5,6 @@ const socket = io.connect('http://192.168.2.167:1337')
 const device = window.navigator.userAgent
 
 export default class Controller extends Component {
-
   constructor (props) {
     super(props)
 
@@ -20,15 +19,6 @@ export default class Controller extends Component {
       // when the component mounts on the mobile device, we add the user to the State with a new Snake instance
 
     socket.emit('check-device-type', device)
-
-        // socket.on('activate-device-controls', function(isPhone) {
-        //         console.log('YES YOU ARE CONNECTED WITH A MOBILE DEVICE')
-        //         var snake_position = {
-        //             x: 0,
-        //             y: 0
-        //         }
-
-        // })
 
         var up = document.getElementById('up')
         var down = document.getElementById('down')
@@ -92,5 +82,4 @@ export default class Controller extends Component {
         </div>
     )
   }
-
 }
