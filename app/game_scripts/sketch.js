@@ -9,7 +9,6 @@ export default function sketch (p) {
   var canvas
   var foods = []
   var colorKey = 0
-  var aliveSnakes = {}
 
   p.setup = function () {
     canvas = p.createCanvas(800, 600)
@@ -92,6 +91,19 @@ export default function sketch (p) {
           snake1.collide(snake2)
         }
       }
+    }
+    //count how many snakes are still alive (aka "visible")
+    let countAlive = 0
+    let winnerName 
+    for (let id in snakes) {
+      if (snakes[id].visible) {
+        countAlive++
+        winnerName = snakes[id].name
+      }
+    }
+    if (countAlive === 1) {
+      //we have a winner!
+      console.log('and winner is..', winnerName, 'countAlive', countAlive)
     }
   }
 }
