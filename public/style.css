@@ -24,10 +24,7 @@
     border: 2px solid white;
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> design
 body {
     padding: 0;
     margin: 0;
@@ -232,11 +229,12 @@ button#right{
     position:relative;
 }
 
-<<<<<<< HEAD
+
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
-=======
+}
+
 #welcome-page{
   margin-top:150px;
 }
@@ -256,5 +254,5 @@ button#right{
 
 #banner{
   width:81%;
->>>>>>> design
+
 }
