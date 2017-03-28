@@ -1,7 +1,10 @@
 * {
-/*    width: 100%;
-    height: 100%;*/
     box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Endless-Boss-Battle';
+  src: url('./font/Endless-Boss-Battle.tff')
 }
 
 
@@ -36,8 +39,6 @@ body {
 }
 
 #main{
-/*    height: 100%;
-    width: 100%;*/
   padding:100px;
   position: absolute;
   top: 50%;
@@ -185,9 +186,6 @@ button#down{
   transform: translateY(4px);
 }
 
-button#left{
-
-}
 #left:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -232,9 +230,9 @@ button#right{
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
-  display:inline-flex;
+  display:inline-block;
   padding:20px;
-  position:absolute;
+  /*position: right;*/
   right:100px;
   opacity:.3;
   font-family: 'Playfair Display', serif;
@@ -253,7 +251,7 @@ button#right{
 }
 
 .purple{
-  color: #8e66d9 !important;
+  color: aqua;
 }
 
 .green{

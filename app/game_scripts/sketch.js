@@ -9,13 +9,18 @@ export default function sketch (p) {
   var canvas
   var foods = []
   var colorKey = 0
+  var fontRegular = p.loadFont('../../../public/font/Endless-Boss-Battle.tff')
+
+  // p.preload = function () {
+  //   fontRegular = p.loadFont('../../../public/font/Endless-Boss-Battle.cff')
+  // }
 
   p.setup = function () {
     canvas = p.createCanvas(800, 600)
     p.frameRate(10)
 
    // connect client to the server through sockets
-    socket = io.connect('http://192.168.2.140:1337')
+    socket = io.connect('http://192.168.1.184:1337')
 
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
@@ -40,7 +45,6 @@ export default function sketch (p) {
           foods.push(food)
         }
         // getting users information to display the scores
-        console.log('-----------', snakes)
         store.dispatch(getSnakes(snakes))
       }
     })
@@ -51,12 +55,12 @@ export default function sketch (p) {
      // This would need to change because we dont have a single snake anymore, we have an snakes OBJ
       snakes[userId].dir(data.x, data.y)
     })
-    //Handle user disconnection
+    // Handle user disconnection
     socket.on('user-disconnect', function (userId) {
       delete snakes[userId]
       console.log('on user-disconnect, snakes=', snakes)
-      //using close is not working as expected right now. will investigate further when there is time
-      //socket.close()
+      // using close is not working as expected right now. will investigate further when there is time
+      // socket.close()
     })
 
     // Handle server disconnection, close the socket connection
@@ -92,9 +96,9 @@ export default function sketch (p) {
         }
       }
     }
-    //count how many snakes are still alive (aka "visible")
+    // count how many snakes are still alive (aka "visible")
     let countAlive = 0
-    let winnerName 
+    let winnerName
     for (let id in snakes) {
       if (snakes[id].visible) {
         countAlive++
@@ -102,7 +106,11 @@ export default function sketch (p) {
       }
     }
     if (countAlive === 1) {
-      //we have a winner!
+      // we have a winner!
+      p.textAlign(p.CENTER)
+      p.textSize(80)
+      p.textFont(fontRegular)
+      p.text('GAME OVER', p.width / 2, p.height / 2)
       console.log('and winner is..', winnerName, 'countAlive', countAlive)
     }
   }
