@@ -59,26 +59,6 @@ body {
   transform: translate(-50%, -50%)
 }
 
-/*#main{
-  position: absolute;
-  margin-left: 10%;
-  margin-right: 0%;
-  margin-top: -5%;
-  margin-bottom: 0%;
-  border-radius: 50%;
-<<<<<<< HEAD
-  background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-
-}
-=======
-}*/
-
 button#right{
    margin-top: -5%;
    margin-bottom: 0%;
@@ -192,14 +172,15 @@ button#left{
 
 /*WAITING ROOM*/
 #waiting-room{
-<<<<<<< HEAD
-  color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+ text-align: center;
+ font-size: 100px;
+ color:     #00FFFF ;
+ animation: glowing 1500ms infinite;
+}
+@keyframes glowing{
+ 0% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
+ 50% { text-color:     #F0F8FF ; text-shadow: 0 0 10px     #F0F8FF ; }
+ 100% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
 }
 
 /*FOR PHONE */
@@ -211,6 +192,8 @@ button#left{
 
  * {
   box-sizing: border-box;
+  }
+/* Where should the media query end? */
 }
 
 body {
@@ -229,18 +212,6 @@ body {
     position: fixed;
 }
 
-#main{
-  padding:250px;
-  size: relative;
-  position: relative;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
-  transform: translate(-50%, -50%);
-  transform-origin: center center;
-  border: 1px solid yellow;
-}
 
 button.controller{
   height:50px !important;
@@ -284,6 +255,7 @@ button#down{
   animation-iteration-count: infinite;
 
 }
+
 #down:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -332,17 +304,17 @@ button#left{
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
-=======
   text-align: center;
   font-size: 100px;
   color: 	#00FFFF;
   animation: glowing 1500ms infinite;
->>>>>>> 8802f8b517cb7dc51af6a9a864c9bcba752e8b03
 }
+
 @keyframes glowing{
   0% { text-color: 	#00FFFF; text-shadow: 0 0 3px 	#00FFFF; }
   50% { text-color: 	#F0F8FF; text-shadow: 0 0 10px 	#F0F8FF; }
   100% { text-color: 	#00FFFF; text-shadow: 0 0 3px 	#00FFFF; }
+}
 
 #parent-div{
     position:relative;
