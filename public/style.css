@@ -79,11 +79,27 @@ body {
 =======
 }*/
 
-#right:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+button#right{
+   margin-top: -5%;
+   margin-bottom: 0%;
+   margin-left:500%;
+   border-radius: 50%;
+   background-color: #749a02 ;
+   background-color: #749a02 ;
+   -webkit-animation-name: greenPulse;
+   animation-name: greenPulse;
+   -webkit-animation-duration: 2s;
+   animation-duration: 2s;
+   -webkit-animation-iteration-count: infinite;
+   animation-iteration-count: infinite;
+ }
+
+ #right:active {
+   background-color: #3e8e41 ;
+   background-color: #3e8e41 ;
+   box-shadow: 0 5px #666;
+   transform: translateY(4px);
+ }
 
 button#up{
   position: absolute;
