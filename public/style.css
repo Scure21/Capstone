@@ -1,5 +1,14 @@
+@font-face {
+    font-family: 'pixeledregular';
+    src: url('pixeled-webfont.woff2') format('woff2'),
+         url('pixeled-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
   box-sizing: border-box;
+  font-family: 'pixeledregular';
 }
 
 #color-selector {
@@ -224,7 +233,7 @@ button#right{
   position:absolute;
   right:100px;
   opacity:.3;
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
 }
 
 #score{
@@ -309,5 +318,5 @@ input{
   margin: 0 auto !important;
   text-align: center;
   font-size: 20px !important;
-  font-family: 'Playfair Display', serif !important;
+  /*font-family: 'Playfair Display', serif !important;*/
 }
