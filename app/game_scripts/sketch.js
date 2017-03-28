@@ -8,9 +8,10 @@ export default function sketch (p) {
   var snakes = {}
   var canvas
   var foods = []
+  var colorKey = 0
 
   p.setup = function () {
-    canvas = p.createCanvas(600, 600)
+    canvas = p.createCanvas(1200, 760)
     p.frameRate(10)
     // connect client to the server through sockets
     socket = io.connect('http://192.168.0.8:1337')
@@ -23,20 +24,15 @@ export default function sketch (p) {
         var colors = ["blue", "yellow", "purple", "green"]
 
         users.forEach(user => {
-
-          // assign color to snake
-          var randomId = p.floor(p.random(0, 4))
-          var colorKey = randomId;
-
-          for(var snake in snakes){
-            if(snake.name == colors[colorKey]){
-              colorKey +=1
-            }
+          let color = colors[colorKey]
+          snakes[user] = new Snake(null, null, p, user, color)
+          if(colorKey > 2){
+            colorKey%=2
+          }
+          else{
+            colorKey+=1
           }
 
-          var color = colors[colorKey]
-
-          snakes[user] = new Snake(null, null, p, user, color)
         })
         // we are going to have 5 foods on the canvas for all the players
         for (let i = 0; i < 6; i++) {

@@ -5,9 +5,9 @@ import store from '../store'
 
 const colors = {
   "blue": "34b7ea",
-  "yellow": "ffff00",
+  "yellow": "ffa500",
   "purple": "8e66d9",
-  "green": "b2d080"
+  "green": "4cd814"
 }
 
 export default function Snake (x, y, p, user, colorName) {
