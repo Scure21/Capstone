@@ -9,18 +9,15 @@ export default function sketch (p) {
   var canvas
   var foods = []
   var colorKey = 0
-  var fontRegular = p.loadFont('../../../public/font/Endless-Boss-Battle.tff')
-
-  // p.preload = function () {
-  //   fontRegular = p.loadFont('../../../public/font/Endless-Boss-Battle.cff')
-  // }
+  var countAlive
+  var winnerSnake
 
   p.setup = function () {
     canvas = p.createCanvas(800, 600)
     p.frameRate(10)
 
    // connect client to the server through sockets
-    socket = io.connect('http://192.168.1.184:1337')
+    socket = io.connect('http://192.168.2.140:1337')
 
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
@@ -97,21 +94,33 @@ export default function sketch (p) {
       }
     }
     // count how many snakes are still alive (aka "visible")
-    let countAlive = 0
-    let winnerName
+    //assign 0 only when snakes object is not empty, otherwise there will a GAME OVER msg even before the game begins
+    if (Object.keys(snakes).length !== 0){
+      countAlive = 0
+    }
+    
     for (let id in snakes) {
       if (snakes[id].visible) {
         countAlive++
-        winnerName = snakes[id].name
+        winnerSnake = snakes[id]
       }
     }
+
+    p.textAlign(p.CENTER)
     if (countAlive === 1) {
       // we have a winner!
-      p.textAlign(p.CENTER)
       p.textSize(80)
-      p.textFont(fontRegular)
       p.text('GAME OVER', p.width / 2, p.height / 2)
-      console.log('and winner is..', winnerName, 'countAlive', countAlive)
+      p.textSize(60)
+      p.fill(winnerSnake.color)
+      p.text('The winner is:', p.width / 2, (p.height / 2) + 100)
+      p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 180)
+    } else if (countAlive === 0) {
+      //the 2 remaining snakes colided head-to-head and both died
+      p.textSize(80)
+      p.text('GAME OVER', p.width / 2, p.height / 2)
+      p.textSize(60)
+      p.text('Everyone is dead...', p.width / 2, (p.height / 2) + 100)
     }
   }
 }
