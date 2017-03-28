@@ -9,9 +9,10 @@ export default function sketch (p) {
   var canvas
   var foods = []
   var colorKey = 0
+  var aliveSnakes = {}
 
   p.setup = function () {
-    canvas = p.createCanvas(1200, 760)
+    canvas = p.createCanvas(800, 600)
     p.frameRate(10)
 
    // connect client to the server through sockets
@@ -20,28 +21,26 @@ export default function sketch (p) {
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
       if (deviceType === 'mobile') {
-
         // loop through the users array and assign each user a new snake with a color
-        var colors = ["blue", "yellow", "purple", "green"]
+        var colors = ['blue', 'yellow', 'aqua', 'green']
 
         users.forEach(user => {
           let color = colors[colorKey]
+          // We are assuming that only 4 players will join a room, so we just need 4 colors
           snakes[user] = new Snake(p, user, color)
-          if(colorKey > 2){
-            colorKey%=2
+          if (colorKey === 3) {
+            colorKey %= 2
+          } else {
+            colorKey += 1
           }
-          else{
-            colorKey+=1
-          }
-
         })
         // we are going to have 5 foods on the canvas for all the players
-
         for (let i = 0; i < 6; i++) {
           const food = new Food(p)
           foods.push(food)
         }
         // getting users information to display the scores
+        console.log('-----------', snakes)
         store.dispatch(getSnakes(snakes))
       }
     })
