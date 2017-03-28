@@ -20,7 +20,18 @@ module.exports = function (io) {
             device.match(/Windows Phone/i)
         ) {
           // if its a mobile device push it to the users array
-          users.push(socket.id)
+          users.push({id: socket.id})
+          var colorKey = 0;
+          var colors = ["blue", "yellow", "purple", "green"]
+          users.map(function(user){
+            user.colorName = colors[colorKey]
+            if (colorKey > 2){
+              colorKey %= 2
+            }
+            else{
+              colorKey += 1
+            }
+          })
           return 'mobile'
         } else {
           return 'computer'
@@ -30,10 +41,17 @@ module.exports = function (io) {
       // user connected, eventually we want to check till we have 4 users
       // connected and then emit to the sketch so the match starts
       const deviceType = detectDevice(device)
-      console.log('users just before emit', users)
-      if (users.length === 2) io.sockets.emit('send-device-type', {deviceType, users})
-    })
 
+      //REMEMBER to chenge this to 4
+      if (users.length === 2) io.sockets.emit('send-device-type', {deviceType, users})
+      
+      io.sockets.emit('get-current-users', users)
+
+    })
+    
+    socket.on('get-snake', function(){
+      return socket.id
+    })
     // update the snake position according the touch event on the mobile screen
     socket.on('user-movement-update', function (data) {
       const userId = socket.id

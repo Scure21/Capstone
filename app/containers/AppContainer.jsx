@@ -2,6 +2,8 @@ import React from 'react'
 import MobileDetect from 'mobile-detect'
 import { connect } from 'react-redux'
 import { Link, browserHistory } from 'react-router'
+import UserLogin from '../components/UserLogin'
+import LandingPage from '../components/LandingPage'
 
 const md = new MobileDetect(window.navigator.userAgent)
 
@@ -16,10 +18,10 @@ class AppContainer extends React.Component {
   componentWillMount () {
     if (!md.mobile()) {
       this.setState({deviceType: 'computer'})
-      browserHistory.push('/game')
+      browserHistory.push('/LandingPage')
     } else {
       this.setState({deviceType: 'phone'})
-      browserHistory.push('/controller')
+      browserHistory.push('/userlogin')
     }
   }
 
@@ -37,4 +39,5 @@ const mapStateToProps = (state, ownProps) => {
     auth: state.auth
   }
 }
+
 export default connect(mapStateToProps)(AppContainer)
