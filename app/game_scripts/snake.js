@@ -2,13 +2,6 @@ import { scl, utils } from './utils'
 import { updateSnakePoints } from '../reducers/snakes'
 import store from '../store'
 
-const colors = {
-  "blue": "34b7ea",
-  "yellow": "ffa500",
-  "purple": "8e66d9",
-  "green": "4cd814"
-}
-
 export default function Snake (p, user, colorName) {
   const vector = utils.randomVector(p).mult(scl)
   this.x = vector.x

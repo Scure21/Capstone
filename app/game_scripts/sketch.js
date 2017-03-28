@@ -3,6 +3,7 @@ import Snake from './snake'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
 
+
 export default function sketch (p) {
   var socket
   var snakes = {}
@@ -17,10 +18,11 @@ export default function sketch (p) {
    // connect client to the server through sockets
     socket = io.connect('http://192.168.1.184:1337')
 
+
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
+      
       if (deviceType === 'mobile') {
-
         // loop through the users array and assign each user a new snake with a color
         var colors = ["blue", "yellow", "purple", "green"]
 
@@ -33,10 +35,8 @@ export default function sketch (p) {
           else{
             colorKey+=1
           }
-
         })
         // we are going to have 5 foods on the canvas for all the players
-
         for (let i = 0; i < 6; i++) {
           const food = new Food(p)
           foods.push(food)

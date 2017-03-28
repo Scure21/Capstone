@@ -16,7 +16,7 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
-        <Route path='/user' component={PhoneUserInput} />
+        <Route path="/user" component={PhoneUserInput} />
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
         <Route path="/interstitial" component={Int}/>

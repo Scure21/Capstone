@@ -16,7 +16,7 @@ class AppContainer extends React.Component {
   componentWillMount () {
     if (!md.mobile()) {
       this.setState({deviceType: 'computer'})
-      browserHistory.push('/game')
+      browserHistory.push('/interstitial')
     } else {
       this.setState({deviceType: 'phone'})
       browserHistory.push('/controller')
