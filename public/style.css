@@ -24,6 +24,10 @@
     border: 2px solid white;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> design
 body {
     padding: 0;
     margin: 0;
@@ -35,17 +39,14 @@ body {
     text-align: center;
 }
 
-#main{
-/*    height: 100%;
-    width: 100%;*/
+/*#main{
+
   padding:100px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid yellow;
-
-}
+}*/
 
 
 @media only screen
@@ -231,7 +232,29 @@ button#right{
     position:relative;
 }
 
+<<<<<<< HEAD
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
+=======
+#welcome-page{
+  margin-top:150px;
+}
+
+#logo{
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-repeat:no-repeat;
+  margin:0 auto;
+  align-items: center;
+}
+
+#logoName{
+  margin:0 auto;
+}
+
+#banner{
+  width:81%;
+>>>>>>> design
 }
