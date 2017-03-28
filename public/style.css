@@ -243,3 +243,19 @@ button#right{
 #score{
   text-align: right;
 }
+
+.blue{
+  color: #34b7ea;
+}
+
+.yellow{
+  color: #ffa500;
+}
+
+.purple{
+  color: #8e66d9 !important;
+}
+
+.green{
+  color: #4cd814;
+}

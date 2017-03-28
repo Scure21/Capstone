@@ -20,7 +20,7 @@ export default class Scores extends Component {
             snakesIds && snakesIds.map((snakeId, indx) => {
               return (
                 <tr key={indx}>
-                  <td>{`User ${indx}`}</td>
+                  <td className={`${this.props.snakes.list[snakeId].name}`}>{this.props.snakes.list[snakeId].name}</td>
                   <td id="score">{this.props.snakes.list[snakeId].points}</td>
                 </tr>
               )
