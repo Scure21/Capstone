@@ -2,7 +2,7 @@ import { scl, utils } from './utils'
 import { updateSnakePoints } from '../reducers/snakes'
 import store from '../store'
 
-export default function Snake (p, user, colorName) {
+export default function Snake (p, user, colorName, img) {
   const vector = utils.randomVector(p).mult(scl)
   this.x = vector.x
   this.y = vector.y
@@ -14,6 +14,7 @@ export default function Snake (p, user, colorName) {
   this.name = colorName
   this.color = colorName
   this.visible = true
+  this.img = img
 }
 
 Snake.prototype.dir = function (x, y) {
@@ -72,10 +73,13 @@ Snake.prototype.move = function (p) {
 
 Snake.prototype.draw = function (p) {
   if (this.visible) {
-    p.fill(this.color)
-    p.rect(this.x, this.y, scl, scl)
+    // p.imageMode(p.CENTER)
+    p.image(this.img, this.x, this.y, scl, scl)
+    // p.fill(this.color)
+    // p.rect(this.x, this.y, scl, scl)
     for (var i = 0; i < this.tail.length; i++) {
-      p.rect(this.tail[i].x, this.tail[i].y, scl, scl)
+      // p.rect(this.tail[i].x, this.tail[i].y, scl, scl)
+      p.image(this.img, this.tail[i].x, this.tail[i].y, 20, 20)
     }
   }
 }

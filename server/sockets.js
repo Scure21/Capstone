@@ -31,7 +31,7 @@ module.exports = function (io) {
       // connected and then emit to the sketch so the match starts
       const deviceType = detectDevice(device)
       console.log('users just before emit', users)
-      if (users.length === 2) io.sockets.emit('send-device-type', {deviceType, users})
+      if (users.length === 4) io.sockets.emit('send-device-type', {deviceType, users})
     })
 
     // update the snake position according the touch event on the mobile screen
