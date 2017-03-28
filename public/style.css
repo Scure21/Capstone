@@ -1,3 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+@viewport {
+  width: device-width;
+}
+
+/*make controller buttons glow*/
+@-webkit-keyframes greenPulse {
+  from { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
+  50% { background-color: #91bd09 ; -webkit-box-shadow: 0 0 18px #91bd09 ; }
+  to { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
+}
+
 @font-face {
     font-family: 'pixeledregular';
     src: url('pixeled-webfont.woff2') format('woff2'),
@@ -44,13 +59,14 @@ body {
   transform: translate(-50%, -50%)
 }
 
-#main{
+/*#main{
   position: absolute;
   margin-left: 10%;
   margin-right: 0%;
   margin-top: -5%;
   margin-bottom: 0%;
   border-radius: 50%;
+<<<<<<< HEAD
   background-color: #749a02;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
@@ -60,6 +76,9 @@ body {
   animation-iteration-count: infinite;
 
 }
+=======
+}*/
+
 #right:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -155,17 +174,9 @@ button#left{
   transform: translateY(4px);
 }
 
-#parent-div{
-    position:relative;
-}
-
-#leaderboard{
-  border:1px solid yellow;
-  color:yellow;
-}
-
 /*WAITING ROOM*/
 #waiting-room{
+<<<<<<< HEAD
   color: #749a02;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
@@ -305,7 +316,17 @@ button#left{
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+=======
+  text-align: center;
+  font-size: 100px;
+  color: 	#00FFFF;
+  animation: glowing 1500ms infinite;
+>>>>>>> 8802f8b517cb7dc51af6a9a864c9bcba752e8b03
 }
+@keyframes glowing{
+  0% { text-color: 	#00FFFF; text-shadow: 0 0 3px 	#00FFFF; }
+  50% { text-color: 	#F0F8FF; text-shadow: 0 0 10px 	#F0F8FF; }
+  100% { text-color: 	#00FFFF; text-shadow: 0 0 3px 	#00FFFF; }
 
 #parent-div{
     position:relative;
@@ -314,11 +335,6 @@ button#left{
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
-  display:inline-flex;
-  padding:20px;
-  position:absolute;
-  right:100px;
-  opacity:.3;
 }
 
 #score{
@@ -403,8 +419,4 @@ input{
   margin: 0 auto !important;
   text-align: center;
   font-size: 20px !important;
-  /*font-family: 'Playfair Display', serif !important;*/
 }
-
-/* HELLOOOOOOOO */
-
