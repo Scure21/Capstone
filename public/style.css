@@ -31,21 +31,147 @@
 }
 
 body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 0;
     margin: 0;
     background-image: url('./images/bg.png');
     background-size: cover;
 }
 
-#login {
-    text-align: center;
+#main{
+  padding:250px;
+  position: relative;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: 1px solid yellow;
 }
 
 #main{
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-left: 10%;
+  margin-right: 0%;
+  margin-top: -5%;
+  margin-bottom: 0%;
+  border-radius: 50%;
+  background-color: #749a02;
+  -webkit-animation-name: greenPulse;
+  animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+ 
+}
+#right:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+button#up{
+  position: absolute;
+  margin-left: 25%;
+  margin-right: 0;
+  margin-top: -15%;
+  margin-bottom: 0%;
+  border-radius: 50%;
+  background-color: #749a02;
+  -webkit-animation-name: greenPulse;
+  animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+#up:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+button#down{
+  position: absolute;
+  margin-left: -25%;
+  margin-right: 0%;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  border-radius: 50%;
+  background-color: #749a02;
+  -webkit-animation-name: greenPulse;
+  animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+ 
+}
+#down:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+button#left{
+  position: absolute;
+  margin-left: -10%;
+  margin-right: 0%;
+  margin-top: -5%;
+  margin-bottom: 0%;
+  border-radius: 50%;
+  background-color: #749a02;
+  -webkit-animation-name: greenPulse;
+  animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+ 
+}
+#left:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+#login-btn{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  border-radius: 20px;
+}
+#login-btn:hover {background-color: #3e8e41}
+#login-btn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#signup-btn{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  border-radius: 20px;
+}
+#signup-btn:hover{background-color: #3e8e41}
+#signup-btn:active{
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#parent-div{
+    position:relative;
+}
+
+#leaderboard{
+  border:1px solid yellow;
+  color:yellow;
 }
 
 @media only screen
@@ -153,17 +279,29 @@ and (max-width : 480px){
       box-shadow: 0 5px #666;
       transform: translateY(4px);
     }
+
 }
 
 button.controller{
+  /*text-align: center;*/
   height:50px !important;
   width:50px !important;
 }
-
 button#up{
-  display:block;
-  margin-left:25px;
-  cursor: pointer;
+  position: absolute;
+  margin-left: 25%;
+  margin-right: 0;
+  margin-top: -15%;
+  margin-bottom: 0%;
+  border-radius: 50%;
+  background-color: #749a02;
+  -webkit-animation-name: greenPulse;
+  animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+ 
 }
 #up:active {
   background-color: #3e8e41;
@@ -172,8 +310,20 @@ button#up{
 }
 
 button#down{
-  display:block;
-  margin-left:25px;
+  position: absolute;
+  margin-left: -25%;
+  margin-right: 0%;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  border-radius: 50%;
+  background-color: #749a02;
+  -webkit-animation-name: greenPulse;
+  animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+ 
 }
 #down:active {
   background-color: #3e8e41;
@@ -182,7 +332,20 @@ button#down{
 }
 
 button#left{
-
+  position: absolute;
+  margin-left: -10%;
+  margin-right: 0%;
+  margin-top: -5%;
+  margin-bottom: 0%;
+  border-radius: 50%;
+  background-color: #749a02;
+  -webkit-animation-name: greenPulse;
+  animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+ 
 }
 #left:active {
   background-color: #3e8e41;
@@ -190,14 +353,7 @@ button#left{
   transform: translateY(4px);
 }
 
-button#right{
 
-}
-#right:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
 
 #login-btn{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
