@@ -2,7 +2,7 @@ const chalk = require('chalk')
 
 module.exports = function (io) {
   // users obj to keep track of all the connected users
-  const users = []
+  var users = []
   // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
@@ -22,7 +22,7 @@ module.exports = function (io) {
           users.push({id: socket.id})
           var colorKey = 0;
           var colors = ["blue", "yellow", "purple", "green"]
-          users.forEach(function(user){
+          users.map(function(user){
             user.colorName = colors[colorKey]
             if (colorKey > 2){
               colorKey %= 2

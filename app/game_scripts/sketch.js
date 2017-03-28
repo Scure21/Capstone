@@ -2,7 +2,6 @@ import Food from './food'
 import Snake from './snake'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
-// import { addUsers } from '../reducers/int'
 
 
 export default function sketch (p) {
