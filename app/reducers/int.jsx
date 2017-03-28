@@ -1,10 +1,10 @@
 /* ------- ACTIONS -------- */
-const GET_USERS = 'GET_USERS'
+const ADD_USERS = 'ADD_USERS'
 
 /* -------------  ACTION CREATORS  --------------- */
 
-export const getUsers = users => ({
-  type: GET_USERS,
+export const addUsers = users => ({
+  type: ADD_USERS,
   users
 })
 
@@ -13,11 +13,11 @@ const initialUsersState = {
 }
 
 /* --------------- REDUCER ----------------- */
-export default function (state = initialUsersState, action) {
+const intReducer = (state = initialUsersState, action) => {
   const newState = Object.assign({}, state)
 
   switch (action.type) {
-    case GET_USERS:
+    case ADD_USERS:
       newState.users = action.users
       break
 
@@ -26,3 +26,5 @@ export default function (state = initialUsersState, action) {
   }
   return newState
 }
+
+export default intReducer

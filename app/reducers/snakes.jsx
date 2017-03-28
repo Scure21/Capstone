@@ -1,8 +1,10 @@
+// import axios from 'axios'
 // want to be able to see each snakes points.
 
 /* ------- ACTIONS -------- */
-const UPDATE_SNAKE_POINTS = 'UPDATE_SNAKE_POINTS'
-const GET_SNAKES = 'GET_SNAKES'
+const UPDATE_SNAKE_POINTS = "UPDATE_SNAKE_POINTS"
+const GET_SNAKES = "GET_SNAKES"
+
 
 /* -------------  ACTION CREATORS  --------------- */
 
@@ -18,24 +20,27 @@ export const getSnakes = snakes => ({
 
 const initialSnakesState = {
   selected: {}, // name and points of each snake
-  list: [] // all snakes
+  list: {} // all snakes
 }
 
-/* --------------- REDUCER ----------------- */
-export default function (state = initialSnakesState, action) {
-  const newState = Object.assign({}, state)
 
-  switch (action.type) {
+/* --------------- REDUCER ----------------- */
+const snakeReducer = (state = initialSnakesState, action) => {
+  const newState = Object.assign({}, state);
+
+  switch(action.type){
     case UPDATE_SNAKE_POINTS:
-      newState.selected.points = action.snake
-      break
+      newState.list[action.snake.id].points = action.snake.points
+      break;
 
     case GET_SNAKES:
       newState.list = action.snakes
-      break
+      break;
 
     default:
       return state
   }
   return newState
 }
+
+export default snakeReducer

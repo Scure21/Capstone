@@ -1,71 +1,49 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
-//import io from 'socket.io-client'
+import io from 'socket.io-client'
+var socket = io.connect('http://192.168.2.111:1337')
 
-// var currUsers;
-// const socket = io.connect('http://192.168.0.6:1337')
 
-export default class Int extends Component {
 
+export default class Int extends Component{
+  constructor(props){
+      super(props)
+      this.state = {
+        users: []
+      }
+  }
+
+componentDidMount(){
+  
+  socket.emit('ask-for-users')
+
+  socket.on('get-current-users', users => {
+    console.log('USERS IN INT', users)
+    this.setState({users: users})
+  })
+}
+    
     //this.tick = this.tick.bind(this)
     //this.update = this.update.bind(this)
-  
-  
-  
-     
-  //    socket.on('ready-to-play', function(users){
-  //       console.log("USERS!!!", users)
-  //       currUsers = users;
-  //       return currUsers;
-  //    })
-  //    this.setState({users: currUsers});
-  //    if (this.state.users.length >= 4){
-  //      this.setState({ready: true})
-  //    }
-  // }
 
 
-  // tick() {
-  //   this.setState({counter: this.state.counter - 1})
-  //   if (this.state.counter <= 0){
-  //     clearInterval(this.interval)
-  //      browserHistory.push('/game')
-  //   }
-  // }
-  
-  // if (currUsers && currUsers.length >= 4){
-  //      this.interval = setInterval(this.tick, 1000)
-  //      this.setState({ready: true})
-  //    }
-  
+  //onSend to recieve update from store
 
-  // if (props && props.users.length < 4){
-     render(){
+  //update to change state 
+  
+  
+  render(){
 
-   console.log('PROPS', this.props.users)
+   //console.log('USERPROPS', this.props.users)
       return (
-  <div id="waiting-room">
-    <h1>WAITING ROOM</h1>
-  </div>
+        <div id="waiting-room">
+          <h1>WAITING ROOM</h1>
+          <h2>{this.state.users.length}</h2>
+        </div>
     )
   }
+
+
 }
-  /*else if (props && props.users.length < 4){
-    return (
-  <div id="waiting-room">
-    <h1>WAITING ROOM</h1>
-    <h2>NEW VERSION</h2>
-    {/*<p><b id="nums">{this.state.counter}</b></p>*/
-//   </div>*/
-//     )
-//   }
 
-// }
-
-
-
-//each time a user logs in it will emit to an on socket in here 
-
-
-//we want to check with sockets to see how many users have logged in
 

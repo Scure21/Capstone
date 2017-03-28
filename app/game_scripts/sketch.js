@@ -2,15 +2,15 @@ import Food from './food'
 import Snake from './snake'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
-import { getUsers } from '../reducers/int'
-var colorKey = 0
+// import { addUsers } from '../reducers/int'
+
 
 export default function sketch (p) {
   var socket
   var snakes = {}
   var canvas
   var foods = []
-  var usersToInt = {};
+  var colorKey = 0
 
   p.setup = function () {
     canvas = p.createCanvas(600, 600)
@@ -20,30 +20,27 @@ export default function sketch (p) {
 
     // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
+      
       if (deviceType === 'mobile') {
        
-        // loop through the users array and assign each user a new snake and a color
-        var colors = ["blue", "yellow", "purple", "green"]
-       
-        users.forEach(user => { 
-          let color = colors[colorKey]
-          snakes[user] = new Snake(null, null, p, user, color)
+         
+        // loop through the users array and assign each user a new snake
+
+        users.forEach(user => {
+          snakes[user] = new Snake(null, null, p, user.id, user.color)
         })
+
+
         // we are going to have 5 foods on the canvas for all the players
         for (let i = 0; i < 6; i++) {
           const food = new Food(p)
           foods.push(food)
         }
-        // getting users information to display the scores
-        store.dispatch(getSnakes(snakes))
 
-      
-        // snakes.forEach(function(snake){
-        //   usersToInt[snake.user] = snake.color
-        // })
-        //send array of users to lobby
-        store.dispatch(getUsers(users))
-        //socket.emit('ready-to-play', users)
+       // send all snakes to store
+        store.dispatch(getSnakes(snakes))
+        
+     
       }
     })
 

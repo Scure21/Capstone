@@ -5,7 +5,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import AppContainer from './containers/AppContainer'
-import IntContainer from './containers/IntContainer'
+import Int from './components/Int'
 import Login from './components/Login'
 import SignUpContainer from './containers/SignUpContainer'
 import Game from './components/Game'
@@ -19,7 +19,7 @@ render(
         <Route path="/user" component={PhoneUserInput} />
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
-        <Route path="/interstitial" component={IntContainer}/>
+        <Route path="/interstitial" component={Int}/>
         <Route path="/controller" component={Controller}/>
         <Route path="/game" component={Game}/>
       </Route>
