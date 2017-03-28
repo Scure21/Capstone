@@ -21,6 +21,7 @@ module.exports = function (io) {
         ) {
           // if its a mobile device push it to the users array
           users.push(socket.id)
+          io.sockets.emit('ready-to-play', users);
           return 'mobile'
         } else {
           return 'computer'

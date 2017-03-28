@@ -1,11 +1,7 @@
 import React from 'react'
-import axios from 'axios'
-
 
 export default (props) => {
-
-
- return(
+  return (
     <div className="container">
       <div className="row">
         <div className="col-sm-6">
@@ -65,5 +61,4 @@ export default (props) => {
       </div>
     </div>
   )
-
 }
