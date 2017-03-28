@@ -58,7 +58,7 @@ body {
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #right:active {
   background-color: #3e8e41;
@@ -101,7 +101,7 @@ button#down{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #down:active {
   background-color: #3e8e41;
@@ -123,7 +123,7 @@ button#left{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #left:active {
   background-color: #3e8e41;
@@ -176,11 +176,11 @@ button#left{
 }
 
 /*FOR PHONE */
-@media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
   and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) { 
+  and (orientation: landscape) {
 
  * {
   box-sizing: border-box;
@@ -233,7 +233,7 @@ button#up{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #up:active {
   background-color: #3e8e41;
@@ -255,7 +255,7 @@ button#down{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #down:active {
   background-color: #3e8e41;
@@ -277,7 +277,7 @@ button#left{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #left:active {
   background-color: #3e8e41;
@@ -403,4 +403,8 @@ input{
   margin: 0 auto !important;
   text-align: center;
   font-size: 20px !important;
+  /*font-family: 'Playfair Display', serif !important;*/
 }
+
+/* HELLOOOOOOOO */
+
