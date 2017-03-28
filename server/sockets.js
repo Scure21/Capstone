@@ -30,7 +30,8 @@ module.exports = function (io) {
       // user connected, eventually we want to check till we have 4 users
       // connected and then emit to the sketch so the match starts
       const deviceType = detectDevice(device)
-      io.sockets.emit('send-device-type', {deviceType, users})
+      console.log('users just before emit', users)
+      if (users.length === 2) io.sockets.emit('send-device-type', {deviceType, users})
     })
 
     // update the snake position according the touch event on the mobile screen
@@ -45,7 +46,7 @@ module.exports = function (io) {
       console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
       // If a user is disconnected, remove it from the users array by checking the socket that's getting disconnected
       users = users.filter(userId => userId !== socket.id)
-      io.sockets.emit()
+      io.sockets.emit('user-disconnect', socket.id)
     })
   })
 }

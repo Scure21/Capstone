@@ -16,10 +16,11 @@ export default function sketch (p) {
     p.frameRate(10)
 
    // connect client to the server through sockets
-    socket = io.connect('http://192.168.1.184:1337')
+    socket = io.connect('http://192.168.2.140:1337')
 
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
+      console.log('users received on send-device-type', users)
       if (deviceType === 'mobile') {
         // loop through the users array and assign each user a new snake with a color
         var colors = ['blue', 'yellow', 'aqua', 'green']
@@ -45,14 +46,21 @@ export default function sketch (p) {
       }
     })
 
-   // we get the information from the server of each user movement and we update each user movement
+    // we get the information from the server of each user movement and we update each user movement
     socket.on('server-dir-update', function ({data, userId}) {
      // get the specific user and update the direction of movement
      // This would need to change because we dont have a single snake anymore, we have an snakes OBJ
       snakes[userId].dir(data.x, data.y)
     })
+    //Handle user disconnection
+    socket.on('user-disconnect', function (userId) {
+      delete snakes[userId]
+      console.log('on user-disconnect, snakes=', snakes)
+      //using close is not working as expected right now. will investigate further when there is time
+      //socket.close()
+    })
 
-   // Handle server disconnection, close the socket connection
+    // Handle server disconnection, close the socket connection
     socket.on('disconnect', function () {
       socket.close()
     })
