@@ -9,8 +9,12 @@ export default class Int extends Component{
       super(props)
       this.state = {
         users: [],
-        colors: []
+        colors: [],
+        ready: false,
+        counter: 5
       }
+    
+      this.tick = this.tick.bind(this)
   }
 
 componentDidMount(){
@@ -22,17 +26,26 @@ componentDidMount(){
       return i.colorName
     })
     this.setState({users: users, colors: colors})
+    if (this.state.users.length >= 4){
+      this.interval = setInterval(this.tick, 1000)
+      this.setState({ready: true})
+    }
   })
 }
     
-    //this.tick = this.tick.bind(this)
+
+    
+
     //this.update = this.update.bind(this)
 
 
-  //onSend to recieve update from store
-
-  //update to change state 
-  
+ tick() {
+    this.setState({counter: this.state.counter - 1})
+    if (this.state.counter <= 0){
+      clearInterval(this.interval)
+       browserHistory.push('/game')
+    }
+  }
   
   render(){
 
@@ -43,14 +56,29 @@ componentDidMount(){
    var users = this.state.users
    var color = this.state.colors
    console.log('COLOR', color)
-      return (
+
+        if (this.state.ready === false){
+          return (
         <div id="waiting-room">
           <h1>WAITING ROOM</h1>
-          <li> {this.state.colors && this.state.colors[this.state.colors.length - 1]}</li>
+        {this.state.colors && 
+            <h2>A 
+          {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
+        </div>)
+      }
+      else{
+          return (
+          <div id="waiting-room">
+          <h1>WAITING ROOM</h1>
+        {this.state.colors && 
+            <h2>A 
+          {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
+        <p><b id="nums">{this.state.counter}</b></p>
         </div>
-      )
+        )     
+      }
+      
   }
-
 
 }
 
