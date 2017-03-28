@@ -9,7 +9,6 @@ export default function sketch (p) {
   var snakes = {}
   var canvas
   var foods = []
-  var colorKey = 0
 
   p.setup = function () {
     canvas = p.createCanvas(1200, 760)
@@ -25,18 +24,9 @@ export default function sketch (p) {
     socket.on('send-device-type', function ({deviceType, users}) {
       
       if (deviceType === 'mobile') {
-        // loop through the users array and assign each user a new snake with a color
-        var colors = ["blue", "yellow", "purple", "green"]
-
+    
         users.forEach(user => {
-          let color = colors[colorKey]
-          snakes[user] = new Snake(p, user, color)
-          if(colorKey > 2){
-            colorKey%=2
-          }
-          else{
-            colorKey+=1
-          }
+          snakes[user.id] = new Snake(p, user.id, user.colorName)
         })
         // we are going to have 5 foods on the canvas for all the players
         for (let i = 0; i < 6; i++) {

@@ -11,9 +11,11 @@ export default class Int extends Component {
         users: [],
         colors: [],
         ready: false,
-        counter: 5
+        counter: 5,
+        next: false
       }
       this.tick = this.tick.bind(this)
+      this.handleClick = this.handleClick.bind(this)
   }
 
 componentDidMount(){
@@ -29,18 +31,34 @@ componentDidMount(){
     }
   })
 }
- tick() {
+ 
+tick() {
     this.setState({counter: this.state.counter - 1})
     if (this.state.counter <= 0){
       clearInterval(this.interval)
        browserHistory.push('/game')
     }
   }
+
+handleClick(){
+   this.setState({next: true})
+  }
   
   render(){
-   let len = this.state.users.length
-   var users = this.state.users
-   var color = this.state.colors
+        if (this.state.next === false){
+          return (
+            <div>
+        <div id="welcome-page">
+            <div id="logo">
+              <img src="images/sketch_images/logo.png" className="img-responsive" id="logoName"/>
+              <img src="images/sketch_images/banner.png" className="img-responsive" id="banner"/>
+              <button id="play" onClick={this.handleClick}></button>
+            </div>
+          </div>
+      </div>
+          )
+        }
+        
         if (this.state.ready === false){
           return (
         <div id="waiting-room">
