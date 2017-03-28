@@ -8,9 +8,9 @@
 
 /*make controller buttons glow*/
 @-webkit-keyframes greenPulse {
-  from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
+  from { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
+  50% { background-color: #91bd09 ; -webkit-box-shadow: 0 0 18px #91bd09 ; }
+  to { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
 }
 
 #color-selector {
@@ -33,6 +33,13 @@
 }
 
 body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 0;
     margin: 0;
     background-image: url('./images/bg.png');
@@ -46,10 +53,13 @@ body {
 }
 
 #main{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)
+  padding:250px;
+  position: relative;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: 1px solid yellow;
 }
 
 button.controller{
@@ -70,17 +80,17 @@ button#right{
   margin-top: -5%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #right:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -92,7 +102,7 @@ button#up{
   margin-top: -15%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
@@ -101,7 +111,7 @@ button#up{
   animation-iteration-count: infinite;
 }
 #up:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -113,17 +123,17 @@ button#down{
   margin-top: 5%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #down:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -135,17 +145,17 @@ button#left{
   margin-top: -5%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #left:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -156,9 +166,9 @@ button#left{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border-radius: 20px;
 }
-#login-btn:hover {background-color: #3e8e41}
+#login-btn:hover {background-color: #3e8e41 }
 #login-btn:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -167,9 +177,9 @@ button#left{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border-radius: 20px;
 }
-#signup-btn:hover{background-color: #3e8e41}
+#signup-btn:hover{background-color: #3e8e41 }
 #signup-btn:active{
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -183,29 +193,13 @@ button#left{
   color:yellow;
 }
 
-/*WAITING ROOM*/
-#waiting-room{
-  color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-}
-
-
-
-
-
-/*FOR PHONE */
-@media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
   and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) { 
+  and (orientation: landscape) {
 
- * {
+* {
   box-sizing: border-box;
 }
 
@@ -214,10 +208,10 @@ button#left{
 }*/
 
 /*make controller buttons glow*/
-/*@-webkit-keyframes greenPulse {
-  from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
+@-webkit-keyframes greenPulse {
+  from { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
+  50% { background-color: #91bd09 ; -webkit-box-shadow: 0 0 18px #91bd09 ; }
+  to { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
 }
 
 #color-selector {
@@ -289,17 +283,17 @@ button#right{
   margin-top: -5%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #right:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -311,17 +305,17 @@ button#up{
   margin-top: -15%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #up:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -333,17 +327,17 @@ button#down{
   margin-top: 5%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #down:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -355,17 +349,17 @@ button#left{
   margin-top: -5%;
   margin-bottom: 0%;
   border-radius: 50%;
-  background-color: #749a02;
+  background-color: #749a02 ;
   -webkit-animation-name: greenPulse;
   animation-name: greenPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- 
+
 }
 #left:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -376,9 +370,9 @@ button#left{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border-radius: 20px;
 }
-#login-btn:hover {background-color: #3e8e41}
+#login-btn:hover {background-color: #3e8e41 }
 #login-btn:active {
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -387,9 +381,9 @@ button#left{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border-radius: 20px;
 }
-#signup-btn:hover{background-color: #3e8e41}
+#signup-btn:hover{background-color: #3e8e41 }
 #signup-btn:active{
-  background-color: #3e8e41;
+  background-color: #3e8e41 ;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -402,8 +396,6 @@ button#left{
   border:1px solid yellow;
   color:yellow;
 }
-
-  }
 
  
 
