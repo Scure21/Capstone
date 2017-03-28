@@ -45,8 +45,8 @@ module.exports = function (io) {
       io.sockets.emit('get-current-users', users)
     })
 
-    socket.on('ask-for-users', function(){
-      socket.emit('get-current-users', users)
+    socket.on('get-snake', function(){
+      return socket.id
     })
     // update the snake position according the touch event on the mobile screen
     socket.on('user-movement-update', function (data) {

@@ -3,14 +3,25 @@ import { browserHistory } from 'react-router'
 import io from 'socket.io-client'
 var socket = io.connect('http://192.168.2.111:1337')
 
+export default class Int extends Component {
 
-export default class Int extends Component{
   constructor(props){
-      super(props)
-      this.state = {
-        users: [],
-        colors: []
-      }
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(){
+    browserHistory.push('/game')
+  }
+
+  render () {
+    return (
+      <div>
+        <h1>hello</h1>
+        <button onClick={this.handleClick}> PLAY </button>
+      </div>
+    )
   }
 
 componentDidMount(){
@@ -24,25 +35,11 @@ componentDidMount(){
     this.setState({users: users, colors: colors})
   })
 }
-    
-    //this.tick = this.tick.bind(this)
-    //this.update = this.update.bind(this)
-
-
-  //onSend to recieve update from store
-
-  //update to change state 
-  
   
   render(){
-
-   console.log('STATE', this.state)
    let len = this.state.users.length
-   console.log('LENGTH', len)
-   console.log('HELLO', this.state.users)
    var users = this.state.users
    var color = this.state.colors
-   console.log('COLOR', color)
       return (
         <div id="waiting-room">
           <h1>WAITING ROOM</h1>
@@ -50,8 +47,6 @@ componentDidMount(){
         </div>
       )
   }
-
-
 }
 
 
