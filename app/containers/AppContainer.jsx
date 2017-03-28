@@ -2,7 +2,7 @@ import React from 'react'
 import MobileDetect from 'mobile-detect'
 import { connect } from 'react-redux'
 import { Link, browserHistory } from 'react-router'
-import Controller from '../components/Controller'
+import UserLogin from '../components/UserLogin'
 import LandingPage from '../components/LandingPage'
 
 const md = new MobileDetect(window.navigator.userAgent)
@@ -21,7 +21,7 @@ class AppContainer extends React.Component {
       browserHistory.push('/LandingPage')
     } else {
       this.setState({deviceType: 'phone'})
-      browserHistory.push('/controller')
+      browserHistory.push('/userlogin')
     }
   }
 

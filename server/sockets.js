@@ -33,6 +33,10 @@ module.exports = function (io) {
       io.sockets.emit('send-device-type', {deviceType, users})
     })
 
+    socket.on('get-snake', function(){
+      return socket.id
+    })
+
     // update the snake position according the touch event on the mobile screen
     socket.on('user-movement-update', function (data) {
       const userId = socket.id

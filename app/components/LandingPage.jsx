@@ -27,6 +27,3 @@ class LandingPage extends Component {
 }
 
 export default LandingPage
-
-
-    // <img src="images/sketch_images/play.png" className="img-responsive" id="play" onClick={this.handleClick}/>

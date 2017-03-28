@@ -12,6 +12,16 @@ import Game from './components/Game'
 import PhoneUserInput from './components/PhoneUserInput'
 import Controller from './components/Controller'
 import LandingPage from './components/LandingPage'
+import UserLogin from './components/UserLogin'
+import { getSnake } from './reducers/snakes'
+// import io from 'socket.io-client'
+// const socket = io.connect('http://192.168.0.8:1337')
+
+// const onUserLoginEnter = () => {
+//   var snake = socket.emit('get-snake')
+//   console.log(snake.socket.id)
+//   // store.dispatch(getSnake())
+// }
 
 render(
   <Provider store={store}>
@@ -22,6 +32,7 @@ render(
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
         <Route path="/interstitial" component={Int}/>
+        <Route path="/userlogin" component={UserLogin} />
         <Route path="/controller" component={Controller}/>
         <Route path="/game" component={Game}/>
       </Route>

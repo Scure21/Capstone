@@ -289,3 +289,25 @@ button#right{
   border: transparent;
 }
 
+#main-phone{
+  width:400px;
+  margin-top:-200px;
+}
+
+#username{
+  display:flex;
+  margin-top: 50px;
+  display:block;
+  align-items: center;
+}
+
+input{
+  height: 52px;
+  border-radius: 50px;
+  width: 80%;
+  display: block;
+  margin: 0 auto !important;
+  text-align: center;
+  font-size: 20px !important;
+  font-family: 'Playfair Display', serif !important;
+}
