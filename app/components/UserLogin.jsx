@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 
-class Controller extends Component {
+class UserLogin extends Component {
   constructor (props) {
     super(props)
 
@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Controller)
+export default connect(mapStateToProps, mapDispatchToProps)(UserLogin)
 
 
 
