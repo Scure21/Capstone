@@ -1,9 +1,6 @@
 * {
-/*    width: 100%;
-    height: 100%;*/
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 
 #color-selector {
     position: fixed;
@@ -24,7 +21,6 @@
     border: 2px solid white;
 }
 
-
 body {
     padding: 0;
     margin: 0;
@@ -36,16 +32,12 @@ body {
     text-align: center;
 }
 
-/*#main{
-
-  padding:100px;
+#main{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-<<<<<<< HEAD
-}*/
-
+}
 
 @media only screen
   and (min-device-width: 320px)
@@ -102,9 +94,6 @@ body {
     }
 }
 
-
-
-
 /* general layouts smaller than 480px, iPhone and older mobiles */
 @media only screen
 and (max-width : 480px){
@@ -155,15 +144,12 @@ and (max-width : 480px){
       box-shadow: 0 5px #666;
       transform: translateY(4px);
     }
-
-
 }
 
 button.controller{
   height:50px !important;
   width:50px !important;
 }
-
 
 button#up{
   display:block;
@@ -230,7 +216,6 @@ button#right{
     position:relative;
 }
 
-
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
@@ -262,11 +247,8 @@ button#right{
   color: #4cd814;
 }
 
-#welcome-page{
-  margin-top:150px;
-}
-
 #logo{
+  width:1250px;
   display:flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -280,6 +262,30 @@ button#right{
 }
 
 #banner{
-  width:81%;
-
+  width:90%;
 }
+
+#play{
+  width: 350px;
+  height: 70px;
+  background-image: url(./images/sketch_images/play.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+}
+
+#play:hover{
+  border:none;
+}
+
+#play:active{
+  width: 350px;
+  height: 70px;
+  background-image: url(./images/sketch_images/active-play.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+}
+

@@ -11,11 +11,13 @@ import SignUpContainer from './containers/SignUpContainer'
 import Game from './components/Game'
 import PhoneUserInput from './components/PhoneUserInput'
 import Controller from './components/Controller'
+import LandingPage from './components/LandingPage'
 
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
+        <Route path="/landingPage" component={LandingPage}/>
         <Route path='/user' component={PhoneUserInput} />
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
