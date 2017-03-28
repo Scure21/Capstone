@@ -2,16 +2,25 @@ import { scl, utils } from './utils'
 import { updateSnakePoints } from '../reducers/snakes'
 import store from '../store'
 
-export default function Snake (p) {
+const colors = {
+  "blue": "34b7ea",
+  "yellow": "ffa500",
+  "purple": "8e66d9",
+  "green": "4cd814"
+}
+
+export default function Snake (p, user, colorName) {
   const vector = utils.randomVector(p).mult(scl)
   this.x = vector.x
   this.y = vector.y
+  this.id = user
   this.xspeed = -1
   this.yspeed = 0
   this.tail = []
   this.points = 0
+  this.name = colorName
+  this.color = colors[colorName]
   this.visible = true
-  this.color = [p.floor(p.random(0, 255)), p.floor(p.random(0, 255)), p.floor(p.random(0, 255))]
 }
 
 Snake.prototype.dir = function (x, y) {
@@ -26,9 +35,7 @@ Snake.prototype.eat = function (p, food) {
     food.eaten(p)
     this.points++
     this.tail.push({x: this.x, y: this.y})
-    console.log(this.points + ' points')
-    // send new score to store
-    store.dispatch(updateSnakePoints(this.points))
+    store.dispatch(updateSnakePoints(this))
   }
 }
 
