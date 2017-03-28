@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router'
 // var currUsers;
 // const socket = io.connect('http://192.168.0.6:1337')
 
-export default(props) => {
+export default class Int extends Component {
 
     //this.tick = this.tick.bind(this)
     //this.update = this.update.bind(this)
@@ -39,20 +39,23 @@ export default(props) => {
   //    }
   
 
-  // console.log('PROPS', props)
   // if (props && props.users.length < 4){
+     render(){
+
+   console.log('PROPS', this.props.users)
       return (
   <div id="waiting-room">
     <h1>WAITING ROOM</h1>
   </div>
     )
   }
+}
   /*else if (props && props.users.length < 4){
     return (
   <div id="waiting-room">
     <h1>WAITING ROOM</h1>
     <h2>NEW VERSION</h2>
-    {/*<p><b id="nums">{this.state.counter}</b></p>*/}
+    {/*<p><b id="nums">{this.state.counter}</b></p>*/
 //   </div>*/
 //     )
 //   }

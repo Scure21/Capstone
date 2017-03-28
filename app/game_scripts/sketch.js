@@ -27,13 +27,7 @@ export default function sketch (p) {
        
         users.forEach(user => { 
           let color = colors[colorKey]
-          snakes[user] = new Snake(null, null, p, user, color) 
-            if(colorKey > 2){
-              colorKey%=2
-            }
-            else{
-              colorKey+=1
-            }
+          snakes[user] = new Snake(null, null, p, user, color)
         })
         // we are going to have 5 foods on the canvas for all the players
         for (let i = 0; i < 6; i++) {
@@ -44,11 +38,11 @@ export default function sketch (p) {
         store.dispatch(getSnakes(snakes))
 
       
-        snakes.forEach(function(snake){
-          usersToInt[snake.user] = snake.color
-        })
+        // snakes.forEach(function(snake){
+        //   usersToInt[snake.user] = snake.color
+        // })
         //send array of users to lobby
-        store.dispatch(getUsers(usersToInt))
+        store.dispatch(getUsers(users))
         //socket.emit('ready-to-play', users)
       }
     })
