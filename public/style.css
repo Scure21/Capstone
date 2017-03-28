@@ -1,16 +1,14 @@
+@font-face {
+    font-family: 'pixeledregular';
+    src: url('pixeled-webfont.woff2') format('woff2'),
+         url('pixeled-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
   box-sizing: border-box;
-}
-
-@viewport {
-  width: device-width;
-}
-
-/*make controller buttons glow*/
-@-webkit-keyframes greenPulse {
-  from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
+  font-family: 'pixeledregular';
 }
 
 #color-selector {
@@ -37,12 +35,6 @@ body {
     margin: 0;
     background-image: url('./images/bg.png');
     background-size: cover;
-    /*overflow-x: hidden;
-    position: fixed;*/
-      /*overflow-x: hidden;
-  position: fixed;*/
-  /*transform: translate(-50%, -50%);
-  transform-origin: center center;*/
 }
 
 #main{
@@ -52,18 +44,7 @@ body {
   transform: translate(-50%, -50%)
 }
 
-button.controller{
-  text-align: center;
-  height:50px !important;
-  width:50px !important;
-}
-
-.col-1{
-  text-align: center;
-}
-
-
-button#right{
+#main{
   position: absolute;
   margin-left: 10%;
   margin-right: 0%;
@@ -194,10 +175,6 @@ button#left{
   animation-iteration-count: infinite;
 }
 
-
-
-
-
 /*FOR PHONE */
 @media only screen 
   and (min-device-width: 414px) 
@@ -208,36 +185,6 @@ button#left{
  * {
   box-sizing: border-box;
 }
-
-/*@viewport {
-  width: device-width;
-}*/
-
-/*make controller buttons glow*/
-/*@-webkit-keyframes greenPulse {
-  from { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02; -webkit-box-shadow: 0 0 9px #333; }
-}
-
-#color-selector {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 80px;
-    height: 120px;
-    background: black;
-}
-
-/*.marker {
-    width: 40px;
-    height: 40px;
-    float: left;
-}
-
-.marker.selected {
-    border: 2px solid white;
-}*/
 
 body {
     width: 100%;
@@ -266,44 +213,12 @@ body {
   transform: translate(-50%, -50%);
   transform-origin: center center;
   border: 1px solid yellow;
-  /*overflow-x: hidden;
-  position: fixed;*/
-  
 }
 
 button.controller{
-  /*text-align: center;*/
   height:50px !important;
   width:50px !important;
 }
-
-.col-1{
-  text-align: center;
-}
-
-
-button#right{
-  position: absolute;
-  margin-left: 10%;
-  margin-right: 0%;
-  margin-top: -5%;
-  margin-bottom: 0%;
-  border-radius: 50%;
-  background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
- 
-}
-#right:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
 button#up{
   position: absolute;
   margin-left: 25%;
@@ -370,8 +285,6 @@ button#left{
   transform: translateY(4px);
 }
 
-
-
 #login-btn{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border-radius: 20px;
@@ -401,9 +314,93 @@ button#left{
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
+  display:inline-flex;
+  padding:20px;
+  position:absolute;
+  right:100px;
+  opacity:.3;
 }
 
-  }
+#score{
+  text-align: right;
+}
 
- 
+.blue{
+  color: #34b7ea;
+}
 
+.yellow{
+  color: #ffa500;
+}
+
+.purple{
+  color: #8e66d9 !important;
+}
+
+.green{
+  color: #4cd814;
+}
+
+#logo{
+  width:1250px;
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-repeat:no-repeat;
+  margin:0 auto;
+  align-items: center;
+}
+
+#logoName{
+  margin:0 auto;
+}
+
+#banner{
+  width:90%;
+}
+
+#play{
+  width: 350px;
+  height: 70px;
+  background-image: url(./images/sketch_images/play.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+}
+
+#play:hover{
+  border:none;
+}
+
+#play:active{
+  width: 350px;
+  height: 70px;
+  background-image: url(./images/sketch_images/active-play.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+}
+
+#main-phone{
+  width:400px;
+  margin-top:-200px;
+}
+
+#username{
+  display:flex;
+  margin-top: 50px;
+  display:block;
+  align-items: center;
+}
+
+input{
+  height: 52px;
+  border-radius: 50px;
+  width: 80%;
+  display: block;
+  margin: 0 auto !important;
+  text-align: center;
+  font-size: 20px !important;
+}

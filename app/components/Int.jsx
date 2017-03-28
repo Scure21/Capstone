@@ -3,8 +3,8 @@ import { browserHistory } from 'react-router'
 import io from 'socket.io-client'
 var socket = io.connect('http://192.168.2.111:1337')
 
+export default class Int extends Component {
 
-export default class Int extends Component{
   constructor(props){
       super(props)
       this.state = {
@@ -13,14 +13,11 @@ export default class Int extends Component{
         ready: false,
         counter: 5
       }
-    
       this.tick = this.tick.bind(this)
   }
 
 componentDidMount(){
-  
   socket.emit('ask-for-users')
-
   socket.on('get-current-users', users => {
     var colors = users.map(function(i){
       return i.colorName
@@ -32,13 +29,6 @@ componentDidMount(){
     }
   })
 }
-    
-
-    
-
-    //this.update = this.update.bind(this)
-
-
  tick() {
     this.setState({counter: this.state.counter - 1})
     if (this.state.counter <= 0){
@@ -48,15 +38,9 @@ componentDidMount(){
   }
   
   render(){
-
-   console.log('STATE', this.state)
    let len = this.state.users.length
-   console.log('LENGTH', len)
-   console.log('HELLO', this.state.users)
    var users = this.state.users
    var color = this.state.colors
-   console.log('COLOR', color)
-
         if (this.state.ready === false){
           return (
         <div id="waiting-room">
@@ -76,10 +60,8 @@ componentDidMount(){
         <p><b id="nums">{this.state.counter}</b></p>
         </div>
         )     
-      }
-      
+      }      
   }
-
 }
 
 
