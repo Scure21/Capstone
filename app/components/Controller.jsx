@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import io from 'socket.io-client'
 
-const socket = io.connect('http://192.168.2.167:1337')
+
+const socket = io.connect(window.location.origin)
+
 
 const device = window.navigator.userAgent
 
@@ -53,7 +54,7 @@ export default class Controller extends Component {
 
   render () {
     return (
-      <div className='col-1'>
+      <div className='main-controller'>
           <button id='up' className='controller'>
               <span className='glyphicon glyphicon-chevron-up'></span>
           </button>
