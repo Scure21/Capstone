@@ -43,9 +43,8 @@ module.exports = function (io) {
       // connected and then emit to the sketch so the match starts
       console.log('SOCKETS', users)
       const deviceType = detectDevice(device)
-
-      console.log('users just before emit', users)
-      if (users.length === 4) io.sockets.emit('send-device-type', {deviceType, users})
+      io.sockets.emit('send-device-type', {deviceType, users})
+      io.sockets.emit('get-current-users', users)
     })
 
     socket.on('ask-for-users', function(){
@@ -56,9 +55,6 @@ module.exports = function (io) {
       return socket.id
     })
 
-    // socket.on('get-snake', function(){
-    //   return socket.id
-    // })
     // update the snake position according the touch event on the mobile screen
     socket.on('user-movement-update', function (data) {
       const userId = socket.id

@@ -48,14 +48,17 @@ export default function sketch (p) {
     canvas = p.createCanvas(1200, 760)
     p.frameRate(10)
     // connect client to the server through sockets
-    socket = io.connect('http://192.168.1.184:1337')
+    socket = io.connect('http://192.168.2.167:1337')
 
    // receives device type from server and if it is a mobile, make a new snake
         // loop through the users array and assign each user a new snake with a color
-        var colors = ['blue', 'yellow', 'purple', 'green']
+        // var colors = ['blue', 'yellow', 'purple', 'green']
+
+        // console.log("** INSIDE SETUP: ", allUsers)
 
         allUsers.forEach(user => {
-          let color = colors[colorKey]
+          console.log("INSIDE USER FOR EACH :", user.id)
+          let color = user.colorName
           if (color === 'blue') {
             img = blueSnake
           } else if (color === 'yellow') {
@@ -65,15 +68,18 @@ export default function sketch (p) {
           } else if (color === 'green') {
             img = greenSnake
           }
-          snakes[user] = new Snake(p, user, color, img)
-          if (colorKey > 2) {
-            colorKey %= 2
-          } else {
-            colorKey += 1
-          }
+          snakes[user.id] = new Snake(p, user.id, color, img)
+          // if (colorKey > 2) {
+          //   colorKey %= 2
+          // } else {
+          //   colorKey += 1
+          // }
+        })
+        // console.log("**** SNAKES: ", snakes)
 
         // we are going to have 5 foods on the canvas for all the players
         const fruits = [ apple, banana, carrot, coconut, grape, lemon, orange, watermelon ]
+
         for (let i = 0; i < 6; i++) {
           const food = new Food(p, fruits)
           foods.push(food)
@@ -94,11 +100,14 @@ export default function sketch (p) {
     socket.on('disconnect', function () {
       socket.close()
     })
+  }
 
 
 // -----------------DRAW-------------------- //
   p.draw = function () {
     p.background(51)
+
+    // console.log("INSIDE DRAW: ", snakes)
 
     // Draw each snake
     for (let id in snakes) {
@@ -125,6 +134,8 @@ export default function sketch (p) {
     }
     // count how many snakes are still alive (aka "visible")
     //assign 0 only when snakes object is not empty, otherwise there will a GAME OVER msg even before the game begins
+
+
     if (Object.keys(snakes).length !== 0){
       countAlive = 0
     }

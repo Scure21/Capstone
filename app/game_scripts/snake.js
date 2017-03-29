@@ -73,12 +73,8 @@ Snake.prototype.move = function (p) {
 
 Snake.prototype.draw = function (p) {
   if (this.visible) {
-    // p.imageMode(p.CENTER)
     p.image(this.img, this.x, this.y, scl, scl)
-    // p.fill(this.color)
-    // p.rect(this.x, this.y, scl, scl)
     for (var i = 0; i < this.tail.length; i++) {
-      // p.rect(this.tail[i].x, this.tail[i].y, scl, scl)
       p.image(this.img, this.tail[i].x, this.tail[i].y, 20, 20)
     }
   }
