@@ -1,16 +1,10 @@
 * {
   box-sizing: border-box;
+  font-family: 'pixeledregular';
 }
 
 @viewport {
   width: device-width;
-}
-
-/*make controller buttons glow*/
-@-webkit-keyframes greenPulse {
-  from { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09 ; -webkit-box-shadow: 0 0 18px #91bd09 ; }
-  to { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
 }
 
 @font-face {
@@ -19,11 +13,6 @@
          url('pixeled-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: 'pixeledregular';
 }
 
 #color-selector {
@@ -53,10 +42,18 @@ body {
 }
 
 #main{
+  padding:100px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%)
+}
+
+/*make controller buttons glow*/
+@-webkit-keyframes greenPulse {
+  from { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
+  50% { background-color: #91bd09 ; -webkit-box-shadow: 0 0 18px #91bd09; }
+  to { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
 }
 
 button#right{
@@ -140,19 +137,19 @@ button#left{
   animation-iteration-count: infinite;
 
 }
+
 #left:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
-
-
 #login-btn{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   border-radius: 20px;
 }
 #login-btn:hover {background-color: #3e8e41}
+
 #login-btn:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -164,6 +161,7 @@ button#left{
   border-radius: 20px;
 }
 #signup-btn:hover{background-color: #3e8e41}
+
 #signup-btn:active{
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -177,144 +175,13 @@ button#left{
  color:     #00FFFF ;
  animation: glowing 1500ms infinite;
 }
+
 @keyframes glowing{
  0% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
  50% { text-color:     #F0F8FF ; text-shadow: 0 0 10px     #F0F8FF ; }
  100% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
 }
 
-/*FOR PHONE */
-@media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) {
-
- * {
-  box-sizing: border-box;
-  }
-/* Where should the media query end? */
-}
-
-body {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 0;
-    margin: 0;
-    background-image: url('./images/bg.png');
-    background-size: cover;
-    overflow-x: hidden;
-    position: fixed;
-}
-
-
-button.controller{
-  height:50px !important;
-  width:50px !important;
-}
-button#up{
-  position: absolute;
-  margin-left: 25%;
-  margin-right: 0;
-  margin-top: -15%;
-  margin-bottom: 0%;
-  border-radius: 50%;
-  background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-
-}
-#up:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-button#down{
-  position: absolute;
-  margin-left: -25%;
-  margin-right: 0%;
-  margin-top: 5%;
-  margin-bottom: 0%;
-  border-radius: 50%;
-  background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-
-}
-
-#down:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-button#left{
-  position: absolute;
-  margin-left: -10%;
-  margin-right: 0%;
-  margin-top: -5%;
-  margin-bottom: 0%;
-  border-radius: 50%;
-  background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-
-}
-#left:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-#login-btn{
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  border-radius: 20px;
-}
-#login-btn:hover {background-color: #3e8e41}
-#login-btn:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-#signup-btn{
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  border-radius: 20px;
-}
-#signup-btn:hover{background-color: #3e8e41}
-#signup-btn:active{
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-  text-align: center;
-  font-size: 100px;
-  color: 	#00FFFF;
-  animation: glowing 1500ms infinite;
-}
-
-@keyframes glowing{
-  0% { text-color: 	#00FFFF; text-shadow: 0 0 3px 	#00FFFF; }
-  50% { text-color: 	#F0F8FF; text-shadow: 0 0 10px 	#F0F8FF; }
-  100% { text-color: 	#00FFFF; text-shadow: 0 0 3px 	#00FFFF; }
-}
 
 #parent-div{
     position:relative;
@@ -323,6 +190,11 @@ button#left{
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
+  display:inline-block;
+  padding:20px;
+  /*position: right;*/
+  right:100px;
+  opacity:.3;
 }
 
 #score{
@@ -338,7 +210,7 @@ button#left{
 }
 
 .purple{
-  color: #8e66d9 !important;
+  color: aqua;
 }
 
 .green{

@@ -3,6 +3,7 @@ const chalk = require('chalk')
 module.exports = function (io) {
   // users obj to keep track of all the connected users
   var users = []
+
   // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
@@ -41,13 +42,19 @@ module.exports = function (io) {
       // connected and then emit to the sketch so the match starts
       console.log('SOCKETS', users)
       const deviceType = detectDevice(device)
-      io.sockets.emit('send-device-type', {deviceType, users})
+
+      //REMEMBER to chenge this to 4
+      if (users.length === 2) io.sockets.emit('send-device-type', {deviceType, users})
 
       io.sockets.emit('get-current-users', users)
-    })
+
 
     socket.on('ask-for-users', function(){
       socket.emit('get-current-users', users)
+    })
+
+    socket.on('get-snake', function(){
+      return socket.id
     })
 
     // socket.on('get-snake', function(){
@@ -64,40 +71,8 @@ module.exports = function (io) {
     socket.on('disconnect', function () {
       console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
       // If a user is disconnected, remove it from the users array by checking the socket that's getting disconnected
-      users.filter(socket => socket !== socket.id)
+      users = users.filter(userId => userId !== socket.id)
+      io.sockets.emit('user-disconnect', socket.id)
     })
   })
 }
-
- /*
-  ROOMS: this may work for the rooms of the game, so the players wait for all the people to join the room
-  */
-
-  // var drawHistory = {};
-
-  // io.on('connection', function (socket) {
-
-  //     // scope issues
-  //     var room = null;
-
-  //     // listens to 37 emit
-  //     socket.on('wantToJoinRoomPlox', function (roomName) {
-  //         room = roomName;
-  //         socket.join(roomName);
-
-  //         if (!drawHistory[roomName]) {
-  //             drawHistory[roomName] = [];
-  //         }
-
-  //         // console.log('drawhistory: ', drawHistory)
-  //         socket.emit('drawHistory', drawHistory[roomName]);
-  //     });
-
-  //     socket.on('newDraw', function (start, end, color) {
-  //         // data
-  //         console.log('new draw', start, end, color)
-  //         drawHistory[room].push({ start: start, end: end, color: color });
-  //         socket.broadcast.to(room).emit('someoneElseDrew', start, end, color);
-  //     });
-
-  // });
