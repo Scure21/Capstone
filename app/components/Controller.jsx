@@ -54,7 +54,7 @@ export default class Controller extends Component {
 
   render () {
     return (
-      <div className='col-1'>
+      <div className='main-controller'>
           <button id='up' className='controller'>
               <span className='glyphicon glyphicon-chevron-up'></span>
           </button>

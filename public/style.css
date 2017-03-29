@@ -42,11 +42,10 @@ body {
 }
 
 #main{
-  padding:100px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 /*make controller buttons glow*/
@@ -190,12 +189,13 @@ button#left{
 #leaderboard{
   border:1px solid yellow;
   color:yellow;
-  display:inline-block;
+  display:inline-flex;
   padding:20px;
-  /*position: right;*/
+  position:absolute;
   right:100px;
   opacity:.3;
 }
+
 
 #score{
   text-align: right;
@@ -260,6 +260,7 @@ button#left{
 }
 
 #main-phone{
+
   width:400px;
   margin-top:-200px;
 }
