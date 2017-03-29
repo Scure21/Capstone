@@ -9,11 +9,21 @@ export default function sketch (p) {
   var canvas
   var foods = []
   var colorKey = 0
-  var greenSnake
-  var yellowSnake
-  var blueSnake
-  var purpleSnake
-  var img
+  var greenSnakeHead
+  var greenSnakeBody
+  var greenSnakeTail
+  var blueSnakeHead
+  var blueSnakeBody
+  var blueSnakeTail
+  var yellowSnakeHead
+  var yellowSnakeBody
+  var yellowSnakeTail
+  var purpleSnakeHead
+  var purpleSnakeBody
+  var purpleSnakeTail
+  var head
+  var body
+  var tail
   var apple
   var banana
   var carrot
@@ -25,10 +35,18 @@ export default function sketch (p) {
 
   p.preload = function () {
     // Snakes body images
-    greenSnake = p.loadImage('images/snakes_images/greenBodyStraight.png')
-    blueSnake = p.loadImage('images/snakes_images/blueBodyStraight.png')
-    yellowSnake = p.loadImage('images/snakes_images/yellowBodyStraight.png')
-    purpleSnake = p.loadImage('images/snakes_images/purpleBodyStraight.png')
+    greenSnakeHead = p.loadImage('images/snakes_images/greenHeadStraight.png')
+    greenSnakeBody = p.loadImage('images/snakes_images/greenBodyStraight.png')
+    greenSnakeTail = p.loadImage('images/snakes_images/greenTail.png')
+    blueSnakeHead = p.loadImage('images/snakes_images/blueHeadStraight.png')
+    blueSnakeBody = p.loadImage('images/snakes_images/blueBodyStraight.png')
+    blueSnakeTail = p.loadImage('images/snakes_images/blueTail.png')
+    yellowSnakeHead = p.loadImage('images/snakes_images/yellowHeadStraight.png')
+    yellowSnakeBody = p.loadImage('images/snakes_images/yellowBodyStraight.png')
+    yellowSnakeTail = p.loadImage('images/snakes_images/yellowTail.png')
+    purpleSnakeHead = p.loadImage('images/snakes_images/purpleHeadStraight.png')
+    purpleSnakeBody = p.loadImage('images/snakes_images/purpleBodyStraight.png')
+    purpleSnakeTail = p.loadImage('images/snakes_images/purpleTail.png')
 
     // Fruits images
     apple = p.loadImage('images/fruits/Apple.png')
@@ -43,9 +61,9 @@ export default function sketch (p) {
 
   p.setup = function () {
     canvas = p.createCanvas(1200, 760)
-    p.frameRate(10)
+    p.frameRate(3)
     // connect client to the server through sockets
-    socket = io.connect('http://192.168.1.184:1337')
+    socket = io.connect('http://192.168.1.3:1337')
 
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
@@ -56,15 +74,23 @@ export default function sketch (p) {
         users.forEach(user => {
           let color = colors[colorKey]
           if (color === 'blue') {
-            img = blueSnake
+            head = blueSnakeHead
+            body = blueSnakeBody
+            tail = blueSnakeTail
           } else if (color === 'yellow') {
-            img = yellowSnake
+            head = yellowSnakeHead
+            body = yellowSnakeBody
+            tail = yellowSnakeTail
           } else if (color === 'purple') {
-            img = purpleSnake
+            head = purpleSnakeHead
+            body = purpleSnakeBody
+            tail = purpleSnakeTail
           } else if (color === 'green') {
-            img = greenSnake
+            head = greenSnakeHead
+            body = greenSnakeBody
+            tail = greenSnakeTail
           }
-          snakes[user] = new Snake(p, user, color, img)
+          snakes[user] = new Snake(p, user, color, head, body, tail)
           if (colorKey > 2) {
             colorKey %= 2
           } else {
