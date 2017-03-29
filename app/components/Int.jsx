@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import io from 'socket.io-client'
-var socket = io.connect('http://192.168.2.167:1337')
+var socket = io.connect('http://192.168.1.184:1337')
+export var allUsers = []
 
 export default class Int extends Component {
 
@@ -26,6 +27,7 @@ export default class Int extends Component {
       })
       this.setState({users: users, colors: colors})
       if (this.state.users.length === 4){
+        allUsers = this.state.users
         this.interval = setInterval(this.tick, 1000)
         this.setState({ready: true})
       }
@@ -45,7 +47,6 @@ export default class Int extends Component {
   }
 
   render(){
-    console.log("******* INSIDE INT: ", this.state.users)
         if (this.state.next === false){
           return (
             <div>
@@ -58,27 +59,16 @@ export default class Int extends Component {
           </div>
       </div>
           )
+        } else {
+          return (
+            <div id="waiting-room">
+              <h1>WAITING ROOM</h1>
+            {this.state.colors.length ?
+                <h2>A
+              {' ' + this.state.colors[this.state.colors.length - 1]} snake has joined!</h2> : <h2>Waiting for snakes to join...</h2>}
+              { this.state.ready ? <p><b id="nums">{this.state.counter}</b></p> : null}
+            </div>)
         }
-
-        if (this.state.ready === false){
-          return (
-        <div id="waiting-room">
-          <h1>WAITING ROOM</h1>
-        {this.state.colors &&
-            <h2>A
-          {' ' + this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
-        </div>)
-      }
-      else{
-          return (
-          <div id="waiting-room">
-          <h1>WAITING ROOM</h1>
-        {this.state.colors &&
-            <h2>A {' ' + this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
-        <p><b id="nums">{this.state.counter}</b></p>
-        </div>
-        )
-      }
   }
 }
 

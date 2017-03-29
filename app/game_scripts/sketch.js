@@ -2,7 +2,7 @@ import Food from './food'
 import Snake from './snake'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
-
+import {allUsers} from '../components/Int.jsx'
 
 export default function sketch (p) {
   var socket
@@ -51,12 +51,10 @@ export default function sketch (p) {
     socket = io.connect('http://192.168.1.184:1337')
 
    // receives device type from server and if it is a mobile, make a new snake
-    socket.on('send-device-type', function ({deviceType, users}) {
-      if (deviceType === 'mobile') {
         // loop through the users array and assign each user a new snake with a color
         var colors = ['blue', 'yellow', 'purple', 'green']
 
-        users.forEach(user => {
+        allUsers.forEach(user => {
           let color = colors[colorKey]
           if (color === 'blue') {
             img = blueSnake
@@ -73,7 +71,6 @@ export default function sketch (p) {
           } else {
             colorKey += 1
           }
-        })
 
         // we are going to have 5 foods on the canvas for all the players
         const fruits = [ apple, banana, carrot, coconut, grape, lemon, orange, watermelon ]
@@ -84,8 +81,7 @@ export default function sketch (p) {
         console.log('FOOD ARRAY', foods)
         // getting users information to display the scores
         store.dispatch(getSnakes(snakes))
-      }
-    })
+
 
    // we get the information from the server of each user movement and we update each user movement
     socket.on('server-dir-update', function ({data, userId}) {
@@ -98,7 +94,7 @@ export default function sketch (p) {
     socket.on('disconnect', function () {
       socket.close()
     })
-  }
+
 
 // -----------------DRAW-------------------- //
   p.draw = function () {
