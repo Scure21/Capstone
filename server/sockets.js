@@ -39,12 +39,13 @@ module.exports = function (io) {
       // send type to client side and use it to determine which view to render
       // user connected, eventually we want to check till we have 4 users
       // connected and then emit to the sketch so the match starts
+      console.log('SOCKETS', users)
       const deviceType = detectDevice(device)
       io.sockets.emit('send-device-type', {deviceType, users})
-     
+
       io.sockets.emit('get-current-users', users)
     })
-      
+
     socket.on('ask-for-users', function(){
       socket.emit('get-current-users', users)
     })
