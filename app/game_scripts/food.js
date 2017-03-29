@@ -16,9 +16,6 @@ Food.prototype.y = function () {
 
 Food.prototype.draw = function (p) {
   p.image(this.img, this.x(), this.y(), scl, scl)
-
-  // p.fill(255, 0, 100)
-  // p.rect(this.x(), this.y(), this.scl, this.scl)
 }
 
 Food.prototype.eaten = function (p) {
