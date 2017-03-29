@@ -1,6 +1,7 @@
 import { scl, utils } from './utils'
 
-export default function Food (p) {
+export default function Food (p, fruits) {
+  this.img = fruits[Math.floor(Math.random() * fruits.length)]
   this.vec = utils.randomVector(p).mult(scl)
   this.scl = scl
 }
@@ -14,8 +15,7 @@ Food.prototype.y = function () {
 }
 
 Food.prototype.draw = function (p) {
-  p.fill(255, 0, 100)
-  p.rect(this.x(), this.y(), this.scl, this.scl)
+  p.image(this.img, this.x(), this.y(), scl, scl)
 }
 
 Food.prototype.eaten = function (p) {

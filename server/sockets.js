@@ -44,11 +44,8 @@ module.exports = function (io) {
       console.log('SOCKETS', users)
       const deviceType = detectDevice(device)
 
-      //REMEMBER to chenge this to 4
-      if (users.length === 2) io.sockets.emit('send-device-type', {deviceType, users})
-
-      io.sockets.emit('get-current-users', users)
-
+      console.log('users just before emit', users)
+      if (users.length === 4) io.sockets.emit('send-device-type', {deviceType, users})
     })
 
     socket.on('ask-for-users', function(){
