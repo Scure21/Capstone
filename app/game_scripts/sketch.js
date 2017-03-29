@@ -6,8 +6,9 @@ import { getSnakes } from '../reducers/snakes'
 
 export default function sketch (p) {
   var socket
-  var snakes = {}
   var canvas
+  var users
+  var snakes = {}
   var foods = []
 
   p.setup = function () {
@@ -19,10 +20,10 @@ export default function sketch (p) {
 
 
    // receives device type from server and if it is a mobile, make a new snake
-    socket.on('send-device-type', function ({deviceType, users}) {
+    socket.on('send-device-type', function ({deviceType, usersFromServer}) {
       console.log('sketch', users)
       if (deviceType === 'mobile') {
-
+        users = usersFromServer
         users.forEach(user => {
           console.log("~~~~~ INSIDE SKETCH: ", user.name)
           snakes[user.id] = new Snake(p, user.id, user.colorName, user.name)

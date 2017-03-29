@@ -19,7 +19,7 @@ class UserLogin extends Component {
   }
 
   componentDidMount(){
-    console.log("HELLLOOOOOOO BEFORE EMIT")
+    // when the component mounts on the mobile device, we add the user to the State with a new Snake instance
     socket.emit('check-device-type', device)
   }
 
@@ -41,7 +41,6 @@ class UserLogin extends Component {
   }
 
   render () {
-    console.log("******** CURR SNAKE", this.props.selected)
     return (
       <div id="main-phone">
         <img src="images/sketch_images/logo.png" className="phone-view img-responsive"/>
@@ -54,22 +53,24 @@ class UserLogin extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return{
-    selected: state.snakes.selected
-  }
-}
+// maybe will use later for Redux
+// const mapStateToProps = (state, ownProps) => {
+//   return{
+//     selected: state.snakes.selected
+//   }
+// }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return{
-    setSnakeName: function(snake, name){
-      let action = addName(snake, name)
-      return dispatch(action)
-    }
-  }
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return{
+//     setSnakeName: function(snake, name){
+//       let action = addName(snake, name)
+//       return dispatch(action)
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserLogin)
+// export default connect(mapStateToProps, mapDispatchToProps)(UserLogin)
+export default UserLogin
 
 
 

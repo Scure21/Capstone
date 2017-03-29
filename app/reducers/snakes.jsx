@@ -4,7 +4,7 @@
 const UPDATE_SNAKE_POINTS = "UPDATE_SNAKE_POINTS"
 const GET_SNAKES = "GET_SNAKES"
 const GET_SNAKE = "GET_SNAKE"
-const ADD_NAME = "ADD_NAME"
+
 
 
 /* -------------  ACTION CREATORS  --------------- */
@@ -25,11 +25,6 @@ export const getSnake = snake => ({
   snake
 })
 
-export const addName = (snake, name) => ({
-  type: ADD_NAME,
-  name
-})
-
 const initialSnakesState = {
   selected: {}, // name and points of each snake
   list: {} // all snakes
@@ -48,10 +43,6 @@ const snakeReducer = (state = initialSnakesState, action) => {
     case GET_SNAKES:
       newState.list = action.snakes
       break;
-
-    case ADD_NAME:
-      console.log("~~~~~~~~ INSIDE REDUCER", action)
-      newState.list[action.snake.id].name = action.snake.name
 
     default:
       return state

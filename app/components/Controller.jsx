@@ -8,7 +8,7 @@ export default class Controller extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {x: 0, y: 0}
+    this.state = {x: 0, y: 0, user: {}}
     this.moveUp = this.moveUp.bind(this)
     this.moveDown = this.moveDown.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
@@ -16,8 +16,18 @@ export default class Controller extends Component {
   }
 
   componentDidMount () {
-    // when the component mounts on the mobile device, we add the user to the State with a new Snake instance
-    // socket.emit('check-device-type', device)
+    //hopefully users will be on store state eventually
+    socket.emit('ask-for-users')
+    socket.on('get-current-users', users => {
+      console.log('socket id', socket.id)
+      // this.setState({users: users})
+      console.log("*** USERS: ", users)
+      let user = users.filter(user => {
+        return user.id == socket.id
+      })
+      console.log("** INSIDE CONTROLLER: ", user)
+      this.setState({user: user})
+    })
 
     const up = document.getElementById('up')
     const down = document.getElementById('down')

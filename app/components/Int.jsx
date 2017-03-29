@@ -36,7 +36,7 @@ tick() {
     this.setState({counter: this.state.counter - 1})
     if (this.state.counter <= 0){
       clearInterval(this.interval)
-       browserHistory.push('/game')
+      browserHistory.push('/game')
     }
   }
 
