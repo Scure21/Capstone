@@ -65,7 +65,7 @@ handleClick(){
           <h1>WAITING ROOM</h1>
         {this.state.colors && 
             <h2>A 
-          {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
+          {" " + this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
         </div>)
       }
       else{
@@ -74,7 +74,7 @@ handleClick(){
           <h1>WAITING ROOM</h1>
         {this.state.colors && 
             <h2>A 
-          {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
+          {" " + this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
         <p><b id="nums">{this.state.counter}</b></p>
         </div>
         )     

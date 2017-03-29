@@ -22,7 +22,7 @@ export default function sketch (p) {
 
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
-      
+      console.log('USERS IN SKETCH', users)
       if (deviceType === 'mobile') {
     
         users.forEach(user => {
