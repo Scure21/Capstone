@@ -20,7 +20,6 @@ class UserLogin extends Component {
   }
 
   handleInputChange(evt){
-    console.log(evt.target.value)
     this.setState({
       inputValue: evt.target.value
     })
@@ -32,7 +31,6 @@ class UserLogin extends Component {
   }
 
   render () {
-    console.log("******** CURR SNAKE", this.props.selected)
     return (
       <div id="main-phone">
         <img src="images/sketch_images/logo.png" className="phone-view img-responsive"/>

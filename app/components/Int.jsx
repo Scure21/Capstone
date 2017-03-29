@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import io from 'socket.io-client'
 var socket = io.connect('http://192.168.1.184:1337')
+export var allUsers = []
 
 export default class Int extends Component {
 
@@ -26,6 +27,7 @@ export default class Int extends Component {
       })
       this.setState({users: users, colors: colors})
       if (this.state.users.length === 4){
+        allUsers = this.state.users
         this.interval = setInterval(this.tick, 1000)
         this.setState({ready: true})
       }

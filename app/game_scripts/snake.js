@@ -12,7 +12,7 @@ export default function Snake (p, user, colorName) {
   this.tail = []
   this.points = 0
   this.name = colorName
-  this.color = colors[colorName]
+  this.color = colorName
   this.visible = true
 }
 

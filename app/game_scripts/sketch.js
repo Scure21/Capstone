@@ -2,7 +2,7 @@ import Food from './food'
 import Snake from './snake'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
-
+import {allUsers} from '../components/Int.jsx'
 
 export default function sketch (p) {
   var socket
@@ -16,12 +16,8 @@ export default function sketch (p) {
     // connect client to the server through sockets
     socket = io.connect('http://192.168.1.184:1337')
 
-   // receives device type from server and if it is a mobile, make a new snake
-    socket.on('send-device-type', function ({deviceType, users}) {
-      console.log('sketch', users)
-      if (deviceType === 'mobile') {
 
-        users.forEach(user => {
+    allUsers.forEach(user => {
           snakes[user.id] = new Snake(p, user.id, user.colorName)
         })
         // we are going to have 5 foods on the canvas for all the players
@@ -31,8 +27,15 @@ export default function sketch (p) {
         }
         // getting users information to display the scores
         store.dispatch(getSnakes(snakes))
-      }
-    })
+
+
+  //  // receives device type from server and if it is a mobile, make a new snake
+  //   socket.on('send-device-type', function ({deviceType, users}) {
+  //     console.log('sketch', users)
+  //     if (deviceType === 'mobile') {
+
+  //     }
+  //   })
 
    // we get the information from the server of each user movement and we update each user movement
     socket.on('server-dir-update', function ({data, userId}) {
