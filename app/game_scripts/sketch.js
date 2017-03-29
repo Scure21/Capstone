@@ -19,9 +19,6 @@ export default function sketch (p) {
     // connect client to the server through sockets
     socket = io.connect('http://192.168.2.167:1337')
 
-   // connect client to the server through sockets
-    socket = io.connect('http://192.168.2.140:1337')
-
 
    // receives device type from server and if it is a mobile, make a new snake
     socket.on('send-device-type', function ({deviceType, users}) {
@@ -101,7 +98,7 @@ export default function sketch (p) {
     if (Object.keys(snakes).length !== 0){
       countAlive = 0
     }
-    
+
     for (let id in snakes) {
       if (snakes[id].visible) {
         countAlive++

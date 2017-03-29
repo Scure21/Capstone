@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import io from 'socket.io-client'
-var socket = io.connect('http://192.168.2.111:1337')
+var socket = io.connect('http://192.168.2.167:1337')
 
 export default class Int extends Component {
 
@@ -36,7 +36,7 @@ componentDidMount(){
        browserHistory.push('/game')
     }
   }
-  
+
   render(){
    let len = this.state.users.length
    var users = this.state.users
@@ -45,8 +45,8 @@ componentDidMount(){
           return (
         <div id="waiting-room">
           <h1>WAITING ROOM</h1>
-        {this.state.colors && 
-            <h2>A 
+        {this.state.colors &&
+            <h2>A
           {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
         </div>)
       }
@@ -54,13 +54,13 @@ componentDidMount(){
           return (
           <div id="waiting-room">
           <h1>WAITING ROOM</h1>
-        {this.state.colors && 
-            <h2>A 
+        {this.state.colors &&
+            <h2>A
           {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
         <p><b id="nums">{this.state.counter}</b></p>
         </div>
-        )     
-      }      
+        )
+      }
   }
 }
 
