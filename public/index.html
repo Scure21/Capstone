@@ -9,6 +9,18 @@
   </head>
   <body>
     <div id="main"></div>
-    <script async defer src=/bundle.js></script>
+    <script>
+        var realSocketIo = window.io
+        var connection = null
+        window.io = {
+          connect: function (uri) {
+            if (!connection) {
+              connection = realSocketIo.connect(uri)
+            }
+            return connection
+          }
+        }
+    </script>
+    <script src=/bundle.js></script>
   </body>
 </html>

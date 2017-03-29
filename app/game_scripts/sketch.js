@@ -48,11 +48,9 @@ export default function sketch (p) {
     canvas = p.createCanvas(1200, 760)
     p.frameRate(10)
     // connect client to the server through sockets
-    socket = io.connect('http://192.168.2.167:1337')
 
-   // receives device type from server and if it is a mobile, make a new snake
-        // loop through the users array and assign each user a new snake with a color
-        // var colors = ['blue', 'yellow', 'purple', 'green']
+    socket = io.connect(window.location.origin)
+
 
         // console.log("** INSIDE SETUP: ", allUsers)
 

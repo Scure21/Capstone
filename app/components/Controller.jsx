@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import io from 'socket.io-client'
 
-const socket = io.connect('http://192.168.2.167:1337')
+
+const socket = io.connect(window.location.origin)
+
 
 const device = window.navigator.userAgent
 

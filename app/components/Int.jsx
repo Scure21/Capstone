@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
-var socket = io.connect('http://192.168.2.167:1337')
+
+var socket = io.connect(window.location.origin)
+
 export var allUsers = []
 
 export default class Int extends Component {
