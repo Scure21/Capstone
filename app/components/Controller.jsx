@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
 
-const socket = io.connect('http://192.168.1.3:1337')
+const socket = io.connect('http://192.168.1.184:1337')
 const device = window.navigator.userAgent
 
 export default class Controller extends Component {
