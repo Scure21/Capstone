@@ -21,8 +21,8 @@ render(
         <Route path='/user' component={PhoneUserInput} />
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
-        <Route path="/interstitial" component={Int}/>
         <Route path="/userlogin" component={UserLogin} />
+        <Route path="/interstitial" component={Int} />
         <Route path="/controller" component={Controller}/>
         <Route path="/game" component={Game}/>
       </Route>

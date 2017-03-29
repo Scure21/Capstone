@@ -18,21 +18,21 @@ export default class Int extends Component {
       this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount(){
-    socket.emit('ask-for-users')
-    socket.on('get-current-users', users => {
-      var colors = users.map(function(i){
-        return i.colorName
-      })
-      this.setState({users: users, colors: colors})
-      if (this.state.users.length === 4){
-        this.interval = setInterval(this.tick, 1000)
-        this.setState({ready: true})
-      }
+componentDidMount(){
+  socket.emit('ask-for-users')
+  socket.on('get-current-users', users => {
+    var colors = users.map(function(i){
+      return i.colorName
     })
-  }
+    this.setState({users: users, colors: colors})
+    if (this.state.users.length >= 4){
+      this.interval = setInterval(this.tick, 1000)
+      this.setState({ready: true})
+    }
+  })
+}
 
-  tick() {
+tick() {
     this.setState({counter: this.state.counter - 1})
     if (this.state.counter <= 0){
       clearInterval(this.interval)
@@ -40,12 +40,11 @@ export default class Int extends Component {
     }
   }
 
-  handleClick(){
+handleClick(){
    this.setState({next: true})
   }
 
   render(){
-    console.log("******* INSIDE INT: ", this.state.users)
         if (this.state.next === false){
           return (
             <div>
@@ -66,7 +65,7 @@ export default class Int extends Component {
           <h1>WAITING ROOM</h1>
         {this.state.colors &&
             <h2>A
-          {' ' + this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
+          {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
         </div>)
       }
       else{
@@ -74,7 +73,8 @@ export default class Int extends Component {
           <div id="waiting-room">
           <h1>WAITING ROOM</h1>
         {this.state.colors &&
-            <h2>A {' ' + this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
+            <h2>A
+          {this.state.colors[this.state.colors.length - 1]} snake has joined!</h2>}
         <p><b id="nums">{this.state.counter}</b></p>
         </div>
         )

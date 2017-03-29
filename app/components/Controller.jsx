@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import io from 'socket.io-client'
-
 const socket = io.connect('http://192.168.2.167:1337')
 
 const device = window.navigator.userAgent
@@ -18,7 +17,7 @@ export default class Controller extends Component {
 
   componentDidMount () {
     // when the component mounts on the mobile device, we add the user to the State with a new Snake instance
-    socket.emit('check-device-type', device)
+    // socket.emit('check-device-type', device)
 
     const up = document.getElementById('up')
     const down = document.getElementById('down')

@@ -2,7 +2,7 @@ const chalk = require('chalk')
 
 module.exports = function (io) {
   // users obj to keep track of all the connected users
-  var users = []
+  var users = [] // [ {id: socket.id, colorname: "yellow", name: "something"}. {}, {}]
   // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
@@ -36,14 +36,19 @@ module.exports = function (io) {
           return 'computer'
         }
       }
-      // send type to client side and use it to determine which view to render
-      // user connected, eventually we want to check till we have 4 users
-      // connected and then emit to the sketch so the match starts
-      console.log('SOCKETS', users)
+
+      console.log('*******SOCKETS', users)
       const deviceType = detectDevice(device)
       io.sockets.emit('send-device-type', {deviceType, users})
 
       io.sockets.emit('get-current-users', users)
+    })
+
+    socket.on('set-name', function(name){
+        var user = users.filter((user) => {
+          return user.id == socket.id
+        })
+        user[0].name = name;
     })
 
     socket.on('ask-for-users', function(){

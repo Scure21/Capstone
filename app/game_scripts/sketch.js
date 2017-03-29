@@ -11,7 +11,7 @@ export default function sketch (p) {
   var foods = []
 
   p.setup = function () {
-    canvas = p.createCanvas(1200, 760)
+    canvas = p.createCanvas(600, 600)
     p.frameRate(10)
     // connect client to the server through sockets
     socket = io.connect('http://192.168.2.167:1337')
@@ -24,7 +24,8 @@ export default function sketch (p) {
       if (deviceType === 'mobile') {
 
         users.forEach(user => {
-          snakes[user.id] = new Snake(p, user.id, user.colorName)
+          console.log("~~~~~ INSIDE SKETCH: ", user.name)
+          snakes[user.id] = new Snake(p, user.id, user.colorName, user.name)
         })
         // we are going to have 5 foods on the canvas for all the players
         for (let i = 0; i < 6; i++) {

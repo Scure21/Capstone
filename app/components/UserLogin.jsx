@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
+import io from 'socket.io-client'
+var socket = io.connect('http://192.168.2.167:1337')
+const device = window.navigator.userAgent
 
 
 class UserLogin extends Component {
@@ -15,7 +18,13 @@ class UserLogin extends Component {
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
+  componentDidMount(){
+    console.log("HELLLOOOOOOO BEFORE EMIT")
+    socket.emit('check-device-type', device)
+  }
+
   handleClick(){
+    socket.emit('set-name', this.state.inputValue)
     browserHistory.push('/controller')
   }
 
