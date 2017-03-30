@@ -47,19 +47,23 @@ export default class Controller extends Component {
 
   render () {
     return (
-      <div className='main-controller'>
-          <button id='up' className='controller'>
+      <div className='main-controller container'>
+        <div className='row'>
+          <button id='up' className='controller col-sm-offset-4 col-sm-2'>
               <span className='glyphicon glyphicon-chevron-up'></span>
           </button>
-          <button id='left' className='controller'>
-                  <span className='glyphicon glyphicon-chevron-left'></span>
-          </button>
-          <button id='right' className='controller'>
+          <button id='right' className='controller col-sm-offset-4 col-sm-2'>
                   <span className='glyphicon glyphicon-chevron-right'></span>
           </button>
-          <button id='down' className='controller'>
+        </div>
+        <div className="row">
+          <button id='left' className='controller col-sm-offset-4 col-sm-2'>
+                  <span className='glyphicon glyphicon-chevron-left'></span>
+          </button>
+          <button id='down' className='controller col-sm-offset-4 col-sm-2'>
                   <span className='glyphicon glyphicon-chevron-down'></span>
           </button>
+        </div>
       </div>
     )
   }
