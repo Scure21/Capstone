@@ -16,7 +16,7 @@
 }
 
 canvas{
-  margin-left: -50px;
+  margin-left: -150px;
 }
 
 #color-selector {
@@ -53,10 +53,16 @@ body {
 }
 
 /*make controller buttons glow*/
-@-webkit-keyframes greenPulse {
-  from { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
-  50% { background-color: #91bd09 ; -webkit-box-shadow: 0 0 18px #91bd09; }
-  to { background-color: #749a02 ; -webkit-box-shadow: 0 0 9px #333; }
+@-webkit-keyframes yellowPulse {
+  from { background-color: #FFFF00 ; -webkit-box-shadow: 0 0 9px #FFFF00; }
+  50% { background-color: #FFFF7F ; -webkit-box-shadow: 0 0 18px #FFFF7F; }
+  to { background-color: #FFFF00 ; -webkit-box-shadow: 0 0 9px #FFFF00; }
+}
+
+#main-controller{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 button#right{
@@ -65,15 +71,15 @@ button#right{
    margin-left:500%;*/
    border-radius: 50%;
    background-color: #749a02 ;
-   background-color: #749a02 ;
-   -webkit-animation-name: greenPulse;
-   animation-name: greenPulse;
+   -webkit-animation-name: yellowPulse;
+   animation-name: yellowPulse;
    -webkit-animation-duration: 2s;
    animation-duration: 2s;
    -webkit-animation-iteration-count: infinite;
    animation-iteration-count: infinite;
-   height:60px;
-   width:60px;
+   height:100px;
+   width:100px;
+   margin-left:100px;
  }
 
  #right:active {
@@ -91,15 +97,16 @@ button#up{
   margin-bottom: 0%;*/
   border-radius: 50%;
   background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
+  -webkit-animation-name: yellowPulse;
+  animation-name: yellowPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  height:60px;
-  width:60px;
+  height:100px;
+  width:100px;
 }
+
 #up:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -114,14 +121,16 @@ button#down{
   margin-bottom: 0%;*/
   border-radius: 50%;
   background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
+  -webkit-animation-name: yellowPulse;
+  animation-name: yellowPulse;
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
- height:60px;
- width:60px;
+  height:100px;
+  width:100px;
+  margin-left:100px;
+  margin-top:50px;
 
 }
 #down:active {
@@ -133,13 +142,15 @@ button#down{
 button#left{
     border-radius: 50%;
     background-color: #749a02;
-    -webkit-animation-name: greenPulse;
-    animation-name: greenPulse;
+    -webkit-animation-name: yellowPulse;
+    animation-name: yellowPulse;
     animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
-   height:60px;
-   width:60px;
+    height:100px;
+    width:100px;
+    margin-top:50px;
+
 
 }
 
