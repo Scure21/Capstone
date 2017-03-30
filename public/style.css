@@ -80,6 +80,7 @@ button#right{
   animation-iteration-count: infinite;
   height:80px;
   width:80px;
+  color:black;
   /*margin-left:100px;*/
 }
 
@@ -106,6 +107,7 @@ button#up{
   animation-iteration-count: infinite;
   height:80px;
   width:80px;
+  color:black;
 }
 
 #up:active {
@@ -130,6 +132,7 @@ button#down{
   animation-iteration-count: infinite;
   height:80px;
   width:80px;
+  color:black;
 /*  margin-left:100px;
   margin-top:50px;*/
 
@@ -150,6 +153,7 @@ button#left{
     animation-iteration-count: infinite;
     height:80px;
     width:80px;
+    color:black;
     /*margin-top:50px;*/
 }
 
@@ -337,4 +341,23 @@ footer{
 
 #welcome-page{
   margin-top: 100px;
+}
+
+
+.glyphicon-chevron-up:before {
+    content: "\e113";
+    color: black;
+}
+
+.glyphicon-chevron-down:before {
+    content: "\e113";
+    color: black;
+}
+.glyphicon-chevron-right:before {
+    content: "\e113";
+    color: black;
+}
+.glyphicon-chevron-left:before {
+    content: "\e113";
+    color: black;
 }
