@@ -223,6 +223,7 @@ td{
 
 
 #score{
+  padding-left: 10px;
   text-align: right;
 }
 
@@ -334,13 +335,13 @@ input{
 
 footer{
   align-items: center;
-  margin-top: 250px;
+  margin-top: 240px;
   padding-left:40%;
   justify-content: center !important;
 }
 
 #welcome-page{
-  margin-top: 100px;
+  margin-top: 200px;
 }
 
 
@@ -363,3 +364,5 @@ footer{
     content: "\e079";
     color:black;
 }
+
+

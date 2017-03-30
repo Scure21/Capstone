@@ -9,7 +9,7 @@ export default class Scores extends Component {
            <tbody>
           <tr>
             <th> Name </th>
-            <th> Score </th>
+            <th id="score"> Score </th>
           </tr>
           {
             snakesIds && snakesIds.map((snakeId, indx) => {
