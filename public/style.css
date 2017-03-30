@@ -316,6 +316,11 @@ input{
   font-size: 20px !important;
 }
 
+.welcome-msg{
+  display: flex;
+  align-items: center;
+}
+
 /*
 #waiting-room{
  text-align: center;

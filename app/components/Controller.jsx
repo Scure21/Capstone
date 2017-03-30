@@ -61,8 +61,10 @@ export default class Controller extends Component {
   render () {
     return (
       <div className='main-controller container'>
-        <h4 className='yellow'>Welcome, {this.state.user.name}</h4>
-        <h5 className='yellow'>Your color is {this.state.user.colorName}</h5>
+        <div className="welcome-msg">
+          <h4 className='yellow'>Welcome, {this.state.user.name}</h4>
+          <h5 className='yellow'>Your color is <span className={this.state.user.colorName}>{this.state.user.colorName}</span></h5>
+        </div>
         <div className='row'>
           <button id='up' className='controller col-sm-offset-4 col-sm-2'>
               <span className='glyphicon glyphicon-chevron-up'></span>
