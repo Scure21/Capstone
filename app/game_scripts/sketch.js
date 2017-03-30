@@ -45,7 +45,7 @@ export default function sketch (p) {
 
 
   p.setup = function () {
-    canvas = p.createCanvas(1200, 760)
+    canvas = p.createCanvas(1100, 760)
     p.frameRate(10)
     // connect client to the server through sockets
 
