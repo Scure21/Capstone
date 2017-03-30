@@ -2,7 +2,7 @@ import { scl, utils } from './utils'
 import { updateSnakePoints } from '../reducers/snakes'
 import store from '../store'
 
-export default function Snake (p, name, colorName, img) {
+export default function Snake (p, id, name, colorName, img) {
   const vector = utils.randomVector(p).mult(scl)
   this.x = vector.x
   this.y = vector.y
@@ -10,6 +10,7 @@ export default function Snake (p, name, colorName, img) {
   this.yspeed = 0
   this.tail = []
   this.points = 0
+  this.id = id
   this.name = name
   this.color = colorName
   this.visible = true

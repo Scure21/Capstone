@@ -24,6 +24,7 @@ export default function sketch (p) {
   var lemon
   var orange
   var watermelon
+  var font
 
   p.preload = function () {
     // Snakes body images
@@ -41,8 +42,11 @@ export default function sketch (p) {
     lemon = p.loadImage('images/fruits/Lemon.png')
     orange = p.loadImage('images/fruits/Orange.png')
     watermelon = p.loadImage('images/fruits/Watermelon.png')
-  }
 
+    // Load Font
+    //font = p.loadFont('font/8-BIT WONDER.TFF')
+
+  }
 
   p.setup = function () {
     canvas = p.createCanvas(1000, 760)
@@ -52,7 +56,6 @@ export default function sketch (p) {
     socket = io.connect(window.location.origin)
 
         allUsers.forEach(user => {
-          console.log('allUsers', user)
           let color = user.colorName
           if (color === 'blue') {
             img = blueSnake
@@ -63,7 +66,7 @@ export default function sketch (p) {
           } else if (color === 'green') {
             img = greenSnake
           }
-          snakes[user.id] = new Snake(p, user.name, color, img)
+          snakes[user.id] = new Snake(p, user.id, user.name, color, img)
         })
 
         // we are going to have 5 foods on the canvas for all the players
@@ -143,6 +146,7 @@ export default function sketch (p) {
     } else if (countAlive === 0) {
       //the 2 remaining snakes colided head-to-head and both died
       p.textSize(80)
+      //p.textFont(font)
       p.text('GAME OVER', p.width / 2, p.height / 2)
       p.textSize(60)
       p.text('Everyone is dead...', p.width / 2, (p.height / 2) + 100)
