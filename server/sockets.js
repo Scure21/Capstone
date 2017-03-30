@@ -41,18 +41,20 @@ module.exports = function (io) {
       // send type to client side and use it to determine which view to render
       // user connected, eventually we want to check till we have 4 users
       // connected and then emit to the sketch so the match starts
-      console.log('SOCKETS', users)
       const deviceType = detectDevice(device)
-      io.sockets.emit('send-device-type', {deviceType, users})
-      io.sockets.emit('get-current-users', users)
     })
 
+    // adding the name the user inputs on their phone to the snake
+    socket.on('set-name', function(name){
+        var user = users.filter((user) => {
+          return user.id == socket.id
+        })
+        user[0].name = name;
+    })
+
+    // send users to Int to render their name on the screen
     socket.on('ask-for-users', function(){
       socket.emit('get-current-users', users)
-    })
-
-    socket.on('get-snake', function(){
-      return socket.id
     })
 
     // update the snake position according the touch event on the mobile screen
@@ -67,7 +69,7 @@ module.exports = function (io) {
       console.log(chalk.yellow('socket id ' + socket.id + ' has disconnected. :('))
       // If a user is disconnected, remove it from the users array by checking the socket that's getting disconnected
       users = users.filter(userId => userId !== socket.id)
-      io.sockets.emit('user-disconnect', socket.id)
+      // io.sockets.emit('user-disconnect', socket.id)
     })
   })
 }

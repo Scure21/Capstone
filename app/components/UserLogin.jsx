@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
-
+const socket = io.connect(window.location.origin)
+const device = window.navigator.userAgent
 
 class UserLogin extends Component {
   constructor (props) {
@@ -15,7 +16,12 @@ class UserLogin extends Component {
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
+  componentDidMount(){
+    socket.emit('check-device-type', device)
+  }
+
   handleClick(){
+    socket.emit('set-name', this.state.inputValue)
     browserHistory.push('/controller')
   }
 
@@ -43,23 +49,23 @@ class UserLogin extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return{
-    selected: state.snakes.selected
-  }
-}
+// const mapStateToProps = (state, ownProps) => {
+//   return{
+//     selected: state.snakes.selected
+//   }
+// }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return{
-    setSnakeName: function(snake, name){
-      let action = addName(snake, name)
-      return dispatch(action)
-    }
-  }
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return{
+//     setSnakeName: function(snake, name){
+//       let action = addName(snake, name)
+//       return dispatch(action)
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserLogin)
-
+// export default connect(mapStateToProps, mapDispatchToProps)(UserLogin)
+export default UserLogin
 
 
 
