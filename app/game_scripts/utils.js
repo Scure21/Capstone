@@ -1,4 +1,4 @@
-export const scl = 20
+export const scl = 25
 
 
 export const utils = {

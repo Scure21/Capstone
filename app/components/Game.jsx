@@ -8,6 +8,7 @@ export default class Game extends Component {
     return (
       <div>
         <ScoresContainer />
+        <div id="game-over"></div>
         <P5Wrapper id="game" sketch={sketch} />
       </div>
     )

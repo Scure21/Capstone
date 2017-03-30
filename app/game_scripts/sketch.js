@@ -48,7 +48,7 @@ export default function sketch (p) {
   }
 
   p.setup = function () {
-    canvas = p.createCanvas(1000, 800)
+    canvas = p.createCanvas(1440, 900)
     p.frameRate(10)
     // connect client to the server through sockets
 
@@ -71,7 +71,7 @@ export default function sketch (p) {
         // we are going to have 5 foods on the canvas for all the players
         const fruits = [ apple, banana, carrot, coconut, grape, lemon, orange, watermelon ]
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 25; i++) {
           const food = new Food(p, fruits)
           foods.push(food)
         }
@@ -95,7 +95,8 @@ export default function sketch (p) {
 
 // -----------------DRAW-------------------- //
   p.draw = function () {
-    p.background(51)
+    p.clear()
+    p.background('rgba(10%,10%,10%,0.5)')
 
     // Draw each snake
     for (let id in snakes) {
@@ -141,8 +142,8 @@ export default function sketch (p) {
       p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
       p.fill(winnerSnake.color)
-      p.text('The winner is:', p.width / 2, (p.height / 2) + 170)
-      p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 180)
+      p.text('The winner is:', p.width / 2, (p.height / 2) + 150)
+      p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 210)
     } else if (countAlive === 0) {
       //the 2 remaining snakes colided head-to-head and both died
       p.textSize(80)

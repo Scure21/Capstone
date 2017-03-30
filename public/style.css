@@ -17,7 +17,10 @@
 }
 
 canvas{
-  margin-left: -200px;
+  /*margin-left: -200px;*/
+  position:inherit;
+  top:0;
+  left:0;
 }
 
 #color-selector {
@@ -209,9 +212,14 @@ button#left{
 #leaderboard{
   color: yellow;
   display: inline-flex;
-  padding: 20px;
+/*  padding: 20px;
   position: absolute;
-  right: -225px;
+  right: -225px;*/
+  padding-top:30px;
+  padding-left:30px;
+  position:fixed;
+  z-index: 100;
+
 }
 
 th{
@@ -335,7 +343,7 @@ input{
 
 footer{
   align-items: center;
-  margin-top: 240px;
+  margin-top: 220px;
   padding-left:40%;
   justify-content: center !important;
 }
