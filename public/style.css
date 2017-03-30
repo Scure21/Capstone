@@ -15,6 +15,10 @@
     font-style: normal;
 }
 
+canvas{
+  margin-left: -50px;
+}
+
 #color-selector {
     position: fixed;
     top: 0;
@@ -44,7 +48,7 @@ body {
 #main{
   position: absolute;
   top: 50%;
-  left: 45%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -56,9 +60,9 @@ body {
 }
 
 button#right{
-   margin-top: -5%;
+   /*margin-top: -5%;
    margin-bottom: 0%;
-   margin-left:500%;
+   margin-left:500%;*/
    border-radius: 50%;
    background-color: #749a02 ;
    background-color: #749a02 ;
@@ -68,6 +72,8 @@ button#right{
    animation-duration: 2s;
    -webkit-animation-iteration-count: infinite;
    animation-iteration-count: infinite;
+   height:60px;
+   width:60px;
  }
 
  #right:active {
@@ -78,11 +84,11 @@ button#right{
  }
 
 button#up{
-  position: absolute;
+  /*position: absolute;
   margin-left: 25%;
   margin-right: 0;
   margin-top: -15%;
-  margin-bottom: 0%;
+  margin-bottom: 0%;*/
   border-radius: 50%;
   background-color: #749a02;
   -webkit-animation-name: greenPulse;
@@ -91,6 +97,8 @@ button#up{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+  height:60px;
+  width:60px;
 }
 #up:active {
   background-color: #3e8e41;
@@ -99,11 +107,11 @@ button#up{
 }
 
 button#down{
-  position: absolute;
+  /*position: absolute;
   margin-left: -25%;
   margin-right: 0%;
   margin-top: 5%;
-  margin-bottom: 0%;
+  margin-bottom: 0%;*/
   border-radius: 50%;
   background-color: #749a02;
   -webkit-animation-name: greenPulse;
@@ -112,6 +120,8 @@ button#down{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+ height:60px;
+ width:60px;
 
 }
 #down:active {
@@ -121,19 +131,15 @@ button#down{
 }
 
 button#left{
-  position: absolute;
-  margin-left: -10%;
-  margin-right: 0%;
-  margin-top: -5%;
-  margin-bottom: 0%;
-  border-radius: 50%;
-  background-color: #749a02;
-  -webkit-animation-name: greenPulse;
-  animation-name: greenPulse;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+    border-radius: 50%;
+    background-color: #749a02;
+    -webkit-animation-name: greenPulse;
+    animation-name: greenPulse;
+    animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+   height:60px;
+   width:60px;
 
 }
 
