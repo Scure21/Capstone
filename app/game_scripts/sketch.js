@@ -47,7 +47,6 @@ export default function sketch (p) {
     gameOver = p.loadImage('images/sketch_images/game-over.png')
   }
 
-
   p.setup = function () {
     canvas = p.createCanvas(1000, 760)
     p.frameRate(10)
@@ -56,7 +55,6 @@ export default function sketch (p) {
     socket = io.connect(window.location.origin)
 
         allUsers.forEach(user => {
-          console.log('allUsers', user)
           let color = user.colorName
           if (color === 'blue') {
             img = blueSnake
@@ -67,7 +65,7 @@ export default function sketch (p) {
           } else if (color === 'green') {
             img = greenSnake
           }
-          snakes[user.id] = new Snake(p, user.name, color, img)
+          snakes[user.id] = new Snake(p, user.id, user.name, color, img)
         })
 
         // we are going to have 5 foods on the canvas for all the players

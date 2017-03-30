@@ -42,6 +42,7 @@ module.exports = function (io) {
       // user connected, eventually we want to check till we have 4 users
       // connected and then emit to the sketch so the match starts
       const deviceType = detectDevice(device)
+      io.sockets.emit('get-current-users', users)
     })
 
     // adding the name the user inputs on their phone to the snake
