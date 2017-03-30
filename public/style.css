@@ -319,6 +319,10 @@ input{
 .welcome-msg{
   display: flex;
   align-items: center;
+  flex-flow: row wrap;
+  /* Then we define how is distributed the remaining space */
+  justify-content: space-around;
+  margin-bottom:50px;
 }
 
 /*
