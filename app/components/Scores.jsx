@@ -15,7 +15,7 @@ export default class Scores extends Component {
             snakesIds && snakesIds.map((snakeId, indx) => {
               return (
                 <tr key={indx}>
-                  <td className={`${this.props.snakes.list[snakeId].name}`}>{this.props.snakes.list[snakeId].name}</td>
+                  <td className={`${this.props.snakes.list[snakeId].color}`}>{this.props.snakes.list[snakeId].name}</td>
                   <td id="score">{this.props.snakes.list[snakeId].points}</td>
                 </tr>
               )

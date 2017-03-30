@@ -17,7 +17,7 @@
 }
 
 canvas{
-  margin-left: -150px;
+  margin-left: -200px;
 }
 
 #color-selector {
@@ -211,7 +211,7 @@ button#left{
   display: inline-flex;
   padding: 20px;
   position: absolute;
-  right: -180px;
+  right: -225px;
 }
 
 th{
