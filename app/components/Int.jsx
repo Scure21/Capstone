@@ -50,15 +50,16 @@ export default class Int extends Component {
  render(){
        if (this.state.next === false){
          return (
-           <div>
-       <div id="welcome-page">
-           <div id="logo">
-             <img src="images/sketch_images/logo.png" className="img-responsive" id="logoName"/>
-             <img src="images/sketch_images/banner.png" className="img-responsive" id="banner"/>
-             <button id="play" onClick={this.handleClick}></button>
-           </div>
-         </div>
-     </div>
+            <div>
+              <div id="welcome-page">
+                 <div id="logo">
+                   <img src="images/sketch_images/logo.png" className="img-responsive" id="logoName"/>
+                   <img src="images/sketch_images/banner.png" className="img-responsive" id="banner"/>
+                   <button id="play" onClick={this.handleClick}></button>
+                 </div>
+                 <footer> made with <span><img className="love" src="images/sketch_images/8-bit-heart.png" /></span> at GHA </footer>
+               </div>
+            </div>
          )
        } else {
          return (

@@ -133,21 +133,23 @@ export default function sketch (p) {
       }
     }
 
+    p.imageMode(p.CENTER)
     p.textAlign(p.CENTER)
     if (countAlive === 1) {
       // we have a winner!
       p.textSize(80)
-      p.image(gameOver, p.width/2, (p.height/2) + 100)
+      p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
       p.fill(winnerSnake.color)
-      p.text('The winner is:', p.width / 2, (p.height / 2) + 100)
+      p.text('The winner is:', p.width / 2, (p.height / 2) + 150)
       p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 180)
     } else if (countAlive === 0) {
       //the 2 remaining snakes colided head-to-head and both died
       p.textSize(80)
-      p.text('GAME OVER', p.width / 2, p.height / 2)
+      p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
-      p.text('Everyone is dead...', p.width / 2, (p.height / 2) + 100)
+      p.fill('yellow')
+      p.text('Everyone is dead...', p.width / 2, (p.height / 2) + 150)
     }
   }
 }

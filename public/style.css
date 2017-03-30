@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   font-family: 'pixeledregular';
+  color:yellow;
 }
 
 @viewport {
@@ -186,7 +187,7 @@ button#left{
 #waiting-room{
  text-align: center;
  font-size: 100px;
- color:     #00FFFF ;
+ color:     yellow ;
  animation: glowing 1500ms infinite;
 }
 
@@ -321,19 +322,19 @@ input{
   margin-bottom:20px;
 }
 
-
-
-/*
-#waiting-room{
- text-align: center;
- font-size: 100px;
- color:     #00FFFF ;
- animation: glowing 1500ms infinite;
+.love{
+  width:30px;
+  height:30px;
+  display: flex-inline;
 }
 
-@keyframes glowing{
- 0% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
- 50% { text-color:     #F0F8FF ; text-shadow: 0 0 10px     #F0F8FF ; }
- 100% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
+footer{
+  align-items: center;
+  margin-top: 250px;
+  padding-left:40%;
+  justify-content: center !important;
 }
-*/
+
+#welcome-page{
+  margin-top: 100px;
+}
