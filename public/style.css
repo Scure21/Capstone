@@ -66,21 +66,21 @@ body {
 }
 
 button#right{
-   /*margin-top: -5%;
-   margin-bottom: 0%;
-   margin-left:500%;*/
-   border-radius: 50%;
-   background-color: #749a02 ;
-   -webkit-animation-name: yellowPulse;
-   animation-name: yellowPulse;
-   -webkit-animation-duration: 2s;
-   animation-duration: 2s;
-   -webkit-animation-iteration-count: infinite;
-   animation-iteration-count: infinite;
-   height:100px;
-   width:100px;
-   margin-left:100px;
- }
+  /*margin-top: -5%;
+  margin-bottom: 0%;
+  margin-left:500%;*/
+  border-radius: 50%;
+  background-color: #749a02 ;
+  -webkit-animation-name: yellowPulse;
+  animation-name: yellowPulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  height:80px;
+  width:80px;
+  /*margin-left:100px;*/
+}
 
  #right:active {
    background-color: #3e8e41 ;
@@ -103,8 +103,8 @@ button#up{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  height:100px;
-  width:100px;
+  height:80px;
+  width:80px;
 }
 
 #up:active {
@@ -127,10 +127,10 @@ button#down{
   animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  height:100px;
-  width:100px;
-  margin-left:100px;
-  margin-top:50px;
+  height:80px;
+  width:80px;
+/*  margin-left:100px;
+  margin-top:50px;*/
 
 }
 #down:active {
@@ -147,11 +147,9 @@ button#left{
     animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
-    height:100px;
-    width:100px;
-    margin-top:50px;
-
-
+    height:80px;
+    width:80px;
+    /*margin-top:50px;*/
 }
 
 #left:active {
@@ -282,9 +280,7 @@ td{
 }
 
 #main-phone{
-
   width:400px;
-  margin-top:-200px;
 }
 
 #username{
@@ -322,8 +318,10 @@ input{
   flex-flow: row wrap;
   /* Then we define how is distributed the remaining space */
   justify-content: space-around;
-  margin-bottom:50px;
+  margin-bottom:20px;
 }
+
+
 
 /*
 #waiting-room{

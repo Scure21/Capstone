@@ -24,6 +24,7 @@ export default function sketch (p) {
   var lemon
   var orange
   var watermelon
+  var gameOver
 
   p.preload = function () {
     // Snakes body images
@@ -41,6 +42,9 @@ export default function sketch (p) {
     lemon = p.loadImage('images/fruits/Lemon.png')
     orange = p.loadImage('images/fruits/Orange.png')
     watermelon = p.loadImage('images/fruits/Watermelon.png')
+
+    // game images
+    gameOver = p.loadImage('images/sketch_images/game-over.png')
   }
 
 
@@ -135,7 +139,7 @@ export default function sketch (p) {
     if (countAlive === 1) {
       // we have a winner!
       p.textSize(80)
-      p.text('GAME OVER', p.width / 2, p.height / 2)
+      p.image(gameOver, p.width/2, (p.height/2) + 100)
       p.textSize(60)
       p.fill(winnerSnake.color)
       p.text('The winner is:', p.width / 2, (p.height / 2) + 100)
