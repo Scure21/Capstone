@@ -24,7 +24,7 @@ export default function sketch (p) {
   var lemon
   var orange
   var watermelon
-  var font
+  var gameOver
 
   p.preload = function () {
     // Snakes body images
@@ -43,9 +43,8 @@ export default function sketch (p) {
     orange = p.loadImage('images/fruits/Orange.png')
     watermelon = p.loadImage('images/fruits/Watermelon.png')
 
-    // Load Font
-    //font = p.loadFont('font/8-BIT WONDER.TFF')
-
+    // game images
+    gameOver = p.loadImage('images/sketch_images/game-over.png')
   }
 
   p.setup = function () {
@@ -138,7 +137,7 @@ export default function sketch (p) {
     if (countAlive === 1) {
       // we have a winner!
       p.textSize(80)
-      p.text('GAME OVER', p.width / 2, p.height / 2)
+      p.image(gameOver, p.width/2, (p.height/2) + 100)
       p.textSize(60)
       p.fill(winnerSnake.color)
       p.text('The winner is:', p.width / 2, (p.height / 2) + 100)
@@ -146,7 +145,6 @@ export default function sketch (p) {
     } else if (countAlive === 0) {
       //the 2 remaining snakes colided head-to-head and both died
       p.textSize(80)
-      //p.textFont(font)
       p.text('GAME OVER', p.width / 2, p.height / 2)
       p.textSize(60)
       p.text('Everyone is dead...', p.width / 2, (p.height / 2) + 100)

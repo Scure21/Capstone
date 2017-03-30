@@ -5,7 +5,7 @@ export default class Controller extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {x: 0, y: 0}
+    this.state = {x: 0, y: 0, user: {}}
     this.moveUp = this.moveUp.bind(this)
     this.moveDown = this.moveDown.bind(this)
     this.moveLeft = this.moveLeft.bind(this)
@@ -13,7 +13,20 @@ export default class Controller extends Component {
   }
 
   componentDidMount () {
-    // when the component mounts on the mobile device, we add the user to the State with a new Snake instance
+    // when the component mounts on the mobile device, we add the user to the State with a new Snake instance... maybe in the future...
+    //get users info to render name/color for this user
+    //hopefully users will be on store state eventually
+    socket.emit('ask-for-users')
+    socket.on('get-current-users', users => {
+      //console.log('socket id', socket.id)
+      // this.setState({users: users})
+      //console.log("*** USERS: ", users)
+      let user = users.filter(user => {
+        return user.id == socket.id
+      })
+      this.setState({user: user[0]})
+    })
+
     const up = document.getElementById('up')
     const down = document.getElementById('down')
     const left = document.getElementById('left')
@@ -48,6 +61,10 @@ export default class Controller extends Component {
   render () {
     return (
       <div className='main-controller container'>
+        <div className="welcome-msg">
+          <h4 className='yellow'>Welcome, {this.state.user.name}</h4>
+          <h5 className='yellow'>Your color is <span className={this.state.user.colorName}>{this.state.user.colorName}</span></h5>
+        </div>
         <div className='row'>
           <button id='up' className='controller col-sm-offset-4 col-sm-2'>
               <span className='glyphicon glyphicon-chevron-up'></span>
