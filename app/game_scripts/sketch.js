@@ -141,7 +141,7 @@ export default function sketch (p) {
       p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
       p.fill(winnerSnake.color)
-      p.text('The winner is:', p.width / 2, (p.height / 2) + 150)
+      p.text('The winner is:', p.width / 2, (p.height / 2) + 170)
       p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 180)
     } else if (countAlive === 0) {
       //the 2 remaining snakes colided head-to-head and both died
