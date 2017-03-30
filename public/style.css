@@ -350,14 +350,16 @@ footer{
 }
 
 .glyphicon-chevron-down:before {
-    content: "\e113";
-    color: black;
+    content: "\e114";
+    color:black;
 }
+
 .glyphicon-chevron-right:before {
-    content: "\e113";
-    color: black;
+    content: "\e080";
+    color:black;
 }
+
 .glyphicon-chevron-left:before {
-    content: "\e113";
-    color: black;
+    content: "\e079";
+    color:black;
 }
