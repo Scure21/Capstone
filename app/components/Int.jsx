@@ -27,6 +27,7 @@ export default class Int extends Component {
        return i.colorName
      })
      this.setState({users: users, colors: colors})
+     console.log('inside Int, users #', this.state.users.length)
      if (this.state.users.length === 1){
        allUsers = this.state.users
        this.interval = setInterval(this.tick, 1000)

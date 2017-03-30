@@ -72,6 +72,8 @@ Snake.prototype.move = function (p) {
 
 Snake.prototype.draw = function (p) {
   if (this.visible) {
+    p.textSize(20)
+    p.text(this.name, this.x, this.y)
     p.image(this.img, this.x, this.y, scl, scl)
     for (var i = 0; i < this.tail.length; i++) {
       p.image(this.img, this.tail[i].x, this.tail[i].y, scl, scl)
