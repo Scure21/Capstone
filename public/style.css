@@ -191,7 +191,14 @@ button#left{
   display: inline-flex;
   padding: 20px;
   position: absolute;
-  right: -160px;
+  right: -180px;
+}
+
+th{
+  padding-bottom: 20px;
+}
+td{
+  padding-bottom: 10px;
 }
 
 
@@ -270,6 +277,18 @@ button#left{
   align-items: center;
 }
 
+#join{
+  margin: 0 auto;
+  display: block;
+  margin-top: 50px;
+  border: none;
+  background-color: transparent;
+  color: yellow;
+  animation: glowing 1500ms infinite;
+  font-size:25px;
+}
+
+
 input{
   height: 52px;
   border-radius: 50px;
@@ -279,3 +298,18 @@ input{
   text-align: center;
   font-size: 20px !important;
 }
+
+/*
+#waiting-room{
+ text-align: center;
+ font-size: 100px;
+ color:     #00FFFF ;
+ animation: glowing 1500ms infinite;
+}
+
+@keyframes glowing{
+ 0% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
+ 50% { text-color:     #F0F8FF ; text-shadow: 0 0 10px     #F0F8FF ; }
+ 100% { text-color:     #00FFFF ; text-shadow: 0 0 3px     #00FFFF ; }
+}
+*/

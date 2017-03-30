@@ -75,7 +75,7 @@ Snake.prototype.draw = function (p) {
   if (this.visible) {
     p.image(this.img, this.x, this.y, scl, scl)
     for (var i = 0; i < this.tail.length; i++) {
-      p.image(this.img, this.tail[i].x, this.tail[i].y, 20, 20)
+      p.image(this.img, this.tail[i].x, this.tail[i].y, scl, scl)
     }
   }
 }

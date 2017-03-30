@@ -37,7 +37,7 @@ class UserLogin extends Component {
         <div id="username">
           <input placeholder="snake name" onChange={this.handleInputChange}></input>
         </div>
-        <button onClick={this.handleClick}> JOIN! </button>
+        <button id="join" onClick={this.handleClick}> PLAY </button>
       </div>
     )
   }
