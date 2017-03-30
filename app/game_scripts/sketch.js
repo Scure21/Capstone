@@ -51,11 +51,8 @@ export default function sketch (p) {
 
     socket = io.connect(window.location.origin)
 
-
-        // console.log("** INSIDE SETUP: ", allUsers)
-
         allUsers.forEach(user => {
-          console.log("INSIDE USER FOR EACH :", user.id)
+          console.log('allUsers', user)
           let color = user.colorName
           if (color === 'blue') {
             img = blueSnake
@@ -66,14 +63,8 @@ export default function sketch (p) {
           } else if (color === 'green') {
             img = greenSnake
           }
-          snakes[user.id] = new Snake(p, user.id, color, img)
-          // if (colorKey > 2) {
-          //   colorKey %= 2
-          // } else {
-          //   colorKey += 1
-          // }
+          snakes[user.id] = new Snake(p, user.name, color, img)
         })
-        // console.log("**** SNAKES: ", snakes)
 
         // we are going to have 5 foods on the canvas for all the players
         const fruits = [ apple, banana, carrot, coconut, grape, lemon, orange, watermelon ]
@@ -82,7 +73,6 @@ export default function sketch (p) {
           const food = new Food(p, fruits)
           foods.push(food)
         }
-        console.log('FOOD ARRAY', foods)
         // getting users information to display the scores
         store.dispatch(getSnakes(snakes))
 
@@ -104,8 +94,6 @@ export default function sketch (p) {
 // -----------------DRAW-------------------- //
   p.draw = function () {
     p.background(51)
-
-    // console.log("INSIDE DRAW: ", snakes)
 
     // Draw each snake
     for (let id in snakes) {
@@ -132,8 +120,6 @@ export default function sketch (p) {
     }
     // count how many snakes are still alive (aka "visible")
     //assign 0 only when snakes object is not empty, otherwise there will a GAME OVER msg even before the game begins
-
-
     if (Object.keys(snakes).length !== 0){
       countAlive = 0
     }
