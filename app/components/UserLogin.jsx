@@ -1,43 +1,64 @@
-import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
-import { connect } from 'react-redux'
-const socket = io.connect(window.location.origin)
-const device = window.navigator.userAgent
+import React, { Component } from "react";
+import { browserHistory } from "react-router";
+import { connect } from "react-redux";
+const socket = io.connect(window.location.origin);
+const device = window.navigator.userAgent;
 
+// steph fix
+const userName;
+
+// make a module to hold the User constructor and import it here and use it
+
+const getUserName = (e) => {userName = e.target.value}
+const handleClick = () => {
+		socket.emit("set-name", userName);
+		browserHistory.push("/controller");
+	}
+
+const UserLogin = (users) => (
+      <div id="main-phone">
+        <img src="images/sketch_images/logo.png" className="phone-view img-responsive"/>
+        <div id="username">
+          <input placeholder="snake name" onChange={() => getUserName}></input>
+        </div>
+        <button id="join" onClick={() => handleClick}> PLAY </button>
+      </div>
+		);
+
+//------------------------------------------------------------------------------------------//
 class UserLogin extends Component {
-  constructor (props) {
-    super(props)
+	constructor (props) {
+		super(props);
+		this.state = {
+			inputValue: ""
+		};
 
-    this.state = {
-      inputValue: ''
-    }
+		this.handleClick = this.handleClick.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
+	}
 
-    this.handleClick = this.handleClick.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
+	componentDidMount(){
+		socket.emit("check-device-type", device);
+	}
 
-  componentDidMount(){
-    socket.emit('check-device-type', device)
-  }
+	handleClick(){
+		socket.emit("set-name", this.state.inputValue);
+		browserHistory.push("/controller");
+	}
 
-  handleClick(){
-    socket.emit('set-name', this.state.inputValue)
-    browserHistory.push('/controller')
-  }
+	handleInputChange(evt){
+		this.setState({
+			inputValue: evt.target.value
+		});
+	}
 
-  handleInputChange(evt){
-    this.setState({
-      inputValue: evt.target.value
-    })
-  }
+	handleSubmit(evt){
+		event.preventDefault();
+		this.props.setSnakeName(this.props.selected, this.state.inputValue);
+	}
 
-  handleSubmit(evt){
-    event.preventDefault();
-    this.props.setSnakeName(this.props.selected, this.state.inputValue);
-  }
-
-  render () {
-    return (
+	render () {
+		return (
       <div id="main-phone">
         <img src="images/sketch_images/logo.png" className="phone-view img-responsive"/>
         <div id="username">
@@ -45,27 +66,10 @@ class UserLogin extends Component {
         </div>
         <button id="join" onClick={this.handleClick}> PLAY </button>
       </div>
-    )
-  }
+		);
+	}
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//   return{
-//     selected: state.snakes.selected
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//   return{
-//     setSnakeName: function(snake, name){
-//       let action = addName(snake, name)
-//       return dispatch(action)
-//     }
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(UserLogin)
-export default UserLogin
-
-
+export default connect(state => ({users: users})(UserLogin)
+//export default UserLogin;
 

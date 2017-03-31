@@ -4,6 +4,13 @@ module.exports = function (io) {
   // users obj to keep track of all the connected users
   var users = []
 
+  // Steph fix
+  var usersObj = {}
+  function User (name, color) {
+    this.name = name
+    this.color = color || null
+  }
+
   // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
     console.log(chalk.yellow('We have a new user: ' + socket.id))
@@ -21,6 +28,10 @@ module.exports = function (io) {
         ) {
           // if its a mobile device push it to the users array
           users.push({id: socket.id})
+
+          // steph fix
+          usersObj[socket.id] = new User()
+
           var colorKey = 0;
           var colors = ["blue", "yellow", "purple", "green"]
           users.map(function(user){

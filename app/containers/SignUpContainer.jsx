@@ -81,12 +81,10 @@ class SignUpContainer extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
     signupNewUser (user, email, password) {
       dispatch(signup(user, email, password))
       browserHistory.push('/controller')
     }
-
   }
 }
 
