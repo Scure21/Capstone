@@ -3,11 +3,11 @@ const ADD_USER_TO_PROJECTOR = 'ADD_USER_TO_PROJECTOR'
 let COLORS = ['blue', 'yellow', 'purple', 'green']
 
 // ACTION CREATORS
-const createNewUser = (socketId, userName) => {
+export const createNewUser = (userName, userId) => {
     const user = {}
-    user.id = socketId
+    user.id = userId
     user.name = userName
-    user.color = COLORS.pop()
+    user.color = COLORS.shift()
 
     return {type: ADD_USER_TO_PROJECTOR, user}
 }
@@ -16,7 +16,7 @@ const createNewUser = (socketId, userName) => {
 // REDUCER
 const initialState = {
     users: [],
-    user: ''
+    //user: ''
 }
 
 const users = (state = initialState, action) => {
@@ -28,7 +28,9 @@ const users = (state = initialState, action) => {
         //     return newState.user = action.userName
         //for the projector
         case ADD_USER_TO_PROJECTOR:
-            return newState.users.concat(action.user)
+            console.log('USERS', newState.users)
+         newState.users = newState.users.concat([action.user])
+         return newState
 
         default:
             return state

@@ -14,33 +14,34 @@ import Controller from './components/Controller'
 import UserLogin from './components/UserLogin'
 import { getSnake } from './reducers/snakes'
 import { checkDeviceType } from './reducers/device'
+import { createNewUser } from './reducers/users'
 
 function onAppEnter() {
-  function detectCurrentDevice () {
-    const currentDevice = window.navigator.userAgent
-    if (currentDevice.match(/Android/i) ||
-      currentDevice.match(/webOS/i) ||
-      currentDevice.match(/iPhone/i) ||
-      currentDevice.match(/iPad/i) ||
-      currentDevice.match(/iPod/i) ||
-      currentDevice.match(/BlackBerry/i) ||
-      currentDevice.match(/Windows Phone/i)){
-        return 'mobile'
-    } else {
-        return 'projector'
+    function detectCurrentDevice () {
+        const currentDevice = window.navigator.userAgent
+        if (currentDevice.match(/Android/i) ||
+            currentDevice.match(/webOS/i) ||
+            currentDevice.match(/iPhone/i) ||
+            currentDevice.match(/iPad/i) ||
+            currentDevice.match(/iPod/i) ||
+            currentDevice.match(/BlackBerry/i) ||
+            currentDevice.match(/Windows Phone/i)){
+          return 'mobile'
+      } else {
+          return 'projector'
+      }
     }
-  }
-  let device = detectCurrentDevice()
-  store.dispatch(checkDeviceType(device))
+    let device = detectCurrentDevice()
+    store.dispatch(checkDeviceType(device))
 }
 
 function onIntEnter() {
-  console.log('inside onIntEnter')
-  const socket = io.connect(window.location.origin)
-  socket.on('server-user-connected', function(userName) {
-    console.log('server-user-connected', userName)
-    store.dispatch(createNewUser(socket.id, userName))
-  })
+    console.log('inside onIntEnter')
+    const socket = io.connect(window.location.origin)
+    socket.on('server-user-connected', function({userName, userId}) {
+        console.log('server-user-connected', userName)
+        store.dispatch(createNewUser(userName, userId))
+    })
 }
 
 render(
