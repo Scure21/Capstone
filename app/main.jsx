@@ -5,7 +5,8 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import AppContainer from './containers/AppContainer'
-import Int from './components/Int'
+import Home from './components/Home'
+import WaitingRoom from './components/WaitingRoom'
 import Login from './components/Login'
 import SignUpContainer from './containers/SignUpContainer'
 import Game from './components/Game'
@@ -37,7 +38,7 @@ function onAppEnter() {
     store.dispatch(checkDeviceType(device))
 }
 
-function onIntEnter() {
+function onHomeEnter() {
     socket.on('server-user-connected', function({userName, userId}) {
         store.dispatch(createNewUser(userName, userId))
         const users = store.getState().users
@@ -47,10 +48,9 @@ function onIntEnter() {
 }
 
 function onControllerEnter() {
-  socket.on('user-information', function(user){
-    console.log('USER OnCONTROL', user)
-    store.dispatch(getUser(user))
-  })
+    socket.on('user-information', function(user){
+        store.dispatch(getUser(user))
+    })
 }
 
 render(
@@ -60,7 +60,8 @@ render(
         <Route path='/user' component={PhoneUserInput} />
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
-        <Route path="/interstitial" component={Int} onEnter={onIntEnter}/>
+        <Route path="/home" component={Home} onEnter={onHomeEnter}/>
+        <Route path="/waitingroom" component={WaitingRoom}/>
         <Route path="/userlogin" component={UserLogin} />
         <Route path="/controller" component={Controller} onEnter={onControllerEnter}/>
         <Route path="/game" component={Game}/>

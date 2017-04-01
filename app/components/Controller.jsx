@@ -46,8 +46,7 @@ export class Controller extends Component {
     }
 
     render () {
-      console.log('Class Props', this.props)
-      const user = this.props.user || ''
+        const user = this.props.user || ''
         return (
       <div className='main-controller container'>
         <div className="welcome-msg">

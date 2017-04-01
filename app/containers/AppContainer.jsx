@@ -14,7 +14,7 @@ export class AppContainer extends React.Component {
         if (deviceType === 'mobile' ) {
             browserHistory.push('/userlogin')
         } else if (deviceType === 'projector') {
-            browserHistory.push('/interstitial')
+            browserHistory.push('/home')
         }
     }
 
