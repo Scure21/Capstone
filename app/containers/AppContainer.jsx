@@ -1,42 +1,31 @@
 import React from 'react'
-import MobileDetect from 'mobile-detect'
 import { connect } from 'react-redux'
-import { Link, browserHistory } from 'react-router'
-import UserLogin from '../components/UserLogin'
+import { browserHistory } from 'react-router'
+import { checkDeviceType } from '../reducers/device'
 
-const md = new MobileDetect(window.navigator.userAgent)
+const device = window.navigator.userAgent
 
-class AppContainer extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      deviceType: ''
+export class AppContainer extends React.Component {
+    constructor (props) {
+        super(props)
     }
-  }
 
-  componentWillMount () {
-    if (!md.mobile()) {
-      this.setState({deviceType: 'computer'})
-      browserHistory.push('/interstitial')
-    } else {
-      this.setState({deviceType: 'phone'})
-      browserHistory.push('/userlogin')
+    componentWillMount () {
+        const deviceType = this.props.checkDeviceType(device)
+        if (deviceType === 'mobile' ) {
+            browserHistory.push('/userlogin')
+        } else if (deviceType === 'projector') {
+            browserHistory.push('/interstitial')
+        }
     }
-  }
 
-  render () {
-    return (
+    render () {
+        return (
       <div>
         {this.props.children}
       </div>
-    )
-  }
+        )
+    }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    auth: state.auth
-  }
-}
-
-export default connect(mapStateToProps)(AppContainer)
+export default connect(state => ({}), {checkDeviceType})(AppContainer)
