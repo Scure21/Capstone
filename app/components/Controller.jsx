@@ -5,7 +5,7 @@ const socket = io.connect(window.location.origin)
 export class Controller extends Component {
     constructor (props) {
         super(props)
-        this.state = {x: 0, y: 0, user: this.props.users}
+        this.state = {x: 0, y: 0}
         this.moveUp = this.moveUp.bind(this)
         this.moveDown = this.moveDown.bind(this)
         this.moveLeft = this.moveLeft.bind(this)
@@ -46,12 +46,13 @@ export class Controller extends Component {
     }
 
     render () {
-      console.log(this.props)
+      console.log('Class Props', this.props)
+      const user = this.props.user || ''
         return (
       <div className='main-controller container'>
         <div className="welcome-msg">
-          <h4 className='yellow'>Welcome, {this.state.user}</h4>
-          {/*<h5 className='yellow'>Your color is <span className={this.state.user.colorName}>{this.state.user.colorName}</span></h5>*/}
+          <h4 className='yellow'>Welcome, {user.name}</h4>
+          <h5 className='yellow'>Your color is <span className={user.color}>{user.color}</span></h5>
         </div>
         <div className='row'>
           <button id='up' className='controller col-sm-offset-4 col-sm-2'>
@@ -74,4 +75,4 @@ export class Controller extends Component {
     }
 }
 
-export default connect(state => ({users: state.users}))(Controller)
+export default connect(state => ({user: state.users.user}))(Controller)

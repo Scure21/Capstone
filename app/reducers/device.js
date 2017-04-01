@@ -13,12 +13,12 @@ const device = (state = initialState, action) => {
     const newState = Object.assign({}, state)
 
     switch (action.type) {
-        case DEVICE_TYPE:
-            return newState.device = action.device
+    case DEVICE_TYPE:
+        return newState.device = action.device
 
-        default:
-            return state
-        }
+    default:
+        return state
     }
+}
 
 export default device

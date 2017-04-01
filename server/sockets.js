@@ -10,14 +10,14 @@ module.exports = function (io) {
 
     // Phone user emits to server to be transmitted to projector
         socket.on('user-connected', function(userName){
-            console.log('username inside user-connected', userName)
             const userId = socket.id
             io.sockets.emit('server-user-connected', {userName, userId})
         })
 
-    // send users to Int to render their name on the screen
-        socket.on('ask-for-users', function(){
-            socket.emit('get-current-users', users)
+    // send individual user information
+        socket.on('users-information', function(users){
+          console.log(users)
+          users.forEach(user => socket.to(user.id).emit('user-information', user))
         })
 
     // update the snake position according the touch event on the mobile screen

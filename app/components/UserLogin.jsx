@@ -18,7 +18,7 @@ class UserLogin extends Component {
 
  handleClick(){
    socket.emit('user-connected', this.state.userName)
-   //browserHistory.push('/controller')
+   browserHistory.push('/controller')
  }
 
  handleInputChange(evt){

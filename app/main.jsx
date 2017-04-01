@@ -14,7 +14,9 @@ import Controller from './components/Controller'
 import UserLogin from './components/UserLogin'
 import { getSnake } from './reducers/snakes'
 import { checkDeviceType } from './reducers/device'
-import { createNewUser } from './reducers/users'
+import { createNewUser, getUser } from './reducers/users'
+
+const socket = io.connect(window.location.origin)
 
 function onAppEnter() {
     function detectCurrentDevice () {
@@ -26,22 +28,29 @@ function onAppEnter() {
             currentDevice.match(/iPod/i) ||
             currentDevice.match(/BlackBerry/i) ||
             currentDevice.match(/Windows Phone/i)){
-          return 'mobile'
-      } else {
-          return 'projector'
-      }
+            return 'mobile'
+        } else {
+            return 'projector'
+        }
     }
     let device = detectCurrentDevice()
     store.dispatch(checkDeviceType(device))
 }
 
 function onIntEnter() {
-    console.log('inside onIntEnter')
-    const socket = io.connect(window.location.origin)
     socket.on('server-user-connected', function({userName, userId}) {
-        console.log('server-user-connected', userName)
         store.dispatch(createNewUser(userName, userId))
+        const users = store.getState().users
+        socket.emit('users-information', users.users)
     })
+
+}
+
+function onControllerEnter() {
+  socket.on('user-information', function(user){
+    console.log('USER OnCONTROL', user)
+    store.dispatch(getUser(user))
+  })
 }
 
 render(
@@ -53,7 +62,7 @@ render(
         <Route path="/signup" component={SignUpContainer}/>
         <Route path="/interstitial" component={Int} onEnter={onIntEnter}/>
         <Route path="/userlogin" component={UserLogin} />
-        <Route path="/controller" component={Controller}/>
+        <Route path="/controller" component={Controller} onEnter={onControllerEnter}/>
         <Route path="/game" component={Game}/>
       </Route>
     </Router>
