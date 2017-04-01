@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { checkDeviceType } from '../reducers/device'
 
-const device = window.navigator.userAgent
 
 export class AppContainer extends React.Component {
     constructor (props) {
@@ -11,7 +10,7 @@ export class AppContainer extends React.Component {
     }
 
     componentWillMount () {
-        const deviceType = this.props.checkDeviceType(device)
+        const deviceType = this.props.device
         if (deviceType === 'mobile' ) {
             browserHistory.push('/userlogin')
         } else if (deviceType === 'projector') {
@@ -21,11 +20,11 @@ export class AppContainer extends React.Component {
 
     render () {
         return (
-      <div>
-        {this.props.children}
-      </div>
+            <div>
+                {this.props.children}
+            </div>
         )
     }
 }
 
-export default connect(state => ({}), {checkDeviceType})(AppContainer)
+export default connect(state => ({device: state.device}))(AppContainer)

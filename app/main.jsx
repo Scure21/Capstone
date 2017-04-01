@@ -13,11 +13,31 @@ import PhoneUserInput from './components/PhoneUserInput'
 import Controller from './components/Controller'
 import UserLogin from './components/UserLogin'
 import { getSnake } from './reducers/snakes'
+import { checkDeviceType } from './reducers/device'
+
+function onAppEnter() {
+  function detectCurrentDevice () {
+    const currentDevice = window.navigator.userAgent
+    if (currentDevice.match(/Android/i) ||
+      currentDevice.match(/webOS/i) ||
+      currentDevice.match(/iPhone/i) ||
+      currentDevice.match(/iPad/i) ||
+      currentDevice.match(/iPod/i) ||
+      currentDevice.match(/BlackBerry/i) ||
+      currentDevice.match(/Windows Phone/i)){
+        return 'mobile'
+    } else {
+        return 'projector'
+    }
+  }
+  let device = detectCurrentDevice()
+  store.dispatch(checkDeviceType(device))
+}
 
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={AppContainer}>
+      <Route path="/" component={AppContainer} onEnter={onAppEnter}>
         <Route path='/user' component={PhoneUserInput} />
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
