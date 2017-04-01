@@ -34,6 +34,15 @@ function onAppEnter() {
   store.dispatch(checkDeviceType(device))
 }
 
+function onIntEnter() {
+  console.log('inside onIntEnter')
+  const socket = io.connect(window.location.origin)
+  socket.on('server-user-connected', function(userName) {
+    console.log('server-user-connected', userName)
+    store.dispatch(createNewUser(socket.id, userName))
+  })
+}
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -41,7 +50,7 @@ render(
         <Route path='/user' component={PhoneUserInput} />
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUpContainer}/>
-        <Route path="/interstitial" component={Int}/>
+        <Route path="/interstitial" component={Int} onEnter={onIntEnter}/>
         <Route path="/userlogin" component={UserLogin} />
         <Route path="/controller" component={Controller}/>
         <Route path="/game" component={Game}/>

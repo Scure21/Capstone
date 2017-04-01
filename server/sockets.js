@@ -4,64 +4,13 @@ module.exports = function (io) {
   // users obj to keep track of all the connected users
   var users = []
 
-  // Steph fix
-  var usersObj = {}
-  function User (name, color) {
-    this.name = name
-    this.color = color || null
-  }
-
   // use socket server as an event emitter in order to listen for new connections
   io.sockets.on('connection', function (socket) {
-    console.log(chalk.yellow('We have a new user: ' + socket.id))
+    console.log(chalk.yellow('We have a new connection: ' + socket.id))
 
-    // Check the device type
-    // socket.on('check-device-type', function (device) {
-    //   function detectDevice () {
-    //     if (device.match(/Android/i) ||
-    //         device.match(/webOS/i) ||
-    //         device.match(/iPhone/i) ||
-    //         device.match(/iPad/i) ||
-    //         device.match(/iPod/i) ||
-    //         device.match(/BlackBerry/i) ||
-    //         device.match(/Windows Phone/i)
-    //     ) {
-    //       // if its a mobile device push it to the users array
-    //       users.push({id: socket.id})
-
-    //       // steph fix
-    //       usersObj[socket.id] = new User()
-
-    //       var colorKey = 0;
-    //       var colors = ["blue", "yellow", "purple", "green"]
-    //       users.map(function(user){
-    //         user.colorName = colors[colorKey]
-    //         if (colorKey > 2){
-    //           colorKey %= 2
-    //         }
-    //         else{
-    //           colorKey += 1
-    //         }
-    //       })
-    //       return 'mobile'
-    //     } else {
-    //       return 'computer'
-    //     }
-    //   }
-
-    //   // send type to client side and use it to determine which view to render
-    //   // user connected, eventually we want to check till we have 4 users
-    //   // connected and then emit to the sketch so the match starts
-    //   const deviceType = detectDevice(device)
-    //   io.sockets.emit('get-current-users', users)
-    // })
-
-    // adding the name the user inputs on their phone to the snake
-    socket.on('set-name', function(name){
-        var user = users.filter((user) => {
-          return user.id == socket.id
-        })
-        user[0].name = name;
+    socket.on('user-connected', function(userName){
+      console.log('username inside user-connected', userName)
+      socket.emit('server-user-connected', userName)
     })
 
     // send users to Int to render their name on the screen
