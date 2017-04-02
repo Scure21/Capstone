@@ -25,11 +25,14 @@ Snake.prototype.dir = function (x, y) {
 }
 
 Snake.prototype.eat = function (p, food) {
-  if (this.x === food.x() && this.y === food.y()) {
+  // If the snake is visible, it will be able to eat, otherwise it wont
+  if(this.visible){
+    if (this.x === food.x() && this.y === food.y()) {
     food.eaten(p)
     this.points++
     this.tail.push({x: this.x, y: this.y})
     store.dispatch(updateSnakePoints(this))
+    }
   }
 }
 

@@ -24,6 +24,7 @@ export default function sketch (p) {
   var lemon
   var orange
   var watermelon
+  var gameOver
 
 
   p.preload = function () {
@@ -42,6 +43,9 @@ export default function sketch (p) {
     lemon = p.loadImage('images/fruits/Lemon.png')
     orange = p.loadImage('images/fruits/Orange.png')
     watermelon = p.loadImage('images/fruits/Watermelon.png')
+
+    // Game Over image
+    gameOver = p.loadImage('images/sketch_images/game-over.png')
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
@@ -52,7 +56,7 @@ export default function sketch (p) {
   p.setup = function () {
     // p.receiveUsers()
 
-    canvas = p.createCanvas(900, 900)
+    canvas = p.createCanvas(1440, 900)
     p.frameRate(10)
     // connect client to the server through sockets
     socket = io.connect(window.location.origin)
@@ -76,7 +80,7 @@ export default function sketch (p) {
         // we are going to have 5 foods on the canvas for all the players
         const fruits = [ apple, banana, carrot, coconut, grape, lemon, orange, watermelon ]
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 25; i++) {
           const food = new Food(p, fruits)
           foods.push(food)
         }
@@ -100,7 +104,8 @@ export default function sketch (p) {
 
 // -----------------DRAW-------------------- //
   p.draw = function () {
-    p.background(51)
+    p.clear()
+    p.background('rgba(10%,10%,10%,0.5)')
 
     // Draw each snake
     for (let id in snakes) {
@@ -137,25 +142,22 @@ export default function sketch (p) {
         winnerSnake = snakes[id]
       }
     }
-    p.gameOver = function(props) {
-      props.handleStateChange(countAlive)
-    }
 
+    p.imageMode(p.CENTER)
     p.textAlign(p.CENTER)
     if (countAlive === 1) {
       // we have a winner!
-      p.textSize(80)
-      p.text('GAME OVER', p.width / 2, p.height / 2)
+      p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
       p.fill(winnerSnake.color)
-      p.text('The winner is:', p.width / 2, (p.height / 2) + 100)
-      p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 180)
+      p.text('The winner is:', p.width / 2, (p.height / 2) + 150)
+      p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 210)
     } else if (countAlive === 0) {
       //the 2 remaining snakes colided head-to-head and both died
-      p.textSize(80)
-      p.text('GAME OVER', p.width / 2, p.height / 2)
+      p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
-      p.text('Everyone is dead...', p.width / 2, (p.height / 2) + 100)
+      p.fill('yellow')
+      p.text('Everyone is dead...', p.width / 2, (p.height / 2) + 150)
     }
   }
 }
