@@ -49,7 +49,7 @@ export default class Controller extends Component {
         return (
       <div className='main-controller container'>
         <div className="welcome-msg">
-          <h4 className='yellow'>Welcome, {user.name}</h4>
+          <h4 className='yellow'>Welcome, <span className={user.color}>{user.name}</span></h4>
           <h5 className='yellow'>Your color is <span className={user.color}>{user.color}</span></h5>
         </div>
         <div className='row'>
