@@ -7,7 +7,7 @@ import store from './store'
 import AppContainer from './containers/AppContainer'
 import ProjectorHome from './components/ProjectorHome'
 import WaitingRoomContainer from './containers/WaitingRoomContainer'
-import Game from './components/Game'
+import GameContainer from './containers/GameContainer'
 import ControllerContainer from './containers/ControllerContainer'
 import UserHome from './components/UserHome'
 import { checkDeviceType } from './reducers/device'
@@ -38,7 +38,6 @@ function onHomeProjectorEnter() {
     socket.on('server-user-connected', function({userName, userId}) {
         store.dispatch(createNewUser(userName, userId))
         const users = store.getState().users
-        console.log('STORE USERS', users)
         socket.emit('users-information', users.list)
     })
 }
@@ -57,7 +56,7 @@ render(
         <Route path="/waitingroom" component={WaitingRoomContainer}/>
         <Route path="/userHome" component={UserHome} />
         <Route path="/controller" component={ControllerContainer} onEnter={onControllerEnter}/>
-        <Route path="/game" component={Game}/>
+        <Route path="/game" component={GameContainer}/>
       </Route>
     </Router>
   </Provider>,

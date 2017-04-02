@@ -32,7 +32,6 @@ const users = (state = initialState, action) => {
             //for the projector
         case ADD_USER_TO_PROJECTOR:
             newState.list = newState.list.concat([action.userObj])
-            console.log('list After concat', newState)
             return newState
 
         default:

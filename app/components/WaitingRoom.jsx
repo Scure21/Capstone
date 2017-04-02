@@ -15,8 +15,7 @@ export default class WaitingRoom extends Component {
     }
 
     componentWillUpdate(){
-        console.log('componentWillUpdate', this.props.users)
-        if (this.props.users.length === 3){
+        if (this.props.users.length === 1){
             this.interval = setInterval(this.timer, 1000)
             this.setState({ready: true})
         }

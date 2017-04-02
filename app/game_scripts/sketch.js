@@ -4,6 +4,7 @@ import store from '../store'
 import { getSnakes } from '../reducers/snakes'
 
 export default function sketch (p) {
+//console.log('Sketch Props', props)
   var socket
   var snakes = {}
   var canvas
@@ -24,6 +25,7 @@ export default function sketch (p) {
   var orange
   var watermelon
 
+
   p.preload = function () {
     // Snakes body images
     greenSnake = p.loadImage('images/snakes_images/greenBodyStraight.png')
@@ -42,12 +44,16 @@ export default function sketch (p) {
     watermelon = p.loadImage('images/fruits/Watermelon.png')
   }
 
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    console.log('custom Props', props)
+  }
 
   p.setup = function () {
+    // p.receiveUsers()
+
     canvas = p.createCanvas(1000, 760)
     p.frameRate(10)
     // connect client to the server through sockets
-
     socket = io.connect(window.location.origin)
 
         allUsers.forEach(user => {
