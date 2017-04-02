@@ -35,11 +35,24 @@ Snake.prototype.eat = function (p, food) {
 
 Snake.prototype.collide = function (snake2) {
   if (this.x === snake2.x && this.y === snake2.y) {
-    this.visible = false
+    snake2.visible = false
+    snake2.x = null
+    snake2.y = null
+    snake2.tail = []
+        console.log('snake2 crashed into snake1 head-to-head')
+        console.log('snake1 ', this.x, this.y)
+        console.log('snake2: ', snake2.x, snake2.y)
   } else {
     for (let i = 0; i < this.tail.length; i++) {
       if (this.tail[i].x === snake2.x && this.tail[i].y === snake2.y) {
         snake2.visible = false
+        snake2.x = null
+        snake2.y = null
+        snake2.tail = []
+        console.log('snake2 crashed into snake1')
+        console.log('snake1 ', this.x, this.y)
+        console.log('snake2 head: ', snake2.x, snake2.y)
+        console.log('snake2 tail: ', snake2.tail, snake2.tail)
       }
     }
   }

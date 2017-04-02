@@ -4,7 +4,7 @@ import store from '../store'
 import { getSnakes } from '../reducers/snakes'
 
 export default function sketch (p) {
-//console.log('Sketch Props', props)
+  var users
   var socket
   var snakes = {}
   var canvas
@@ -46,19 +46,20 @@ export default function sketch (p) {
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     console.log('custom Props', props)
+    users = props.users
   }
 
   p.setup = function () {
     // p.receiveUsers()
 
-    canvas = p.createCanvas(1000, 760)
+    canvas = p.createCanvas(900, 900)
     p.frameRate(10)
     // connect client to the server through sockets
     socket = io.connect(window.location.origin)
 
-        allUsers.forEach(user => {
-          console.log('allUsers', user)
-          let color = user.colorName
+        users.forEach(user => {
+          console.log('user', user)
+          let color = user.color
           if (color === 'blue') {
             img = blueSnake
           } else if (color === 'yellow') {
@@ -68,8 +69,9 @@ export default function sketch (p) {
           } else if (color === 'green') {
             img = greenSnake
           }
-          snakes[user.id] = new Snake(p, user.name, color, img)
+          snakes[user.id] = new Snake(p, user.id, user.name, color, img)
         })
+        console.log('snakes', snakes)
 
         // we are going to have 5 foods on the canvas for all the players
         const fruits = [ apple, banana, carrot, coconut, grape, lemon, orange, watermelon ]
