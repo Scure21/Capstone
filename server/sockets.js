@@ -11,12 +11,13 @@ module.exports = function (io) {
     // Phone user emits to server to be transmitted to projector
         socket.on('user-connected', function(userName){
             const userId = socket.id
+            console.log('Users in users-connected', userName, userId)
             io.sockets.emit('server-user-connected', {userName, userId})
         })
 
-    // send individual user information
+    // send individual user information from projector to mobile
         socket.on('users-information', function(users){
-          console.log(users)
+          console.log('Users in users-information', users)
           users.forEach(user => socket.to(user.id).emit('user-information', user))
         })
 

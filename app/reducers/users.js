@@ -5,11 +5,11 @@ let COLORS = ['blue', 'yellow', 'purple', 'green']
 
 // ACTION CREATORS
 export const createNewUser = (userName, userId) => {
-    const user = {}
-    user.id = userId
-    user.name = userName
-    user.color = COLORS.shift()
-    return {type: ADD_USER_TO_PROJECTOR, user}
+    const userObj = {}
+    userObj.id = userId
+    userObj.name = userName
+    userObj.color = COLORS.shift()
+    return {type: ADD_USER_TO_PROJECTOR, userObj}
 }
 
 export const getUser = (user) => ({type: GET_USER_IN_MOBILE, user})
@@ -17,8 +17,8 @@ export const getUser = (user) => ({type: GET_USER_IN_MOBILE, user})
 
 // REDUCER
 const initialState = {
-    users: [],
-    user: {}
+    list: [],
+    current: {}
 }
 
 const users = (state = initialState, action) => {
@@ -27,11 +27,12 @@ const users = (state = initialState, action) => {
     switch (action.type) {
         //for the phone
         case GET_USER_IN_MOBILE:
-             newState.user = action.user
+             newState.current = action.user
              return newState
             //for the projector
         case ADD_USER_TO_PROJECTOR:
-            newState.users = newState.users.concat([action.user])
+            newState.list = newState.list.concat([action.userObj])
+            console.log('list After concat', newState)
             return newState
 
         default:

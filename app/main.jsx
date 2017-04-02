@@ -5,15 +5,11 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import AppContainer from './containers/AppContainer'
-import Home from './components/Home'
-import WaitingRoom from './components/WaitingRoom'
-import Login from './components/Login'
-import SignUpContainer from './containers/SignUpContainer'
+import ProjectorHome from './components/ProjectorHome'
+import WaitingRoomContainer from './containers/WaitingRoomContainer'
 import Game from './components/Game'
-import PhoneUserInput from './components/PhoneUserInput'
-import Controller from './components/Controller'
-import UserLogin from './components/UserLogin'
-import { getSnake } from './reducers/snakes'
+import ControllerContainer from './containers/ControllerContainer'
+import UserHome from './components/UserHome'
 import { checkDeviceType } from './reducers/device'
 import { createNewUser, getUser } from './reducers/users'
 
@@ -38,13 +34,13 @@ function onAppEnter() {
     store.dispatch(checkDeviceType(device))
 }
 
-function onHomeEnter() {
+function onHomeProjectorEnter() {
     socket.on('server-user-connected', function({userName, userId}) {
         store.dispatch(createNewUser(userName, userId))
         const users = store.getState().users
-        socket.emit('users-information', users.users)
+        console.log('STORE USERS', users)
+        socket.emit('users-information', users.list)
     })
-
 }
 
 function onControllerEnter() {
@@ -57,13 +53,10 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer} onEnter={onAppEnter}>
-        <Route path='/user' component={PhoneUserInput} />
-        <Route path="/login" component={Login}/>
-        <Route path="/signup" component={SignUpContainer}/>
-        <Route path="/home" component={Home} onEnter={onHomeEnter}/>
-        <Route path="/waitingroom" component={WaitingRoom}/>
-        <Route path="/userlogin" component={UserLogin} />
-        <Route path="/controller" component={Controller} onEnter={onControllerEnter}/>
+        <Route path="/projectorHome" component={ProjectorHome} onEnter={onHomeProjectorEnter}/>
+        <Route path="/waitingroom" component={WaitingRoomContainer}/>
+        <Route path="/userHome" component={UserHome} />
+        <Route path="/controller" component={ControllerContainer} onEnter={onControllerEnter}/>
         <Route path="/game" component={Game}/>
       </Route>
     </Router>

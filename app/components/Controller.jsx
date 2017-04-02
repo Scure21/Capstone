@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 const socket = io.connect(window.location.origin)
 
-export class Controller extends Component {
+export default class Controller extends Component {
     constructor (props) {
         super(props)
         this.state = {x: 0, y: 0}
@@ -74,4 +73,4 @@ export class Controller extends Component {
     }
 }
 
-export default connect(state => ({user: state.users.user}))(Controller)
+

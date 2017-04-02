@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Int from '../components/Int'
+import WaitingRoom from '../components/WaitingRoom'
 
-const mapStateToProps = (state) => {
-    console.log("CONTAINER : ", state.users)
-  return {
-    users: state.users
-  }
-}
+const WaitingRoomContainer = connect(state => ({
+    users: state.users.list
+}))(WaitingRoom)
 
-export default connect(mapStateToProps)(Int)
+export default WaitingRoomContainer
