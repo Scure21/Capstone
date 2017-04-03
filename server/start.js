@@ -51,7 +51,7 @@ module.exports = app
   .use(express.static(resolve(__dirname, '..', 'public')))
 
   // Serve our api - ./api also requires in ../db, which syncs with our database
-  .use('/api', require('./api'))
+  // .use('/api', require('./api'))
 
   // Send index.html for anything else.
   .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
