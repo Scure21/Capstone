@@ -49,6 +49,7 @@ export default function sketch (p) {
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    console.log('users sketch', props.users)
     users = props.users
   }
 
