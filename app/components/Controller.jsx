@@ -2,68 +2,55 @@ import React, { Component } from 'react'
 const socket = io.connect(window.location.origin)
 
 export default class Controller extends Component {
-  constructor (props) {
-    super(props)
+    constructor (props) {
+        super(props)
+        this.state = {x: 0, y: 0}
+        this.moveUp = this.moveUp.bind(this)
+        this.moveDown = this.moveDown.bind(this)
+        this.moveLeft = this.moveLeft.bind(this)
+        this.moveRight = this.moveRight.bind(this)
+    }
 
-    this.state = {x: 0, y: 0, user: {}}
-    this.moveUp = this.moveUp.bind(this)
-    this.moveDown = this.moveDown.bind(this)
-    this.moveLeft = this.moveLeft.bind(this)
-    this.moveRight = this.moveRight.bind(this)
-  }
+    componentDidMount () {
 
-  componentDidMount () {
-    // when the component mounts on the mobile device, we add the user to the State with a new Snake instance... maybe in the future...
-    //get users info to render name/color for this user
-    //hopefully users will be on store state eventually
-    socket.emit('ask-for-users')
-    socket.on('get-current-users', users => {
-      //console.log('socket id', socket.id)
-      // this.setState({users: users})
-      //console.log("*** USERS: ", users)
-      let user = users.filter(user => {
-        return user.id == socket.id
-      })
-      this.setState({user: user[0]})
-    })
+        const up = document.getElementById('up')
+        const down = document.getElementById('down')
+        const left = document.getElementById('left')
+        const right = document.getElementById('right')
 
-    const up = document.getElementById('up')
-    const down = document.getElementById('down')
-    const left = document.getElementById('left')
-    const right = document.getElementById('right')
+        up.addEventListener('touchstart', this.moveUp, false)
+        down.addEventListener('touchstart', this.moveDown, false)
+        left.addEventListener('touchstart', this.moveLeft, false)
+        right.addEventListener('touchstart', this.moveRight, false)
+    }
 
-    up.addEventListener('touchstart', this.moveUp, false)
-    down.addEventListener('touchstart', this.moveDown, false)
-    left.addEventListener('touchstart', this.moveLeft, false)
-    right.addEventListener('touchstart', this.moveRight, false)
-  }
+    moveUp () {
+        this.setState({x: 0, y: -1})
+        socket.emit('user-movement-update', this.state)
+    }
 
-  moveUp () {
-    this.setState({x: 0, y: -1})
-    socket.emit('user-movement-update', this.state)
-  }
+    moveDown () {
+        this.setState({x: 0, y: 1})
+        socket.emit('user-movement-update', this.state)
+    }
 
-  moveDown () {
-    this.setState({x: 0, y: 1})
-    socket.emit('user-movement-update', this.state)
-  }
+    moveLeft () {
+        this.setState({x: -1, y: 0})
+        socket.emit('user-movement-update', this.state)
+    }
 
-  moveLeft () {
-    this.setState({x: -1, y: 0})
-    socket.emit('user-movement-update', this.state)
-  }
+    moveRight () {
+        this.setState({x: 1, y: 0})
+        socket.emit('user-movement-update', this.state)
+    }
 
-  moveRight () {
-    this.setState({x: 1, y: 0})
-    socket.emit('user-movement-update', this.state)
-  }
-
-  render () {
-    return (
+    render () {
+        const user = this.props.user || ''
+        return (
       <div className='main-controller container'>
         <div className="welcome-msg">
-          <h4 className='yellow'>Welcome, {this.state.user.name}</h4>
-          <h5 className='yellow'>Your color is <span className={this.state.user.colorName}>{this.state.user.colorName}</span></h5>
+          <h4 className='yellow'>Welcome, <span className={user.color}>{user.name}</span></h4>
+          <h5 className='yellow'>Your color is <span className={user.color}>{user.color}</span></h5>
         </div>
         <div className='row'>
           <button id='up' className='controller col-sm-offset-4 col-sm-2'>
@@ -82,6 +69,8 @@ export default class Controller extends Component {
           </button>
         </div>
       </div>
-    )
-  }
+        )
+    }
 }
+
+

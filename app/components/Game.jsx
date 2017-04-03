@@ -9,7 +9,7 @@ export default class Game extends Component {
       <div>
         <ScoresContainer />
         <div id="game-over"></div>
-        <P5Wrapper id="game" sketch={sketch} />
+        <P5Wrapper id="game" sketch={sketch} users={this.props.users}/>
       </div>
     )
   }
