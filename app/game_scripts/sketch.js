@@ -2,9 +2,9 @@ import Food from './food'
 import Snake from './snake'
 import store from '../store'
 import { getSnakes } from '../reducers/snakes'
-import {allUsers} from '../components/Int.jsx'
 
 export default function sketch (p) {
+  var users
   var socket
   var snakes = {}
   var canvas
@@ -26,6 +26,7 @@ export default function sketch (p) {
   var watermelon
   var gameOver
 
+
   p.preload = function () {
     // Snakes body images
     greenSnake = p.loadImage('images/snakes_images/greenBodyStraight.png')
@@ -43,19 +44,24 @@ export default function sketch (p) {
     orange = p.loadImage('images/fruits/Orange.png')
     watermelon = p.loadImage('images/fruits/Watermelon.png')
 
-    // game images
+    // Game Over image
     gameOver = p.loadImage('images/sketch_images/game-over.png')
   }
 
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    users = props.users
+  }
+
   p.setup = function () {
+
     canvas = p.createCanvas(1440, 900)
     p.frameRate(10)
     // connect client to the server through sockets
-
     socket = io.connect(window.location.origin)
 
-        allUsers.forEach(user => {
-          let color = user.colorName
+        users.forEach(user => {
+          console.log('user', user)
+          let color = user.color
           if (color === 'blue') {
             img = blueSnake
           } else if (color === 'yellow') {
@@ -138,7 +144,6 @@ export default function sketch (p) {
     p.textAlign(p.CENTER)
     if (countAlive === 1) {
       // we have a winner!
-      p.textSize(80)
       p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
       p.fill(winnerSnake.color)
@@ -146,7 +151,6 @@ export default function sketch (p) {
       p.text(winnerSnake.name, p.width / 2, (p.height / 2) + 210)
     } else if (countAlive === 0) {
       //the 2 remaining snakes colided head-to-head and both died
-      p.textSize(80)
       p.image(gameOver, p.width/2, (p.height/2))
       p.textSize(60)
       p.fill('yellow')

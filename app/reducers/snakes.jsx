@@ -49,7 +49,6 @@ const snakeReducer = (state = initialSnakesState, action) => {
       break;
 
     case ADD_NAME:
-      console.log("~~~~~~~~ INSIDE REDUCER", action)
       newState.list[action.snake.id].name = action.snake.name
 
     default:
