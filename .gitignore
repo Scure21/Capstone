@@ -5,7 +5,6 @@ node_modules/*
 !node_modules/APP
 
 # Compiled JS
-public/bundle.js
 public/bundle.js.map
 
 # NPM errors
