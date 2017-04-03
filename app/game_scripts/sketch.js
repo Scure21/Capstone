@@ -49,12 +49,10 @@ export default function sketch (p) {
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    console.log('custom Props', props)
     users = props.users
   }
 
   p.setup = function () {
-    // p.receiveUsers()
 
     canvas = p.createCanvas(1440, 900)
     p.frameRate(10)
@@ -75,7 +73,6 @@ export default function sketch (p) {
           }
           snakes[user.id] = new Snake(p, user.id, user.name, color, img)
         })
-        console.log('snakes', snakes)
 
         // we are going to have 5 foods on the canvas for all the players
         const fruits = [ apple, banana, carrot, coconut, grape, lemon, orange, watermelon ]
