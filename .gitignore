@@ -9,3 +9,7 @@ public/bundle.js.map
 
 # NPM errors
 npm-debug.log
+
+.babelrc
+.eslintrc.json
+yarn.lock
