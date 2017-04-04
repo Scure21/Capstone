@@ -5,4 +5,4 @@ Real-time, multi-player, in-browser game where players use their mobile devices 
 
 Technologies: P5.js, Socket.io, React, Redux, HTML, CSS.
 
-Check the game at: www.snakeswithfriends.herokuapp.com
+Check the game at: snakeswithfriends.herokuapp.com
