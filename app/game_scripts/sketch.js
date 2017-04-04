@@ -49,7 +49,6 @@ export default function sketch (p) {
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    console.log('users sketch', props.users)
     users = props.users
   }
 
@@ -61,7 +60,6 @@ export default function sketch (p) {
     socket = io.connect(window.location.origin)
 
         users.forEach(user => {
-          console.log('user', user)
           let color = user.color
           if (color === 'blue') {
             img = blueSnake
